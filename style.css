@@ -27,7 +27,9 @@
 
 body
 {
-	background-image: url("http://gizmorati.com/wp-content/uploads/2014/02/Horizon-Sun-Earth-Orbit.jpg");
+	background:
+             url("http://gizmorati.com/wp-content/uploads/2014/02/Horizon-Sun-Earth-Orbit.jpg") no-repeat,
+             black;
 	background-attachment: fixed;
 }
 	
