@@ -2,13 +2,32 @@
 	<head>
 		 <link rel="shortcut icon" href="favicon.ico">
 		<link rel="stylesheet" type="text/css" href="style.css" />
-		<link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
 		
 		<title>Hello World - geosir</title>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script>
+			$(window).scroll(function() {
+  				var st = $(window).scrollTop();
+  				var height = $(window).height();
+  				var complete_perc = 0.2; //Proportion to scroll before complete.
+   				$(".main-body-bg").animate({opacity: st/(height*complete_perc)}, 10);
+			});
+		</script>
+		
 	</head>
 	<body>
 		<div class="big-title">
 			<h1>Hello World.</h1>
+		</div>
+		<div class="main-body-bg">
+			<div class="main-body">
+			
+				<h1>Projects by geosir</h1>
+				<h2><a href="http://geosir.github.io/FRAPI-Train">FRAPI Train Project</a></h2>
+				<h2>Sharebrary (Coming Soon!)</h2>
+				<img id="potato-img" src="OddOneOutPotato.jpg" />
+			</div>
 		</div>
 	</body>
 </html>

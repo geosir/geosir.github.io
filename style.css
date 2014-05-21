@@ -1,3 +1,6 @@
+@import url(http://fonts.googleapis.com/css?family=News+Cycle);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+
 .big-title
 {
 	display: block;
@@ -31,5 +34,37 @@ body
              url("http://gizmorati.com/wp-content/uploads/2014/02/Horizon-Sun-Earth-Orbit.jpg") no-repeat,
              black;
 	background-attachment: fixed;
+	
+	font-family: 'News Cycle', sans-serif;
 }
+
+.main-body-bg
+{
+	background-color: rgba(256, 256, 256, 0.5);
+	margin: 10%;
+	opacity: 0;
+}
+
+.main-body
+{
+	color: #000000;
+	padding: 10%
+}
+
+.main-body h1
+{
+	font-family: Ubuntu, sans-serif;
+	font-size: 5em
+}
+
+#potato-img
+{
+	width: 100%;
+	height: auto;
+	
+	display: block;
+	margin: 10% auto 0%;	
+	
+}
+
 	
