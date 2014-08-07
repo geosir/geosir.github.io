@@ -2,7 +2,7 @@
 	<head>
 		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="stylesheet" type="text/css" href="style.css" />
-		<style>
+		<style id="style">
 			.class-form
 			{
 				background-color: rgba(256, 256, 256, 0.5);
@@ -59,6 +59,16 @@
 					}
 				}
 			}
+			
+			function printDiv()
+			{
+				var divToPrint=document.getElementById("areaToPrint");
+				var style = document.getElementById("style");
+				newWin= window.open("");
+				newWin.document.write(style.outerHTML);
+				newWin.document.write(divToPrint.outerHTML);
+				newWin.print();
+			}
 		</script>
 				
 		
@@ -101,77 +111,82 @@
 					<br />
 					<input type="button" name="submit" value="Update Schedule" onClick="updateSchedule(this.form)">
 				</form>
-				<table id="table">
-					<col id="blocks" />
-					<col id="A" />
-					<col id="B" />
-					<col id="C" />
-					<col id="D" />
-					<tr>
-						<th> </th>
-						<th>A</th>
-						<th>B</th>
-						<th>C</th>
-						<th>D</th>
-					</tr>
-					<tr>
-						<th>1</th>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-					</tr>
-					<tr>
-						<th>2</th>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-					</tr>
-					<tr>
-						<th>3</th>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-					</tr>
-					<tr>
-						<th>4</th>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-					</tr>
-					<tr>
-						<th>5</th>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-					</tr>
-					<tr>
-						<th>6</th>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-					</tr>
-					<tr>
-						<th>7</th>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-					</tr>
-					<tr>
-						<th>8</th>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-						<td> </td>
-					</tr>
+				<div id="areaToPrint">
+					<table id="table">
+						<col id="blocks" />
+						<col id="A" />
+						<col id="B" />
+						<col id="C" />
+						<col id="D" />
+						<tr>
+							<th> </th>
+							<th>A</th>
+							<th>B</th>
+							<th>C</th>
+							<th>D</th>
+						</tr>
+						<tr>
+							<th>1</th>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+						</tr>
+						<tr>
+							<th>2</th>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+						</tr>
+						<tr>
+							<th>3</th>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+						</tr>
+						<tr>
+							<th>4</th>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+						</tr>
+						<tr>
+							<th>5</th>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+						</tr>
+						<tr>
+							<th>6</th>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+						</tr>
+						<tr>
+							<th>7</th>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+						</tr>
+						<tr>
+							<th>8</th>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+						</tr>
 					
-				</table>
+					</table>
+				</div>
+				<form>
+					<input type="button" name="print" value="Print" onClick="printDiv()">
+				</form>
 			</div>
 		</div>
 	</body>
