@@ -42,7 +42,7 @@ body
 {
 	background-color: rgba(256, 256, 256, 0.5);
 	margin: 10%;
-	opacity: 0;
+	/*opacity: 0;*/
 }
 
 #main-body

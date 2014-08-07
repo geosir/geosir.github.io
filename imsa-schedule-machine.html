@@ -1,0 +1,178 @@
+<html>
+	<head>
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<style>
+			.class-form
+			{
+				background-color: rgba(256, 256, 256, 0.5);
+				padding: 1rem;
+			}
+			
+			table
+			{
+				table-layout: fixed;
+				border-collapse: collapse;
+				border: 1px solid gray;
+				width: 100%;
+				background-color: white;
+				text-align: center;
+			}
+			table span.text
+			{
+				veritcal-align: center;
+			}
+			#blocks
+			{
+				width: 4rem;
+			}
+			td, th
+			{
+				border: 1px solid gray;
+				height: 4rem;
+				overflow: hidden;
+				white-space: nowrap; 
+			}
+			th
+			{
+				background-color: #98D5FF;
+			}
+		</style>
+		
+		<title>George's Schedule Machine</title>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		
+		<script>
+			function updateSchedule(form)
+			{
+				table = document.getElementById("table");
+				
+				for(i=0; i<form.days.length; i++)
+				{
+					if(form.days[i].checked==true)
+					{
+						table.rows[parseInt(form.block.value)].cells[i+1].innerHTML = 
+							"<span class=\"text\"><p><b>"+form.classname.value+"</b>\n"+form.teacher.value+"</p></span>";
+						table.rows[parseInt(form.block.value)].cells[i+1].style.backgroundColor = form.color.value;
+						console.log(form.color.value);
+					}
+				}
+			}
+		</script>
+				
+		
+	</head>
+	<body>
+		<div id="main-body-bg" style="opacity: 1">
+			<div id="main-body">
+				<h1>George's Schedule Machine</h1>
+				<p>Use the input box below to enter your class information, and watch your schedule magically appear!<br />
+				<i>Mistakes are OK! Overwriting a box will change its contents.</i></p>
+				<form class="class-form" name="scheduler">
+					<b>Class Name: </b> <input type="text" name="classname">
+					<b>Teacher Name: </b> <input type="text" name="teacher">
+					<br />
+					<b>Block: </b> <select name="block">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+					</select>
+					<b>Days: </b> <input type="checkbox" name="days">A
+					<input type="checkbox" name="days">B
+					<input type="checkbox" name="days">C
+					<input type="checkbox" name="days">D
+					<!--<b>Color: </b> <select name="color">
+						<option style="background-color: #A30000;" value="#A30000"></option>
+						<option style="background-color: #FF6600;" value="#FF6600"></option>
+						<option style="background-color: #FFCC00;" value="#FFCC00"></option>
+						<option style="background-color: #99FF33;" value="#99FF33"></option>
+						<option style="background-color: #00CC00;" value="#00CC00"></option>
+						<option style="background-color: #009999;" value="#009999"></option>
+						<option style="background-color: #0066CC;" value="#0066CC"></option>
+						<option style="background-color: #8661BF;" value="#8661BF"></option>
+					</select>-->
+					<input type="color" name="color">
+					<br />
+					<input type="button" name="submit" value="Update Schedule" onClick="updateSchedule(this.form)">
+				</form>
+				<table id="table">
+					<col id="blocks" />
+					<col id="A" />
+					<col id="B" />
+					<col id="C" />
+					<col id="D" />
+					<tr>
+						<th> </th>
+						<th>A</th>
+						<th>B</th>
+						<th>C</th>
+						<th>D</th>
+					</tr>
+					<tr>
+						<th>1</th>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+					</tr>
+					<tr>
+						<th>2</th>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+					</tr>
+					<tr>
+						<th>3</th>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+					</tr>
+					<tr>
+						<th>4</th>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+					</tr>
+					<tr>
+						<th>5</th>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+					</tr>
+					<tr>
+						<th>6</th>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+					</tr>
+					<tr>
+						<th>7</th>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+					</tr>
+					<tr>
+						<th>8</th>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+						<td> </td>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
