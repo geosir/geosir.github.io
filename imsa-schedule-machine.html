@@ -53,7 +53,7 @@
 					if(form.days[i].checked==true)
 					{
 						table.rows[parseInt(form.block.value)].cells[i+1].innerHTML = 
-							"<span class=\"text\"><p><b>"+form.classname.value+"</b>\n"+form.teacher.value+"</p></span>";
+							"<span class=\"text\"><p><b>"+form.classname.value+"</b><br />"+form.teacher.value+"</p></span>";
 						table.rows[parseInt(form.block.value)].cells[i+1].style.backgroundColor = form.color.value;
 						console.log(form.color.value);
 					}
