@@ -69,6 +69,26 @@
 				newWin.document.write(divToPrint.outerHTML);
 				newWin.print();
 			}
+			
+			$("document").ready(function(){
+				$("td").dblclick(function(){
+					this.innerHTML = "";
+					this.style.backgroundColor = "";
+				});
+				console.log("Click to erase loaded.");
+				
+				orig_border_width = parseInt($("td").css("border-width"));
+				orig_border_color = $("td").css("border-color");
+				$("td").hover(function(){
+					this.style.borderWidth = String(orig_border_width*2);
+					this.style.borderColor = "#FF4719";
+				},
+				function(){
+					this.style.borderWidth = String(orig_border_width);
+					this.style.borderColor = orig_border_color;
+				});
+				console.log("Border width change on hover loaded.");
+			});
 		</script>
 				
 		
@@ -78,7 +98,7 @@
 			<div id="main-body">
 				<h1>George's Schedule Machine</h1>
 				<p>Use the input box below to enter your class information, and watch your schedule magically appear!<br />
-				<i>Mistakes are OK! Overwriting a box will change its contents.</i></p>
+				<i>Mistakes are OK! Double-click on a box to clear its contents.</i></p>
 				<form class="class-form" name="scheduler">
 					<b>Class Name: </b> <input type="text" name="classname">
 					<b>Teacher Name: </b> <input type="text" name="teacher">
@@ -107,7 +127,7 @@
 						<option style="background-color: #0066CC;" value="#0066CC"></option>
 						<option style="background-color: #8661BF;" value="#8661BF"></option>
 					</select>-->
-					<input type="color" name="color">
+					<input type="color" name="color" value="#A30000">
 					<br />
 					<input type="button" name="submit" value="Update Schedule" onClick="updateSchedule(this.form)">
 				</form>
@@ -126,56 +146,56 @@
 							<th>D</th>
 						</tr>
 						<tr>
-							<th>1</th>
+							<th>1<br />8:00AM</th>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 						</tr>
 						<tr>
-							<th>2</th>
+							<th>2<br />9:00AM</th>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 						</tr>
 						<tr>
-							<th>3</th>
+							<th>3<br />10:00AM</th>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 						</tr>
 						<tr>
-							<th>4</th>
+							<th>4<br />11:00AM</th>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 						</tr>
 						<tr>
-							<th>5</th>
+							<th>5<br />12:20PM</th>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 						</tr>
 						<tr>
-							<th>6</th>
+							<th>6<br />1:20PM</th>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 						</tr>
 						<tr>
-							<th>7</th>
+							<th>7<br />2:20PM</th>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 							<td> </td>
 						</tr>
 						<tr>
-							<th>8</th>
+							<th>8<br />3:20PM</th>
 							<td> </td>
 							<td> </td>
 							<td> </td>
