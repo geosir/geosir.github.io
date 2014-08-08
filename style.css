@@ -1,5 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=News+Cycle);
-@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+@import url(https://fonts.googleapis.com/css?family=News+Cycle);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu);
 
 .big-title
 {
@@ -31,7 +31,7 @@
 body
 {
 	background:
-             url("http://gizmorati.com/wp-content/uploads/2014/02/Horizon-Sun-Earth-Orbit.jpg") no-repeat,
+             url("Horizon-Sun-Earth-Orbit.jpg") no-repeat,
              black;
 	background-attachment: fixed;
 	
