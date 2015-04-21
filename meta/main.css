@@ -1,0 +1,59 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300);
+body 
+{
+        font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+        margin: 0;
+        background-image: url("http://upload.wikimedia.org/wikipedia/commons/d/d6/STS120LaunchHiRes-edit1.jpg");
+        background-size: 100%;
+}
+.title
+{
+        font-family: Roboto, sans-serif;
+        font-weight: 300;
+        padding: 0 0 10px 0;
+}
+core-toolbar 
+{
+        color: white;
+        background-color: rgb(0, 102, 255);
+}
+.centered
+{
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+}
+html, body 
+{
+        height: 100%;
+        margin: 0;
+}
+core-header-panel
+{
+        height: 100%;
+}
+core-toolbar
+{
+        font-size: 1.5em%;
+}
+core-toolbar.drawer
+{
+        background-color: #FFA100;
+}
+[drawer]
+{
+        background-color: rgb(220,220,220);
+}
+core-drawer-panel:not([narrow]) #navicon
+{
+        display: none;
+}
+.info
+{
+        margin: 2% 10%;
+        padding: 5%;
+        text-align: center;
+        background-color: white;
+}
+        
+

@@ -1,0 +1,25 @@
+{
+  "name": "po",
+  "version": "0.0.0",
+  "authors": [
+    "geo <geomo3@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.5",
+    "font-roboto": "Polymer/font-roboto#^0.5",
+    "core-toolbar": "Polymer/core-toolbar#^0.5",
+    "core-icons": "Polymer/core-icons#^0.5",
+    "paper-icon-button": "Polymer/paper-icon-button#^0.5",
+    "core-header-panel": "Polymer/core-header-panel#^0.5",
+    "core-elements": "Polymer/core-elements#^0.5",
+    "paper-elements": "Polymer/paper-elements#^0.5"
+  }
+}
