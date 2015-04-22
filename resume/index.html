@@ -30,17 +30,12 @@
                 <script>
                         document.addEventListener("polymer-ready", function(){
                                 var navicon = document.getElementById("navicon");
-                                var navlink = document.getElementById("navlink");
                                 var drawer = document.getElementById("drawer-panel");
                                 navicon.addEventListener("click", function(){
                                         drawer.togglePanel();
                                 });
-                                navlink.addEventListener("click", function(){
-                                        console.log("HEY");
-                                        drawer.togglePanel();
-                                });
                                 
-                                document.getElementById("main-menu-list").selected="0";
+                                document.getElementById("main-menu-list").selected="1";
                         });
                 </script>
         </head>
@@ -65,25 +60,6 @@
                                         </span>
                                 </core-toolbar>
                                 <div>
-                                        
-                                        <paper-shadow z=4 class="card" horizontal layout wrap>
-                                                <paper-shadow id="profile-picture" z=2 class="card card-img" flex one wrap>
-                                                        <img src="/media/profile.jpg">
-                                                </paper-shadow>
-                                                <div class="content" flex three>
-                                                        <h1 class="lead-text"><b>Hi! I'm George Moe.</b></h1>
-                                                        I'm a person who does things. Aside from designing websites, like this one, I also run
-                                                        innovation projects, make apps, study emergining sciences, craft kites, dabble in music and
-                                                        movies, write poetry, take photos, volunteer, and engage in other activities,
-                                                        which can be found in my <a>portfolio</a> and <a>resume</a>.
-                                                        <br /><br />
-                                                        As a sophomore at the Illinois Math and Science Academy, I take "advance the human
-                                                        condition..." to heart. I am always looking for new things to learn and new
-                                                        opportunities to explore so that one day, I can give something great to this world.
-                                                        <br /><br />
-                                                        So have a peek at what I busy myself with in the world. Use the <a id="navlink" href="#">navigation menu</a> to get started.        
-                                                </div>
-                                        </paper-shadow>
                                         <paper-shadow z=4 class="card card-title">
                                                 <div class="content">
                                                         <core-icon icon="warning" style="width: 100px; height: 100px; color: #FFA100;"></core-icon>

@@ -3,8 +3,13 @@ body
 {
         font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
         margin: 0;
-        background-image: url("http://upload.wikimedia.org/wikipedia/commons/d/d6/STS120LaunchHiRes-edit1.jpg");
+        background-image: url("/media/shuttle.jpg");
         background-size: 100%;
+}
+img
+{
+        width: 100%;
+        height: auto;
 }
 .title
 {
@@ -48,12 +53,69 @@ core-drawer-panel:not([narrow]) #navicon
 {
         display: none;
 }
-.info
+.card.card-title
 {
         margin: 2% 10%;
-        padding: 5%;
+        padding: 1%;
         text-align: center;
         background-color: white;
 }
-        
-
+.card
+{
+        margin: 2% 10%;
+        padding: 1%;
+        background-color: white;
+}
+.card.card-img
+{
+        margin: 1%;
+        /*width: 25%;*/
+} 
+.content
+{
+        padding: 1%;
+        vertical-align: top;
+}
+.lead-text
+{
+        color: #5577AA;
+}
+[unselectable] {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#feedback-button
+{
+        position: fixed;
+        bottom: 10%;
+        right: 5%;
+}
+#feedback-button paper-fab
+{
+        background-color: #00933B;
+}
+a
+{
+        text-decoration: none;
+        color: rgb(0, 102, 255);
+}
+a:hover
+{
+        text-decoration: none;
+        color: rgb(0, 150, 255);
+}
+/*.title
+{
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+}
+core-toolbar.tall .title
+{
+        font-size: 5em;
+}*/
