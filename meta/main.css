@@ -69,7 +69,8 @@ core-drawer-panel:not([narrow]) #navicon
 .card.card-img
 {
         margin: 1%;
-        /*width: 25%;*/
+        display: inline-block;
+        max-height: 100%;
 } 
 .content
 {

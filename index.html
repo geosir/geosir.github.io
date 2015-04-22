@@ -19,6 +19,7 @@
                 <link rel="import" href="/bower_components/core-toolbar/core-toolbar.html">
                 <link rel="import" href="/bower_components/core-menu/core-menu.html">
                 <link rel="import" href="/bower_components/core-item/core-item.html">
+                <link rel="import" href="/bower_components/core-media-query/core-media-query.html">
                 <link rel="import" href="/bower_components/core-header-panel/core-header-panel.html">
                 <link rel="import" href="/bower_components/core-drawer-panel/core-drawer-panel.html">
                 <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
@@ -65,31 +66,33 @@
                                         </span>
                                 </core-toolbar>
                                 <div>
-                                        
-                                        <paper-shadow z=4 class="card" horizontal layout wrap>
-                                                <paper-shadow id="profile-picture" z=2 class="card card-img" flex one wrap>
-                                                        <img src="/media/profile.jpg">
+                                        <template is="auto-binding">
+                                                <core-media-query query="max-width: 640px" queryMatches="{{phoneScreen}}"></core-media-query>
+                                                <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
+                                                        <paper-shadow id="profile-picture" z=2 class="card card-img fit" auto-vertical flex one>
+                                                                <img src="/media/profile.jpg">
+                                                        </paper-shadow>
+                                                        <div class="content" auto-vertical flex three>
+                                                                <h1 class="lead-text"><b>Hi! I'm George Moe.</b></h1>
+                                                                I'm a person who does things. Aside from designing websites, like this one, I also run
+                                                                innovation projects, make apps, study emergining sciences, craft kites, dabble in music and
+                                                                movies, write poetry, take photos, volunteer, and engage in other activities,
+                                                                which can be found in my <a>portfolio</a> and <a>resume</a>.
+                                                                <br /><br />
+                                                                As a sophomore at the Illinois Math and Science Academy, I take "advance the human
+                                                                condition..." to heart. I am always looking for new things to learn and new
+                                                                opportunities to explore so that one day, I can give something great to this world.
+                                                                <br /><br />
+                                                                So have a peek at what I busy myself with in the world. Use the <a id="navlink" href="#">navigation menu</a> to get started.        
+                                                        </div>
                                                 </paper-shadow>
-                                                <div class="content" flex three>
-                                                        <h1 class="lead-text"><b>Hi! I'm George Moe.</b></h1>
-                                                        I'm a person who does things. Aside from designing websites, like this one, I also run
-                                                        innovation projects, make apps, study emergining sciences, craft kites, dabble in music and
-                                                        movies, write poetry, take photos, volunteer, and engage in other activities,
-                                                        which can be found in my <a>portfolio</a> and <a>resume</a>.
-                                                        <br /><br />
-                                                        As a sophomore at the Illinois Math and Science Academy, I take "advance the human
-                                                        condition..." to heart. I am always looking for new things to learn and new
-                                                        opportunities to explore so that one day, I can give something great to this world.
-                                                        <br /><br />
-                                                        So have a peek at what I busy myself with in the world. Use the <a id="navlink" href="#">navigation menu</a> to get started.        
-                                                </div>
-                                        </paper-shadow>
-                                        <paper-shadow z=4 class="card card-title">
-                                                <div class="content">
-                                                        <core-icon icon="warning" style="width: 100px; height: 100px; color: #FFA100;"></core-icon>
-                                                        <h1>Hard hat area! This site is currently under construction.</h1>
-                                                </div>
-                                        </paper-shadow>
+                                                <paper-shadow z=4 class="card card-title">
+                                                        <div class="content">
+                                                                <core-icon icon="warning" style="width: 100px; height: 100px; color: #FFA100;"></core-icon>
+                                                                <h1>Hard hat area! This site is currently under construction.</h1>
+                                                        </div>
+                                                </paper-shadow>
+                                        </template>
                                 </div>
                         </core-header-panel>
                 </core-drawer-panel>
