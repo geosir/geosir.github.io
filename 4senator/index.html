@@ -13,8 +13,7 @@
 
                 <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
 
-                <link rel="import" href="/meta/imports.html">
-                
+                <link rel="import" href="/meta/imports.html">                
                 
                 <script>
                         document.addEventListener("polymer-ready", function(){
@@ -24,7 +23,7 @@
                                         drawer.togglePanel();
                                 });
                                 
-                                document.getElementById("main-menu-list").selected="2";
+                                document.getElementById("main-menu-list").selected="1";
                         });
                 </script>
         </head>
@@ -49,11 +48,10 @@
                                         </span>
                                 </core-toolbar>
                                 <div>
-                                        <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
-                                                <div class="content" auto-vertical flex three>
-                                                        <h1 class="lead-text"><b>Resume: Here's what I've done</b></h1>
-                                                        <p>Coming soon!</p>
-                                                        
+                                        <paper-shadow z=4 class="card card-title">
+                                                <div class="content">
+                                                         <core-icon icon="check-box" style="width: 100px; height: 100px; color: #00933B;"></core-icon>
+                                                        <h1>Go for Moe! Choose George for 07 Hall Senator.</h1>
                                                 </div>
                                         </paper-shadow>
                                         <paper-shadow z=4 class="card card-title">

@@ -10,39 +10,26 @@
                 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
                 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
                 <script src="/meta/menuloader.js"></script>
+                <script src="/meta/ga.js"></script>
 
                 <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
 
-                <link rel="import" href="/bower_components/font-roboto/roboto.html">
-                <link rel="import" href="/bower_components/core-icons/core-icons.html">
-                <link rel="import" href="/bower_components/core-icons/social-icons.html">
-                <link rel="import" href="/bower_components/core-toolbar/core-toolbar.html">
-                <link rel="import" href="/bower_components/core-menu/core-menu.html">
-                <link rel="import" href="/bower_components/core-item/core-item.html">
-                <link rel="import" href="/bower_components/core-media-query/core-media-query.html">
-                <link rel="import" href="/bower_components/core-header-panel/core-header-panel.html">
-                <link rel="import" href="/bower_components/core-drawer-panel/core-drawer-panel.html">
-                <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
-                <link rel="import" href="/bower_components/paper-shadow/paper-shadow.html">
-                <link rel="import" href="/bower_components/paper-fab/paper-fab.html">
-                <link rel="import" href="/bower_components/core-tooltip/core-tooltip.html">
-                
+                <link rel="import" href="/meta/imports.html">
                 
                 <script>
                         document.addEventListener("polymer-ready", function(){
+
                                 var navicon = document.getElementById("navicon");
-                                var navlink = document.getElementById("navlink");
+                                
                                 var drawer = document.getElementById("drawer-panel");
                                 navicon.addEventListener("click", function(){
                                         drawer.togglePanel();
+                                        document.getElementById("main-menu-list").selected="0";
                                 });
-                                navlink.addEventListener("click", function(){
-                                        console.log("HEY");
-                                        drawer.togglePanel();
-                                });
-                                
-                                document.getElementById("main-menu-list").selected="0";
+
                         });
+                        
+                        
                 </script>
         </head>
         <body fullbleed unresolved layout vertical>
@@ -56,9 +43,9 @@
                                 </div>
                         </core-header-panel>
                         <core-header-panel main mode="waterfall">
-                                <core-tooltip id="feedback-button" class="fancy" label="Feedback">
+                                <!--<core-tooltip id="feedback-button" class="fancy" label="Feedback">
                                         <paper-fab icon="thumbs-up-down"></paper-fab>
-                                </core-tooltip>
+                                </core-tooltip>-->
                                 <core-toolbar class="main" layout vertical>
                                         <paper-icon-button id="navicon" icon="menu"></paper-icon-button>
                                         <span flex>
@@ -68,6 +55,12 @@
                                 <div>
                                         <template is="auto-binding">
                                                 <core-media-query query="max-width: 640px" queryMatches="{{phoneScreen}}"></core-media-query>
+                                                <paper-shadow z=4 class="card card-title">
+                                                        <div class="content">
+                                                                 <core-icon icon="check-box" style="width: 100px; height: 100px; color: #00933B;"></core-icon>
+                                                                <h1><a href="/4senator">Go for Moe!</a> Choose George for 07 Hall Senator.</h1>
+                                                        </div>
+                                                </paper-shadow>
                                                 <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
                                                         <paper-shadow id="profile-picture" z=2 class="card card-img fit" auto-vertical flex one>
                                                                 <img src="/media/profile.jpg">
@@ -77,21 +70,41 @@
                                                                 I'm a person who does things. Aside from designing websites, like this one, I also run
                                                                 innovation projects, make apps, study emergining sciences, craft kites, dabble in music and
                                                                 movies, write poetry, take photos, volunteer, and engage in other activities,
-                                                                which can be found in my <a>portfolio</a> and <a>resume</a>.
+                                                                which can be found in my <a>portfolio</a> and <a href="/resume">resume</a>.
                                                                 <br /><br />
                                                                 As a sophomore at the Illinois Math and Science Academy, I take "advance the human
                                                                 condition..." to heart. I am always looking for new things to learn and new
                                                                 opportunities to explore so that one day, I can give something great to this world.
                                                                 <br /><br />
-                                                                So have a peek at what I busy myself with in the world. Use the <a id="navlink" href="#">navigation menu</a> to get started.        
+                                                                So have a peek at what I busy myself with in the world. Use the <a id="navlink" href="#">navigation menu</a> to get started.
+                                                                <script>
+                                                                        var drawer = document.getElementById("drawer-panel");
+                                                                        var navlink = document.getElementById("navlink");
+                                                                        navlink.addEventListener("click", function(){
+                                                                                drawer.togglePanel();
+                                                                        });
+                                                                </script>
                                                         </div>
                                                 </paper-shadow>
                                                 <paper-shadow z=4 class="card card-title">
                                                         <div class="content">
                                                                 <core-icon icon="warning" style="width: 100px; height: 100px; color: #FFA100;"></core-icon>
                                                                 <h1>Hard hat area! This site is currently under construction.</h1>
+                                                                <p>Content may be incomplete, and some things might be buggy! Thank you for your patience.</p>
                                                         </div>
                                                 </paper-shadow>
+                                                <!--<paper-action-dialog id="feedback-dialog" backdrop autoCloseDisabled layered="false">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+                                                        <paper-button affirmative autofocus>Tap me to close</paper-button>
+                                                </paper-action-dialog>
+                                                <script>
+                                                                var feedback = document.getElementById("feedback-button");
+                                                                var dialog = document.getElementById("feedback-dialog");
+                                                                feedback.addEventListener("click", function(){
+                                                                        dialog.toggle()
+                                                                });
+                                                </script>-->
                                         </template>
                                 </div>
                         </core-header-panel>
