@@ -3,7 +3,9 @@ body
 {
         font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
         margin: 0;
-        background-image: url("/media/shuttle.jpg");
+        background-image: url("/media/earth.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
         background-size: 100%;
 }
 img

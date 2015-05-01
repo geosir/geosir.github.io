@@ -13,7 +13,8 @@
 
                 <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
 
-                <link rel="import" href="/meta/imports.html">                
+                <link rel="import" href="/meta/imports.html">
+                
                 
                 <script>
                         document.addEventListener("polymer-ready", function(){
@@ -23,7 +24,7 @@
                                         drawer.togglePanel();
                                 });
                                 
-                                document.getElementById("main-menu-list").selected="1";
+                                document.getElementById("main-menu-list").selected="3";
                         });
                 </script>
         </head>
@@ -48,28 +49,20 @@
                                         </span>
                                 </core-toolbar>
                                 <div>
-                                        <paper-shadow z=4 class="card card-title">
-                                                <div class="content">
-                                                         <core-icon icon="check-box" style="width: 100px; height: 100px; color: #00933B;"></core-icon>
-                                                        <h1>Go for Moe! Choose George for 07 Hall Senator.</h1>
-                                                </div>
-                                        </paper-shadow>
                                         <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
                                                 <div class="content" auto-vertical flex three>
-                                                        <h1 class="lead-text">Let's get things done.</h1>
-                                                        (Coming soon: my take on this coming year.)
-                                                </div>
-                                        </paper-shadow>
-                                        <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
-                                                <div class="content" auto-vertical flex three>
-                                                        <h1 class="lead-text">Here's the Plan.</h1>
-                                                        (Coming soon: my plan for this year.)
-                                                </div>
-                                        </paper-shadow>
-                                        <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
-                                                <div class="content" auto-vertical flex three>
-                                                        <h1 class="lead-text">I'll do it.</h1>
-                                                        (Coming soon: my philosophy for this year.)
+                                                        <h1 class="lead-text"><b>Portfolio: My projects</b></h1>
+                                                        <ul>
+                                                                <li><a href="/legacy">[WEBSITE] Old website</a></li>
+                                                                <li><a href="/legacy/schedule">[WEBSITE] George's Schedule Machine</a></li>
+                                                                <li><a href="http://undef.in">[WEBSITE] The #Undefined Project</a></li>
+                                                                <li><a href="http://undef.in/clubhub">[WEBSITE] Club Hub</a></li>
+                                                                <li><a href="https://play.google.com/store/apps/details?id=org.satcomp.geo.soundit">[Android APP] Sounds When You Need Them</a></li>
+                                                                
+                                                                
+                                                                <li><p>More coming soon!</p></li>
+                                                        </ul>
+                                                        
                                                 </div>
                                         </paper-shadow>
                                         <paper-shadow z=4 class="card card-title">

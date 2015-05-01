@@ -1,36 +1,11 @@
 <!doctype html>
 <html>
         <head>
-
-                <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-
                 <title>george.moe</title>
-                
-                <link rel="stylesheet" type="text/css" href="/meta/main.css" />
-                <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-                <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-                <script src="/meta/menuloader.js"></script>
-                <script src="/meta/ga.js"></script>
-
-                <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
 
                 <link rel="import" href="/meta/imports.html">
                 
-                <script>
-                        document.addEventListener("polymer-ready", function(){
-
-                                var navicon = document.getElementById("navicon");
-                                
-                                var drawer = document.getElementById("drawer-panel");
-                                navicon.addEventListener("click", function(){
-                                        drawer.togglePanel();
-                                        document.getElementById("main-menu-list").selected="0";
-                                });
-
-                        });
-                        
-                        
-                </script>
+                
         </head>
         <body fullbleed unresolved layout vertical>
                 <core-drawer-panel id="drawer-panel" drawerWidth=200px forceNarrow>
@@ -55,9 +30,9 @@
                                 <div>
                                         <template is="auto-binding">
                                                 <core-media-query query="max-width: 640px" queryMatches="{{phoneScreen}}"></core-media-query>
-                                                <paper-shadow z=4 class="card card-title">
+                                                <paper-shadow z=4 id="goformoe" class="card card-title">
                                                         <div class="content">
-                                                                 <core-icon icon="check-box" style="width: 100px; height: 100px; color: #00933B;"></core-icon>
+                                                                 <core-icon icon="check-box" id="checkbox" style="width: 100px; height: 100px; color: #00933B;"></core-icon>
                                                                 <h1><a href="/4senator">Go for Moe!</a> Choose George for 07 Hall Senator.</h1>
                                                         </div>
                                                 </paper-shadow>
@@ -70,7 +45,7 @@
                                                                 I'm a person who does things. Aside from designing websites, like this one, I also run
                                                                 innovation projects, make apps, study emergining sciences, craft kites, dabble in music and
                                                                 movies, write poetry, take photos, volunteer, and engage in other activities,
-                                                                which can be found in my <a>portfolio</a> and <a href="/resume">resume</a>.
+                                                                which can be found in my <a href="/portfolio">portfolio</a> and <a href="/resume">resume</a>.
                                                                 <br /><br />
                                                                 As a sophomore at the Illinois Math and Science Academy, I take "advance the human
                                                                 condition..." to heart. I am always looking for new things to learn and new
