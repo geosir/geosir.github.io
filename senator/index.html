@@ -15,17 +15,6 @@
 
                 <link rel="import" href="/meta/imports.html">                
                 
-                <script>
-                        document.addEventListener("polymer-ready", function(){
-                                var navicon = document.getElementById("navicon");
-                                var drawer = document.getElementById("drawer-panel");
-                                navicon.addEventListener("click", function(){
-                                        drawer.togglePanel();
-                                });
-                                
-                                document.getElementById("main-menu-list").selected="1";
-                        });
-                </script>
         </head>
         <body fullbleed unresolved layout vertical>
                 <core-drawer-panel id="drawer-panel" drawerWidth=200px forceNarrow>
