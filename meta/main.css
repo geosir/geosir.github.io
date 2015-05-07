@@ -72,8 +72,8 @@ core-drawer-panel:not([narrow]) #navicon
 {
         margin: 1%;
         display: inline-block;
-        max-height: 100%;
-} 
+        height: 0%;
+}
 .content
 {
         padding: 1%;

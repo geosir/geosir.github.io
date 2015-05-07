@@ -6,14 +6,38 @@
 
                 <title>george.moe</title>
                 
-                <link rel="stylesheet" type="text/css" href="/meta/main.css" />
+                <!--<link rel="stylesheet" type="text/css" href="/meta/main.css" />-->
                 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
                 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
                 <script src="/meta/menuloader.js"></script>
 
                 <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
 
-                <link rel="import" href="/meta/imports.html">                
+                <link rel="import" href="/meta/imports.html">         
+                
+                <style>
+                        .section
+                        {
+                                border: 1px solid rgb(200,200,200);
+                                padding: 2%;
+                                margin: 2% 0%;
+                                position: relative;
+                        }
+                        .section .section-label
+                        {
+                                color: rgb(180,180,180);
+                                font-size: 1.5em;
+                                position: absolute;
+                                top: 0;
+                                right: 20px;
+                        }
+                </style>
+                <script>
+                document.addEventListener("polymer-ready", function(){
+                        document.getElementById("main-menu-list").selected="1";
+                });
+                </script>
+                                    
                 
         </head>
         <body fullbleed unresolved layout vertical>
@@ -43,34 +67,83 @@
                                                         <h1>Go for Moe! Choose George for 07 Hall Senator.</h1>
                                                 </div>
                                         </paper-shadow>
+                                        <paper-shadow z=4 class="card" layout horizontal>
+                                                <paper-shadow id="page-picture" z=2 class="card card-img fit" auto-vertical flex one>
+                                                                <img src="/media/imsasunset.jpg">
+                                                </paper-shadow>
+                                                <div class="content" auto-vertical flex three>
+                                                        <h1 class="lead-text">Let&#39;s get things done.</h1>
+                                                        <p>When the Illinois Math and Science Academy was first created, it was a torch thrust into an unexplored frontier, lightning the way for innovative education to produce the next generation of world-changing visionaries.<br /><br />
+
+Today, it still holds that promise in preparing students to be great in the modern world. But it has lost that certain vigor which made the early years at IMSA such an exciting new opportunity. The pioneering spirit has gone, leaving a stagnant and mundane husk of what it used to be.<br /><br />
+
+Yet, things are beginning to look up. With great changes happening throughout the school, from the construction of new classrooms and lounges in the main building, to the review and improvement of academic courses, this is our chance to push for a progressive agenda to jumpstart the Academy.<br /><br />
+
+The biggest change begins right here at home—our residential halls. By reinvigorating our community, through programs like the ones described below, we&#39;ll not only revitalize the Academy, but we&#39;ll also find a spark of optimism within ourselves.</p>
+                                                </div>
+                                        </paper-shadow>
                                         <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
                                                 <div class="content" auto-vertical flex three>
-                                                        <h1 class="lead-text">Let's get things done.</h1>
-                                                        <p>This year is ours. Together, we'll work to solve some of the biggest problems we know.</p>
+                                                        <h1 class="lead-text">Here&#39;s the Plan.</h1>
+                                                        <div class="section">
+                                                                <p class="section-label"><b>COMMUNICATIONS</b></p>
+                                                                <h1><b>Access</b> StudCo projects, easily</h1>
+                                                                <p>StudCo is home to some of the most innovative initiatives on campus. Yet, it&#39;s hard to get details about the goals and progress of these projects. Being informed about these is important, since these affect everyone&#39;s IMSA experience. They also work best when everyone gets involved in the design and feedback process. It&#39;s about time StudCo became better at being transparent.<br /><br />
+                                                                
+Here&#39;s some ways we could fix this:
+                                                                        <ul>
+                                                                                <li>Enact weekly get-informed-fast sessions in our hall hosted by me to talk about and answer questions regarding ongoing StudCo projects. Perfect for conscientious citizens on a time budget.</li>
+                                                                                <li>Create a bulletin board with detailed information about StudCo projects placed in our hall commons, with space for questions and feedback.</l1>
+                                                                                <li>Design a reworked website layout, featuring a news feed on the homepage and easily accessible project pages. Active projects will be featured on the homepage as well.</li>
+                                                                        </ul>
+                                                                </p>
+                                                        </div>
+                                                        <div class="section">
+                                                                <p class="section-label"><b>STUDENT HEALTH-></b>MENTAL HEALTH</p>
+                                                                <h1>Find inspiration at IMSA</h1>
+                                                                <p>It&#39;s true, academics at IMSA are hard, and the workload can often become overwhelming. We all get stressed when the going gets tough, but sometimes, something terrible happens: we become fatigued, tired of life. There are times when we all lose the will to do anything, and most of the time, this is normal. But if this happens chronically, it could lead to depression. It&#39;s important that StudCo create more programs and mental health initiatives to help students through these difficult times—and while we&#39;re at it, maybe help everyone rediscover the passion that inspired them to come to IMSA.<br /><br />
+                                                                
+Here&#39;s what we can do:
+
+                                                                        <ul>
+                                                                                <li>Train wing guides to know how to spot a student in need and provide to them tools necessary to help these students. These tools will be compiled in a Mental Health handbook.</li>
+                                                                                <li>Run a campaign using posters, videos, and events to showcase what can be done at IMSA, as well as provide information about opportunities at IMSA.</li>
+                                                                                <li>Give the Academy a general face-lift by improving the atmosphere in the main building and around campus. This could mean getting better lighting, doing some cleanup of facilities, creating new art for the school, among other aesthetic renovations.</li>
+                                                                        </ul>
+                                                                </p>
+                                                        </div>
+                                                        <div class="section">
+                                                                <p class="section-label"><b>RESIDENTIAL LIFE</b></p>
+                                                                <h1>Connect to facilities and resources</h1>
+                                                                <p>IMSA has a surprising amount of resources available for student activities that many people don&#39;t know about. Whether you&#39;re planning a turn-up party or want to get some stuff for your club event, it should be easy to get ahold of these materials and spaces.<br /><br />
+                                                                
+Some ideas for making this possible:
+                                                                        <ul>
+                                                                                <li>Continue building 1508 by supplying it with comfortable furnishings and useful items. This campaign will expand to provide tasteful management of places like the new Titan Café, as well as provide official support for popular hangout areas. For more information about 1508, go to <a href="http://undef.in/1508" target="_blank">undef.in/1508</a>.</li>
+                                                                                <li>Implement an organized system to space reservations, featuring an online interface that shows who is using what space and when. This will help prevent conflicts as well as serve as a potential venue for free event publicity.</li>
+                                                                        </ul>
+                                                                </p>
+                                                        </div>
+                                                        <div class="section">
+                                                                <p class="section-label"><b>CLUBS, CO-CURRICULARS, AND ATHLETICS</b></p>
+                                                                <h1>Do more with clubs and activities</h1>
+                                                                <p>There are so many clubs and activities on campus that it&#39;s hard to go wrong with your pick. But sometimes, this can lead to an overwhelming scenario in which it&#39;s hard to know exactly which events to go to. Students-l, with its constant inundation of information, only makes this more difficult. Getting an idea of what&#39;s going on at IMSA should be a trivial task instead of the work of a detective. And clubs should be coordinated so that each evening isn&#39;t a dilemma of extracurricular proportions.<br /><br />
+                                                                
+Some ideas for making this possible:
+                                                                        <ul>
+                                                                                <li>Provide services such as Club Hub, an online self-organizing poster wall for IMSA, and the StudCo&#39;s Club Calendar (experimental) as tools for students in getting to know more about IMSA events. These can also be personalized to help them organize their day in a clear and well-planned manner. You can learn more about Club Hub at <a href="http://undef.in/projects/clubhub" target="_blank">undef.in/projects/clubhub</a>, and more about StudCo&#39;s Club Calendar at <a href="http://sites.imsa.edu/studco/experimentalcalendar/" target="_blank">sites.imsa.edu/studco/experimentalcalendar/</a>.</li>
+                                                                                <li>Use the tools above to help clubs plan events at mutually beneficial times with the purpose of avoiding conflicts and providing a good time for everyone. This can be coupled with the resources discussed in <b>Connect</b> to create rich experiences for every event.</li>
+                                                                        </ul>
+                                                                </p>
+                                                        </div>
                                                 </div>
                                         </paper-shadow>
                                         <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
                                                 <div class="content" auto-vertical flex three>
-                                                        <h1 class="lead-text">Here's the Plan.</h1>
-                                                        <h2>Communications</h2>
-							<h2>Mental Health</h2>
-							<h2>1508</h2>
-							<h2>Clubs and Activities</h2>
+                                                        <h1 class="lead-text">Talk to me.</h1>
+                                                        <p>If you have questions, comments, or suggestions, you can email me at <a href="mailto:george@george.moe" target="_blank">george@george.moe</a>. I live in 1507 B-wing&mdash;feel free to hit me up any time for a conversation. You can also find me on Facebook.</p>
                                                 </div>
-                                        </paper-shadow>
-                                        <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
-                                                <div class="content" auto-vertical flex three>
-                                                        <h1 class="lead-text">I'll do it.</h1>
-							<h2>Imagine. Innovate. Inspire.</h2>
-                                                </div>
-                                        </paper-shadow>
-                                        <paper-shadow z=4 class="card card-title">
-                                                <div class="content">
-                                                        <core-icon icon="warning" style="width: 100px; height: 100px; color: #FFA100;"></core-icon>
-                                                        <h1>Hard hat area! This site is currently under construction.</h1>
-                                                        <p>Content may be incomplete, and some things might be buggy! Thank you for your patience.</p>
-                                                </div>
-                                        </paper-shadow>
+                                        </paper-shadow>                                                        
                                 </div>
                         </core-header-panel>
                 </core-drawer-panel>
