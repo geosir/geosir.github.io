@@ -24,18 +24,12 @@
                                 <core-toolbar class="main" layout vertical>
                                         <paper-icon-button id="navicon" icon="menu"></paper-icon-button>
                                         <span flex>
-                                                <h1 class="title" unselectable self-center>george.moe</h1>
+                                                <a class="homeselect" href="/"><h1 class="title" unselectable self-center>george.moe</h1></a>
                                         </span>
                                 </core-toolbar>
                                 <div>
                                         <template is="auto-binding">
                                                 <core-media-query query="max-width: 960px" queryMatches="{{phoneScreen}}"></core-media-query>
-                                                <paper-shadow z=4 id="goformoe" class="card card-title">
-                                                        <div class="content">
-                                                                 <core-icon icon="social:cake" id="checkbox" style="width: 100px; height: 100px; color: #82172B;"></core-icon>
-                                                                <h1><a href="/senator">We did it!</a> Thanks for voting, everyone!</h1>
-                                                        </div>
-                                                </paper-shadow>
                                                 <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
                                                         <paper-shadow id="profile-picture" z=2 class="card card-img fit" auto-vertical flex one>
                                                                 <img src="/media/profile.jpg">
@@ -59,13 +53,6 @@
                                                                                 drawer.togglePanel();
                                                                         });
                                                                 </script>
-                                                        </div>
-                                                </paper-shadow>
-                                                <paper-shadow z=4 class="card card-title">
-                                                        <div class="content">
-                                                                <core-icon icon="warning" style="width: 100px; height: 100px; color: #FFA100;"></core-icon>
-                                                                <h1>Hard hat area! This site is currently under construction.</h1>
-                                                                <p>Content may be incomplete, and some things might be buggy! Thank you for your patience.</p>
                                                         </div>
                                                 </paper-shadow>
                                                 <!--<paper-action-dialog id="feedback-dialog" backdrop autoCloseDisabled layered="false">

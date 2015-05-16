@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+        <head>
+
+                
+                <title>george.moe</title>
+
+                <link rel="import" href="/meta/imports.html">         
+                
+                <style>
+                        .section
+                        {
+                                border: 1px solid rgb(200,200,200);
+                                padding: 2%;
+                                margin: 2% 0%;
+                                position: relative;
+                                
+                                white-space: pre-wrap; /* css-3 */    
+                                white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+                                white-space: -pre-wrap; /* Opera 4-6 */    
+                                white-space: -o-pre-wrap; /* Opera 7 */    
+                                word-wrap: break-word; /* Internet Explorer 5.5+ */
+                        }
+                        .section .section-label
+                        {
+                                color: rgb(180,180,180);
+                                font-size: 1.5em;
+                                position: absolute;
+                                top: 0;
+                                right: 20px;
+                                z-index: 0;
+                        }
+                </style>
+                <script>
+                document.addEventListener("polymer-ready", function(){
+                        document.getElementById("main-menu-list").selected="1";
+                });
+                </script>
+                                    
+                
+        </head>
+        <body fullbleed unresolved layout vertical>
+                <core-drawer-panel id="drawer-panel" drawerWidth=200px forceNarrow>
+                        <core-header-panel drawer mode="waterfall" unselectable>
+                                <core-toolbar class="drawer" >
+                                        <span flex >Navigate!</span>
+                                </core-toolbar>
+                                <div id="main-menu">
+                                        
+                                </div>
+                        </core-header-panel>
+                        <core-header-panel main mode="waterfall">
+                                <!--<core-tooltip id="feedback-button" class="fancy" label="Feedback">
+                                        <paper-fab icon="thumbs-up-down"></paper-fab>
+                                </core-tooltip>-->
+                                <core-toolbar class="main" layout vertical>
+                                        <paper-icon-button id="navicon" icon="menu"></paper-icon-button>
+                                        
+                                        <span flex>
+                                                <a class="homeselect" href="/"><h1 class="title" unselectable self-center>george.moe</h1></a>
+                                        </span>
+                                        
+                                </core-toolbar>
+                                <div>
+                                        <template is="auto-binding">
+                                                <core-media-query query="max-width: 960px" queryMatches="{{phoneScreen}}"></core-media-query>
+                                                <paper-shadow z=4 class="card card-title">
+                                                        <div class="content">
+                                                                 <core-icon icon="forward" style="width: 100px; height: 100px; color: #00933B;"></core-icon>
+                                                                <h1>Ready for a year of progress?</h1>
+                                                        </div>
+                                                </paper-shadow>
+                                                <paper-shadow z=4 class="card" layout layout horizontal?={{!phoneScreen}}>
+                                                        <paper-shadow id="page-picture" z=2 class="card card-img fit" auto-vertical flex one>
+                                                                        <img src="/media/imsasunset.jpg">
+                                                        </paper-shadow>
+                                                        <div class="content" auto-vertical flex three>
+                                                                <h1 class="lead-text">Let&#39;s get things done.</h1>
+                                                                <p>When the Illinois Math and Science Academy was first created, it was a torch thrust into an unexplored frontier, lightning the way for innovative education to produce the next generation of world-changing visionaries.<br /><br />
+
+        Today, it still holds that promise in preparing students to be great in the modern world. But it has lost that certain vigor which made the early years at IMSA such an exciting new opportunity. The pioneering spirit has gone, leaving a stagnant and mundane husk of what it used to be.<br /><br />
+
+        Yet, things are beginning to look up. With great changes happening throughout the school, from the construction of new classrooms and lounges in the main building, to the review and improvement of academic courses, this is our chance to push for a progressive agenda to jumpstart the Academy.<br /><br />
+
+        The biggest change begins right here at home: our residential halls. By reinvigorating our community, through programs like the ones described below, we&#39;ll not only revitalize the Academy, but we&#39;ll also find a spark of optimism within ourselves.</p>
+                                                        </div>
+                                                </paper-shadow>
+                                                <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
+                                                        <div class="content" auto-vertical flex three>
+                                                                <h1 class="lead-text">1507 Project Updates</h1>
+                                                                <div class="section">
+                                                                        <p class="section-label"><b>UPDATES</b></p>
+                                                                        <h1>Coming soon.</h1>
+                                                                </div>
+                                                       </div>
+                                                </paper-shadow>
+                                                <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
+                                                        <div class="content" auto-vertical flex three>
+                                                                <h1 class="lead-text">Talk to me.</h1>
+                                                                <p>If you have questions, comments, or suggestions, you can email me at <a href="mailto:george@george.moe" target="_blank">george@george.moe</a>. I live in 1507 B-wing&mdash;feel free to hit me up any time for a conversation. You can also find me on Facebook.</p>
+                                                        </div>
+                                                </paper-shadow>
+                                        </template>                                                        
+                                </div>
+                        </core-header-panel>
+                </core-drawer-panel>
+        </body>
+</html>
+

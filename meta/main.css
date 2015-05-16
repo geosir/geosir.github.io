@@ -111,6 +111,21 @@ a:hover
         text-decoration: none;
         color: rgb(0, 150, 255);
 }
+
+a.homeselect
+{
+        text-decoration: none;
+        color: white;
+}
+a.homeselect:hover
+{
+        text-decoration: none;
+        color: white;
+}
+body /deep/ core-menu
+{
+        overflow-x: hidden !important;
+}
 /*.title
 {
         -webkit-transition: all 0.3s ease;
