@@ -6,14 +6,13 @@
 
                 <title>george.moe</title>
                 
-                <link rel="stylesheet" type="text/css" href="/meta/main.css" />
-                <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-                <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-                <script src="/meta/menuloader.js"></script>
-
-                <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
-
                 <link rel="import" href="/meta/imports.html">
+                
+                <script>
+                document.addEventListener("polymer-ready", function(){
+                        document.getElementById("main-menu-list").selected="2";
+                });
+                </script>
                 
         </head>
         <body fullbleed unresolved layout vertical>

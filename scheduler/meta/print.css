@@ -1,0 +1,45 @@
+table
+{
+	table-layout: fixed;
+	border-collapse: separate;
+	border-spacing: 3.75pt;
+	width: 511pt;
+	height: 100%;
+	background-color: white;
+	text-align: center;
+	font-size: 12pt;
+}
+table span.text
+{
+	veritcal-align: center;
+}
+#blocks
+{
+	width: 5em;
+}
+td, th
+{
+	border-radius: 3.75pt;
+	overflow: hidden;
+	white-space: nowrap; 
+	margin: 1%;
+	box-sizing:border-box;
+        -moz-box-sizing:border-box;
+        -webkit-box-sizing:border-box;
+}
+th
+{
+	background-color: rgb(0, 80, 120);
+	color: white;
+}
+
+th.mods
+{
+        background-color: rgb(20,20,20);
+}
+
+td
+{
+        background-color: rgb(230,230,255);
+        border: 1px solid gray;
+}

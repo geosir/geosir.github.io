@@ -6,14 +6,13 @@
 
                 <title>george.moe</title>
                 
-                <link rel="stylesheet" type="text/css" href="/meta/main.css" />
-                <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-                <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-                <script src="/meta/menuloader.js"></script>
-
-                <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
-
                 <link rel="import" href="/meta/imports.html">
+                
+                <script>
+                document.addEventListener("polymer-ready", function(){
+                        document.getElementById("main-menu-list").selected="3";
+                });
+                </script>
 
         </head>
         <body fullbleed unresolved layout vertical>
@@ -42,10 +41,14 @@
                                                         <h1 class="lead-text"><b>Portfolio: My projects</b></h1>
                                                         <ul>
                                                                 <li><a href="/legacy">[WEBSITE] Old website</a></li>
-                                                                <li><a href="/legacy/schedule">[WEBSITE] George's Schedule Machine</a></li>
+                                                                <li><a href="/legacy/scheduler">[WEBSITE] George's (old) Schedule Machine</a></li>
+                                                                <li><a href="/scheduler">[WEBSITE] George's New Schedule Machine</a></li>
                                                                 <li><a href="http://undef.in">[WEBSITE] The #Undefined Project</a></li>
                                                                 <li><a href="http://undef.in/clubhub">[WEBSITE] Club Hub</a></li>
                                                                 <li><a href="https://play.google.com/store/apps/details?id=org.satcomp.geo.soundit">[Android APP] Sounds When You Need Them</a></li>
+                                                                <li><a href="https://soundcloud.com/geosir">[MUSIC] geosir on SoundCloud</a></li>
+                                                                <li><a href="https://www.youtube.com/channel/UCVC42uM6XwzS6IeTXE5-JQA">[MUSIC][VIDEO] TheFractalTree on YouTube</a></li>
+                                                                
                                                                 
                                                                 
                                                                 <li><p>More coming soon!</p></li>
