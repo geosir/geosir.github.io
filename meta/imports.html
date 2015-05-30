@@ -38,6 +38,13 @@
 <link rel="import" href="/bower_components/ajax-form/ajax-form.html">
 
 <script>
+
+        var loc = window.location.href+'';
+        if (loc.indexOf('http://')==0){
+            window.location.href = loc.replace('http://','https://');
+        }
+
+
         document.addEventListener("polymer-ready", function(){
 
                 var navicon = document.getElementById("navicon");
