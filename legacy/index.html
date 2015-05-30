@@ -29,6 +29,11 @@
    					$(this).animate({opacity: st/(top*threshold)}, 10);
    				});
 			});
+			
+		        var loc = window.location.href+'';
+                        if (loc.indexOf('http://')==0){
+                                window.location.href = loc.replace('http://','https://');
+                        }
 		</script>
 		
 	</head>
