@@ -1,0 +1,426 @@
+<html>
+        <head>
+
+                <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+                <title>george.moe | Schedule Machine</title>
+
+                <link rel="stylesheet" type="text/css" href="/meta/main.css" />
+                <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+                <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+                <script src="/meta/jquery.transit.min.js"></script>
+                <script src="/meta/menuloader.js"></script>
+                <script src="/meta/ga.js"></script>
+
+                <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
+
+                <link rel="import" href="/bower_components/font-roboto/roboto.html">
+                <link rel="import" href="/bower_components/core-icons/core-icons.html">
+                <link rel="import" href="/bower_components/core-icons/social-icons.html">
+                <link rel="import" href="/bower_components/core-toolbar/core-toolbar.html">
+                <link rel="import" href="/bower_components/core-menu/core-menu.html">
+                <link rel="import" href="/bower_components/core-item/core-item.html">
+                <link rel="import" href="/bower_components/core-media-query/core-media-query.html">
+                <link rel="import" href="/bower_components/core-header-panel/core-header-panel.html">
+                <link rel="import" href="/bower_components/core-drawer-panel/core-drawer-panel.html">
+                <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+                <link rel="import" href="/bower_components/paper-shadow/paper-shadow.html">
+                <link rel="import" href="/bower_components/paper-fab/paper-fab.html">
+                <link rel="import" href="/bower_components/core-tooltip/core-tooltip.html">
+                <link rel="import" href="/bower_components/paper-dialog/paper-dialog.html">
+                <link rel="import" href="/bower_components/paper-checkbox/paper-checkbox.html">
+                <link rel="import" href="/bower_components/paper-input/paper-input.html">
+                <link rel="import" href="/bower_components/paper-input-decorator/paper-input-decorator.html">
+                <link rel="import" href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+                <link rel="import" href="/bower_components/paper-dropdown/paper-dropdown.html">
+                <link rel="import" href="/bower_components/paper-item/paper-item.html">
+                <link rel="import" href="/bower_components/paper-button/paper-button.html">
+                <link rel="import" href="/bower_components/paper-slider/paper-slider.html">
+                <link rel="import" href="/bower_components/paper-radio-group/paper-radio-group.html">
+                <link rel="import" href="/bower_components/paper-spinner/paper-spinner.html">
+                
+                <style id="style">
+                        
+                        body
+                        {
+                                background: none;
+                        }
+                        
+                        .card
+                        {
+                                margin-left: 10px;
+                                width: 960px;
+                        }
+                
+			.class-form
+			{
+				background-color: rgba(256, 256, 256, 0.5);
+				padding: 1rem;
+			}
+			
+			table
+			{
+				table-layout: fixed;
+				border-collapse: separate;
+				border-spacing: 5px;
+				width: 100%;
+				background-color: white;
+				text-align: center;
+				margin: 2% 0;
+			}
+			table span.text
+			{
+				veritcal-align: center;
+			}
+			#blocks
+			{
+				width: 5em;
+			}
+			td, th
+			{
+				border-radius: 5px;
+				height: 5em;
+				overflow: hidden;
+				white-space: nowrap; 
+				margin: 1%;
+				box-sizing:border-box;
+                                -moz-box-sizing:border-box;
+                                -webkit-box-sizing:border-box;
+			}
+			th
+			{
+				background-color: rgb(0, 80, 120);
+				color: white;
+			}
+			
+			th.mods
+			{
+			        background-color: rgb(20,20,20);
+		        }
+			
+			td
+			{
+			        background-color: rgb(230,230,255);
+			        border: 1px solid gray;
+		        }
+		        
+			input
+			{
+			        font-size: 1.2em;
+		        }
+		        #schedule-update, #print-button
+		        {
+		                color: white;
+		                background-color: #4285f4;
+		                margin: 0;
+                        }
+                        .section
+                        {
+                                border: 1px solid rgb(200,200,200);
+                                padding: 1%;
+                                margin: 2% 0%;
+                        }
+                        paper-checkbox
+                        {
+                                padding: 1%;
+                                /*border-left: 1px solid rgb(200,200,200);
+                                border-right: 1px solid rgb(200,200,200);*/
+                        }
+                        
+                        paper-input
+                        {
+                                width: 100%;
+                        }
+                        
+                        #color-label
+                        {
+                                vertical-align: middle;
+                        }
+                        
+                        .form-container
+                        {
+                                margin: 1%;
+                                padding: 1%;
+                        }
+                        
+                        .page-section
+                        {
+                                margin: 2% 0;
+                        }
+                        
+		</style>
+        </head>
+        <body>
+                <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
+                        <div class="content" auto-vertical flex>
+                                <h1 class="lead-text"><b>StudCo Schedule Machine</b></h1>
+                                <i>Designed for use by IMSA students.</i>
+                                <p>Use the input box below to enter your class information, and watch your schedule magically appear! For classes that span multiple mods, insert the classes in the first mod, then add the classes in the second mod. Finally, once you're done, you can hit print to open a printable or screenshot-able view of your schedule.</p>
+                                <i>Mistakes are OK! Double-click on a box to clear its contents.</i>
+                        </div>
+                </paper-shadow>
+                <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
+                        <div class="content" auto-vertical flex>
+                                <h2>Input Box</h2>
+                                <div class="page-section">
+                                        <div class="section" layout horizontal>
+                                                <div class="form-container" flex>
+                                                        <paper-input id="class-name" label="Course Name" name="classname" floatingLabel></paper-input>
+                                                        <paper-input id="teacher-name" label="Teacher" name="teacher" floatingLabel></paper-input>
+                                                        <paper-input id="room-name" label="Room" name="room" floatingLabel></paper-input>
+                                                </div>
+                                                <div flex layout vertical>
+                                                        <div class="form-container" flex layout vertical>
+                                                                <div flex>
+                                                                        <b>Mod: </b>
+                                                                        <paper-dropdown-menu label="Mod" floatingLabel>
+                                                                                <paper-dropdown class="dropdown">
+                                                                                        <core-menu class="menu">
+                                                                                                <paper-item>1</paper-item>
+                                                                                                <paper-item>2</paper-item>
+                                                                                                <paper-item>3</paper-item>
+                                                                                                <paper-item>4</paper-item>
+                                                                                                <paper-item>5</paper-item>
+                                                                                                <paper-item>6</paper-item>
+                                                                                                <paper-item>7</paper-item>
+                                                                                                <paper-item>8</paper-item>
+                                                                                        </core-menu>
+                                                                                </paper-dropdown>
+                                                                        </paper-dropdown-menu>
+                                                                </div>
+                                                        </div>
+                                                        <div class="form-container" flex layout horizontal>
+                                                                <div flex layout horizontal>
+                                                                        <b>Days: </b>
+                                                                        <div flex>
+                                                                                <paper-checkbox class="days" name="days" label="A"></paper-checkbox>
+                                                                                <paper-checkbox class="days" name="days" label="B"></paper-checkbox>
+                                                                                <paper-checkbox class="days" name="days" label="C"></paper-checkbox>
+                                                                                <paper-checkbox class="days" name="days" label="D"></paper-checkbox>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="form-container" flex layout horizontal>
+                                                                <b id="color-label">Color: </b>
+                                                                <paper-radio-group id="color-chooser" selected="red">
+                                                                        <paper-radio-button name="red" label="Red"></paper-radio-button>
+                                                                        <paper-radio-button name="yellow" label="Yellow"></paper-radio-button>
+                                                                        <paper-radio-button name="green" label="Green"></paper-radio-button>
+                                                                        <paper-radio-button name="blue" label="Blue"></paper-radio-button>
+                                                                        <paper-radio-button name="purple" label="Purple"></paper-radio-button>
+                                                                        <paper-radio-button name="pink" label="Pink"></paper-radio-button>
+                                                                </paper-radio-group>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <paper-button id="schedule-update" onClick="updateSchedule()">Update Schedule</paper-button>
+                                        <core-icon id="success-indicator" icon="check-circle" style="opacity: 0; color: #00933B"></core-icon>
+                                </div>
+                        </div>
+                </paper-shadow>
+                <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
+                        <div class="content" auto-vertical flex>
+                                <h2>Your Schedule</h2>
+                                <div id="areaToPrint">
+	                                <table id="table">
+		                                <col id="blocks" />
+		                                <col id="A" />
+		                                <col id="B" />
+		                                <col id="C" />
+		                                <col id="D" />
+		                                <tr>
+			                                <th class="mods">Mod</th>
+			                                <th>A</th>
+			                                <th>B</th>
+			                                <th>C</th>
+			                                <th>D</th>
+		                                </tr>
+		                                <tr>
+			                                <th class="mods">1<br />8:00AM</th>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+		                                </tr>
+		                                <tr>
+			                                <th class="mods">2<br />9:00AM</th>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+		                                </tr>
+		                                <tr>
+			                                <th class="mods">3<br />10:00AM</th>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+		                                </tr>
+		                                <tr>
+			                                <th class="mods">4<br />11:00AM</th>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+		                                </tr>
+		                                <tr>
+			                                <th class="mods">5<br />12:20PM</th>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+		                                </tr>
+		                                <tr>
+			                                <th class="mods">6<br />1:20PM</th>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+		                                </tr>
+		                                <tr>
+			                                <th class="mods">7<br />2:20PM</th>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+		                                </tr>
+		                                <tr>
+			                                <th class="mods">8<br />3:20PM</th>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+			                                <td> </td>
+		                                </tr>
+	
+	                                </table>
+                                </div>
+                                <paper-button id="print-button" onClick="printDiv()">Print</paper-button>
+                                <br>
+                                <br>
+                                <i>Based on <a href="http://george.moe/scheduler">George's New Schedule Machine</a>.</i>
+                               
+                        </div>
+                </paper-shadow>
+                <script>
+			function pad(n, width, z) 
+			{
+                                z = z || '0';
+                                n = n + '';
+                                return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+                        }
+                        
+                        //form elements                        
+                        var colorChooser = document.getElementById("color-chooser");
+                        
+                        var className = document.getElementById("class-name");
+                        var teacherName = document.getElementById("teacher-name");
+                        var roomName = document.getElementById("room-name");
+                        var mods = document.querySelector("paper-dropdown-menu");
+                        var days = document.getElementsByClassName("days");
+                        
+                        //values                        
+                        var colors = {"red": "rgb(191,21,21)", "yellow": "rgb(255,197,0)", "green": "rgb(107,206,44)", "blue": "rgb(18,72,153)", "purple": "rgb(85,28,118)", "pink":"rgb(226,83,193)"};
+                        
+                        var color = colors["red"];
+                        
+			document.addEventListener("polymer-ready", function(){                                
+                                colorChooser.addEventListener("change", function(){
+                                        console.log(colorChooser.selected);
+                                        color = colors[colorChooser.selected];
+                                });
+                        });
+			
+			function updateSchedule()
+			{
+				/*console.log(className.value);
+				console.log(teacherName.value);
+				console.log(roomName.value);
+				console.log(mods.selectedItemLabel);
+				console.log(days);*/
+				
+				$("#success-indicator").css("opacity", 1);
+
+				table = document.getElementById("table");
+				
+				for(i=0; i<days.length; i++)
+				{
+					if(days[i].checked==true)
+					{
+						table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].innerHTML = 
+							"<span class=\"text\"><p><b>"+className.value+"</b><br><i>"+roomName.value+"</i><br>"+teacherName.value+"</p></span>";
+						table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].setAttribute("data-schedule", className.value+" "+roomName.value+" "+teacherName.value);
+						table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].style.backgroundColor = color;
+						table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].style.border = "None"
+					}
+				}
+				for(r=0; r<table.rows.length; r++)
+				{
+				        for(i=table.rows[r].cells.length-1; i>-1; i--)
+				        {
+				                if(r-1 > -1 && table.rows[r].cells[i].getAttribute("data-schedule") != null && table.rows[r].cells[i].getAttribute("data-schedule") == table.rows[r-1].cells[i].getAttribute("data-schedule"))
+						{
+						        table.rows[r-1].cells[i].setAttribute("rowspan", 2);
+						        table.rows[r].cells[i].style.display = "none";
+						        
+					        }
+					        else if(r+1 < table.rows.length && table.rows[r].cells[i].getAttribute("data-schedule") != null && table.rows[r].cells[i].getAttribute("data-schedule") == table.rows[r+1].cells[i].getAttribute("data-schedule"))
+						{
+						        table.rows[r].cells[i].setAttribute("rowspan", 2);
+						        table.rows[r+1].cells[i].style.display = "none";
+					        }
+				        }
+			        }
+				
+				$("#success-indicator").animate({opacity: 0}, 500);
+			}
+			
+			function printDiv()
+			{
+				var divToPrint=document.getElementById("areaToPrint");
+				var style = document.getElementById("style");
+				newWin = window.open("");
+				newWin.document.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"/scheduler/meta/print.css\" />");
+				newWin.document.write(divToPrint.outerHTML);
+				newWin.document.getElementById
+			}
+			
+			$("document").ready(function(){
+				$("td").dblclick(function(){
+					this.innerHTML = "";
+					this.style.backgroundColor = "";
+					this.style.border = "";
+					this.removeAttribute("data-schedule");
+					if(this.hasAttribute("rowspan"))
+					{
+					        var nextCell =  table.rows[$(this).parent().parent().children().index($(this).parent())+1].cells[$(this).parent().children().index($(this))];
+					        this.removeAttribute("rowspan");
+					        nextCell.style.display = "";
+					        nextCell.innerHTML = "";
+					        nextCell.style.backgroundColor = "";
+					        nextCell.style.border = "";
+					        nextCell.removeAttribute("data-schedule");				        
+				        }
+					
+				});
+				//console.log("Click to erase loaded.");
+				
+				orig_border_width = parseInt($("td").css("border-width"));
+				orig_border_color = $("td").css("border-color");
+				$("td").hover(function(){
+				        this.style.border = String(orig_border_width*2)+"px"+" solid #FF4719"
+				},
+				function(){
+				        if(this.style.backgroundColor != "")
+				        {
+				                this.style.border = "None";
+			                }
+			                else
+			                {
+					        this.style.border = "";
+				        }
+				});
+				//console.log("Border width change on hover loaded.");
+			});
+		</script>
+        </body>
+</html>
