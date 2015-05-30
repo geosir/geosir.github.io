@@ -149,6 +149,13 @@
                         }
                         
 		</style>
+		
+		<script>
+		        var loc = window.location.href+'';
+                        if (loc.indexOf('http://')==0){
+                                window.location.href = loc.replace('http://','https://');
+                        }
+                </script>
         </head>
         <body>
                 <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
