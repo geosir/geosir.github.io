@@ -13,11 +13,20 @@ img
         width: 100%;
         height: auto;
 }
+
+.titleholder
+{
+        width: 100%;
+        height: 100%;
+}
+
 .title
 {
-        font-family: Roboto, sans-serif;
-        font-weight: 300;
-        padding: 0 0 10px 0;
+        height: 100%;
+        position:relative;
+        background:   url("/media/georgemoe_logo.png") no-repeat;
+        background-size: auto 80%;
+        background-position: left center;
 }
 core-toolbar 
 {
