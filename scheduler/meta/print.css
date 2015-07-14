@@ -26,6 +26,7 @@ td, th
 	box-sizing:border-box;
         -moz-box-sizing:border-box;
         -webkit-box-sizing:border-box;
+        color: white;
 }
 th
 {
@@ -36,6 +37,10 @@ th
 th.mods
 {
         background-color: rgb(20,20,20);
+}
+th.top
+{
+        height: 36pt;
 }
 
 td

@@ -43,6 +43,7 @@
 				box-sizing:border-box;
                                 -moz-box-sizing:border-box;
                                 -webkit-box-sizing:border-box;
+                                color: white;
 			}
 			th
 			{
@@ -60,6 +61,12 @@
 			        background-color: rgb(230,230,255);
 			        border: 1px solid gray;
 		        }
+		        
+		        th.top
+		        {
+                                height: 3em;
+		        }
+			
 		        
 			input
 			{
@@ -133,7 +140,7 @@
                                                         <h1 class="lead-text"><b>George's New Schedule Machine</b></h1>
                                                         <i>Designed for use by IMSA students.</i>
                                                         <p>Use the input box below to enter your class information, and watch your schedule magically appear! For classes that span multiple mods, insert the classes in the first mod, then add the classes in the second mod. Finally, once you're done, you can hit print to open a printable or screenshot-able view of your schedule.</p>
-				                        <i>Mistakes are OK! Double-click on a box to clear its contents.</i>
+				                        <p><b><i>Protip: Mistakes are OK! Double-click on a box to clear its contents.</b> This fights glitches, too!</i></p>
 			                        </div>
 		                        </paper-shadow>
 		                        <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
@@ -206,11 +213,11 @@
 						                        <col id="C" />
 						                        <col id="D" />
 						                        <tr>
-							                        <th class="mods">Mod</th>
-							                        <th>A</th>
-							                        <th>B</th>
-							                        <th>C</th>
-							                        <th>D</th>
+							                        <th class="mods top">Mod</th>
+							                        <th class="top">A</th>
+							                        <th class="top">B</th>
+							                        <th class="top">C</th>
+							                        <th class="top">D</th>
 						                        </tr>
 						                        <tr>
 							                        <th class="mods">1<br />8:00AM</th>
@@ -272,6 +279,8 @@
 					                        </table>
 				                        </div>
 				                        <paper-button id="print-button" onClick="printDiv()">Print</paper-button>
+				                        <br><br>
+				                        <i>Protip: If all you get are borders when you print, try enabling background graphics.</i>    
                                                        
                                                 </div>
                                         </paper-shadow>

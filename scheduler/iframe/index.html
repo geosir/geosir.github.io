@@ -86,6 +86,7 @@
 				box-sizing:border-box;
                                 -moz-box-sizing:border-box;
                                 -webkit-box-sizing:border-box;
+                                color: white;
 			}
 			th
 			{
@@ -96,6 +97,11 @@
 			th.mods
 			{
 			        background-color: rgb(20,20,20);
+		        }
+		        
+		        th.top
+		        {
+                                height: 3em;
 		        }
 			
 			td
@@ -148,14 +154,15 @@
                                 margin: 2% 0;
                         }
                         
-		</style>
-		
-		<script>
-		        var loc = window.location.href+'';
-                        if (loc.indexOf('http://')==0){
-                                window.location.href = loc.replace('http://','https://');
+                        .powered-by
+                        {
+                            background-color: rgb(157,219,114);
+                            border: 1px solid rgb(85,146,63);
+                            border-radius: 5px;
+                            padding: 0.5em
                         }
-                </script>
+                        
+		</style>
         </head>
         <body>
                 <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
@@ -163,7 +170,8 @@
                                 <h1 class="lead-text"><b>StudCo Schedule Machine</b></h1>
                                 <i>Designed for use by IMSA students.</i>
                                 <p>Use the input box below to enter your class information, and watch your schedule magically appear! For classes that span multiple mods, insert the classes in the first mod, then add the classes in the second mod. Finally, once you're done, you can hit print to open a printable or screenshot-able view of your schedule.</p>
-                                <i>Mistakes are OK! Double-click on a box to clear its contents.</i>
+                                <p><b><i>Protip: Mistakes are OK! Double-click on a box to clear its contents.</b> This fights glitches, too!</i></p>
+                                <p class="powered-by"><core-icon icon="track-changes"></core-icon> Powered by <a href="http://george.moe/scheduler">George's New Schedule Machine</a>.</p>
                         </div>
                 </paper-shadow>
                 <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
@@ -236,11 +244,11 @@
 		                                <col id="C" />
 		                                <col id="D" />
 		                                <tr>
-			                                <th class="mods">Mod</th>
-			                                <th>A</th>
-			                                <th>B</th>
-			                                <th>C</th>
-			                                <th>D</th>
+			                                <th class="mods top">Mod</th>
+			                                <th class="top">A</th>
+			                                <th class="top">B</th>
+			                                <th class="top">C</th>
+			                                <th class="top">D</th>
 		                                </tr>
 		                                <tr>
 			                                <th class="mods">1<br />8:00AM</th>
@@ -304,8 +312,7 @@
                                 <paper-button id="print-button" onClick="printDiv()">Print</paper-button>
                                 <br>
                                 <br>
-                                <i>POWERED BY <a href="http://george.moe/scheduler">George's New Schedule Machine</a>.</i>
-                               
+                                <i>Protip: If all you get are borders when you print, try enabling background graphics.</i>                             
                         </div>
                 </paper-shadow>
                 <script>
@@ -358,6 +365,13 @@
 						table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].setAttribute("data-schedule", className.value+" "+roomName.value+" "+teacherName.value);
 						table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].style.backgroundColor = color;
 						table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].style.border = "None"
+						
+						//Selectively set white font
+						/*var whitelist = [colors["red"], colors["purple"], colors["blue"]];
+						if(whitelist.indexOf(color)!=-1)
+						{
+                                                        table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].style.color = "white";
+                                                }*/
 					}
 				}
 				for(r=0; r<table.rows.length; r++)
@@ -405,6 +419,7 @@
 					        nextCell.innerHTML = "";
 					        nextCell.style.backgroundColor = "";
 					        nextCell.style.border = "";
+					        //nextCell.style.color = "black";
 					        nextCell.removeAttribute("data-schedule");				        
 				        }
 					
