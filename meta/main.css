@@ -3,10 +3,11 @@ body
 {
         font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
         margin: 0;
-        background-image: url("/media/earth.jpg");
-        background-repeat: no-repeat;
-        background-position: bottom;
-        background-size: 100%;
+        background: url("/media/grandteton.jpg") no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
 }
 img
 {

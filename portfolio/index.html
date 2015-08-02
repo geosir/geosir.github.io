@@ -6,14 +6,11 @@
 
                 <title>george.moe</title>
                 
-                <link rel="import" href="/meta/imports.html">
-                
                 <script>
-                document.addEventListener("polymer-ready", function(){
-                        document.getElementById("main-menu-list").selected="3";
-                });
+                        var pageid = 3;
                 </script>
-
+                
+                <link rel="import" href="/meta/imports.html">
         </head>
         <body fullbleed unresolved layout vertical>
                 <core-drawer-panel id="drawer-panel" drawerWidth=200px forceNarrow>
@@ -40,27 +37,17 @@
                                                 <div class="content" auto-vertical flex three>
                                                         <h1 class="lead-text"><b>Portfolio: My projects</b></h1>
                                                         <ul>
+                                                                <li><a href="https://sites.imsa.edu/studco/schedulemaker">[WEBAPP] IMSA StudCo Schedule Maker</a></li>
+                                                                <li><a href="/scheduler">[WEBAPP] George's New Schedule Machine</a></li>
+                                                                <li><a href="/legacy/scheduler">[WEBAPP] George's (old) Schedule Machine</a></li>
                                                                 <li><a href="/legacy">[WEBSITE] Old website</a></li>
-                                                                <li><a href="/legacy/scheduler">[WEBSITE] George's (old) Schedule Machine</a></li>
-                                                                <li><a href="/scheduler">[WEBSITE] George's New Schedule Machine</a></li>
                                                                 <li><a href="http://undef.in">[WEBSITE] The #Undefined Project</a></li>
                                                                 <li><a href="http://undef.in/clubhub">[WEBSITE] Club Hub</a></li>
                                                                 <li><a href="https://play.google.com/store/apps/details?id=org.satcomp.geo.soundit">[Android APP] Sounds When You Need Them</a></li>
                                                                 <li><a href="https://soundcloud.com/geosir">[MUSIC] geosir on SoundCloud</a></li>
                                                                 <li><a href="https://www.youtube.com/channel/UCVC42uM6XwzS6IeTXE5-JQA">[MUSIC][VIDEO] TheFractalTree on YouTube</a></li>
-                                                                
-                                                                
-                                                                
-                                                                <li><p>More coming soon!</p></li>
                                                         </ul>
                                                         
-                                                </div>
-                                        </paper-shadow>
-                                        <paper-shadow z=4 class="card card-title">
-                                                <div class="content">
-                                                        <core-icon icon="warning" style="width: 100px; height: 100px; color: #FFA100;"></core-icon>
-                                                        <h1>Hard hat area! This site is currently under construction.</h1>
-                                                        <p>Content may be incomplete, and some things might be buggy! Thank you for your patience.</p>
                                                 </div>
                                         </paper-shadow>
                                 </div>
