@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+        <head>
+
+                <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+                <title>george.moe | 404!?</title>
+                
+                <script>
+                        var pageid = null;
+                </script>
+                
+                <link rel="import" href="/meta/imports.html">                
+        </head>
+        <body fullbleed unresolved layout vertical>
+                <core-drawer-panel id="drawer-panel" drawerWidth=200px forceNarrow>
+                        <core-header-panel drawer mode="waterfall" unselectable>
+                                <core-toolbar class="drawer" >
+                                        <span flex >Navigate!</span>
+                                </core-toolbar>
+                                <div id="main-menu">
+                                        
+                                </div>
+                        </core-header-panel>
+                        <core-header-panel main mode="waterfall">
+                                <!--<core-tooltip id="feedback-button" class="fancy" label="Feedback">
+                                        <paper-fab icon="thumbs-up-down"></paper-fab>
+                                </core-tooltip>-->
+                                <core-toolbar class="main" layout vertical>
+                                        <paper-icon-button id="navicon" icon="menu"></paper-icon-button>
+                                        <span flex class="titleholder">
+                                                <a class="homeselect" href="/"><div class="title"></div></a>
+                                        </span>
+                                </core-toolbar>
+                                <div>
+                                        <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
+                                                <div class="content" auto-vertical flex three>
+                                                        <h1 class="lead-text"><b>404!? Oh snap!</b></h1>
+                                                        <p>The file you're looking for couldn't be found. There's nothing but open wilderness here...</p>
+                                                        
+                                                </div>
+                                        </paper-shadow>
+                                </div>
+                        </core-header-panel>
+                </core-drawer-panel>
+        </body>
+</html>
+
