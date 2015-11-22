@@ -147,3 +147,19 @@ core-toolbar.tall .title
 {
         font-size: 5em;
 }*/
+
+.copyright
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin: 10%;
+	font-size: 0.7em;
+	color: rgb(150,150,150);
+	z-index: -1;
+}
+
+#main-menu
+{
+	min-height: 100%;
+}
