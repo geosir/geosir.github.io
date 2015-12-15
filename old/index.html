@@ -1,8 +1,8 @@
 <html>
 	<head>
-		 <link rel="shortcut icon" href="/legacy/favicon.ico">
-		<link rel="stylesheet" type="text/css" href="/legacy/style.css" />
-		
+		 <link rel="shortcut icon" href="/old/favicon.ico">
+		<link rel="stylesheet" type="text/css" href="/old/style.css" />
+
 		<title>Hello World - geosir</title>
 		<script>
                         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -13,7 +13,7 @@
                         ga('create', 'UA-55205533-5', 'auto');
                         ga('send', 'pageview');
                 </script>
-		
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script>
 			$("document").ready(function() {
@@ -23,19 +23,19 @@
 			$(window).scroll(function() {
   				var st = $(window).scrollTop();
   				var threshold = 0.8;
-  				
+
   				$(".scrollfadein").each( function(){
   					var top = $(this).position().top;
    					$(this).animate({opacity: st/(top*threshold)}, 10);
    				});
 			});
-			
+
 		        var loc = window.location.href+'';
                         if (loc.indexOf('http://')==0){
                                 window.location.href = loc.replace('http://','https://');
                         }
 		</script>
-		
+
 	</head>
 	<body>
 		<div class="big-title">
@@ -43,13 +43,13 @@
 		</div>
 		<div id="main-body-bg" class="scrollfadein">
 			<div id="main-body">
-			
+
 				<h1>Projects by geosir</h1>
 				<h2><a href="https://geosir.github.io/FRAPI-Train">FRAPI Train Project</a></h2>
 				<h2><a href="https://geosir.github.io/sharebrary">Sharebrary</a></h2>
 				<h2><a href="https://geosir.github.io/yearbook2014">Murphy the Turtle in A Brave New World</a></h2>
-				<h2><a href="/legacy/scheduler">George's Schedule Machine</a></h2>
-				<img class="scrollfadein" id="potato-img" src="/legacy/OddOneOutPotato.jpg" />
+				<h2><a href="/old/scheduler">George's Schedule Machine</a></h2>
+				<img class="scrollfadein" id="potato-img" src="/old/OddOneOutPotato.jpg" />
 			</div>
 		</div>
 	</body>

@@ -1,14 +1,14 @@
 <html>
 	<head>
-		<link rel="shortcut icon" href="/legacy/favicon.ico">
-		<link rel="stylesheet" type="text/css" href="/legacy/style.css" />
+		<link rel="shortcut icon" href="/old/favicon.ico">
+		<link rel="stylesheet" type="text/css" href="/old/style.css" />
 		<style id="style">
 			.class-form
 			{
 				background-color: rgba(256, 256, 256, 0.5);
 				padding: 1rem;
 			}
-			
+
 			table
 			{
 				table-layout: fixed;
@@ -31,40 +31,40 @@
 				border: 1px solid gray;
 				height: 4rem;
 				overflow: hidden;
-				white-space: nowrap; 
+				white-space: nowrap;
 			}
 			th
 			{
 				background-color: #98D5FF;
 			}
 		</style>
-		
+
 		<title>George's Schedule Machine</title>
-		
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		
+
 		<script>
 		        var loc = window.location.href+'';
                         if (loc.indexOf('http://')==0){
                                 window.location.href = loc.replace('http://','https://');
                         }
-                        
+
 			function updateSchedule(form)
 			{
 				table = document.getElementById("table");
-				
+
 				for(i=0; i<form.days.length; i++)
 				{
 					if(form.days[i].checked==true)
 					{
-						table.rows[parseInt(form.block.value)].cells[i+1].innerHTML = 
+						table.rows[parseInt(form.block.value)].cells[i+1].innerHTML =
 							"<span class=\"text\"><p><b>"+form.classname.value+"</b><br />"+form.teacher.value+"</p></span>";
 						table.rows[parseInt(form.block.value)].cells[i+1].style.backgroundColor = form.color.value;
 						console.log(form.color.value);
 					}
 				}
 			}
-			
+
 			function printDiv()
 			{
 				var divToPrint=document.getElementById("areaToPrint");
@@ -74,14 +74,14 @@
 				newWin.document.write(divToPrint.outerHTML);
 				newWin.print();
 			}
-			
+
 			$("document").ready(function(){
 				$("td").dblclick(function(){
 					this.innerHTML = "";
 					this.style.backgroundColor = "";
 				});
 				console.log("Click to erase loaded.");
-				
+
 				orig_border_width = parseInt($("td").css("border-width"));
 				orig_border_color = $("td").css("border-color");
 				$("td").hover(function(){
@@ -95,8 +95,8 @@
 				console.log("Border width change on hover loaded.");
 			});
 		</script>
-				
-		
+
+
 	</head>
 	<body>
 		<div id="main-body-bg" style="opacity: 1">
@@ -206,7 +206,7 @@
 							<td> </td>
 							<td> </td>
 						</tr>
-					
+
 					</table>
 				</div>
 				<form>
