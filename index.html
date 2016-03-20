@@ -79,10 +79,10 @@
                                 
                                 function loadPage(page, callback)
                                 {
-                                        $.get("/pages/"+page, function(data){
+                                        $.get("//pages/"+page, function(data){
                                                 $("#contentarea").html(data);
                                         }).fail(function(){
-                                                $.get("/pages/404", function(data){
+                                                $.get("//pages/404", function(data){
                                                         $("#contentarea").html(data);
                                                 }).always(callback);;
                                         }).done(callback);
