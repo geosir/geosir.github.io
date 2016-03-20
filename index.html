@@ -1,76 +1,117 @@
 <!doctype html>
 <html>
         <head>
-                <title>george.moe</title>
-
-                <link rel="import" href="/meta/imports.html">
-                
-                
+                <title>George's Website</title>
+                <link rel="stylesheet" type="text/css" href="george.css">
+                <script src="https://code.jquery.com/jquery-1.12.2.min.js" integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk=" crossorigin="anonymous"></script>
+                <script src="/meta/ga.js"></script>
+                <script>
+                        $(document).ready(function(){
+                             $("#logobox").css("margin-top", ((window.innerHeight - $("#logobox").height())*5/12));
+                        });
+                        $(document).ready(function(){
+                                //if(window.location.hash == "")
+                                //{
+                                loadPage(window.location.hash.replace("#", ""), function(){
+                                        setTimeout(function(){
+                                                $("#contentarea").show();
+                                                $("#logobox").animate({marginTop: "2vh", marginBottom: "2vh", height: "10vh"}, 1000);
+                                                $("#pagearea").animate({width: "80vw"}, 1000, function(){
+                                                        $("body").css({overflowY: "auto"});
+                                                });
+                                                $("#menulist").animate({marginLeft: "-20vw"}, 1000);
+                                                $(".page").animate({marginLeft: "5vw"}, 1000);
+                                                $("#footer").fadeIn(1000);
+                                                $("#cover").animate({opacity: 0.4}, 1000);
+                                        }, 500);
+                                });
+                                //}
+                                /*else
+                                {
+                                        var target = window.location.hash.replace("#", "");
+                                        loadPage(window.location.hash.replace("#", ""), function(){
+                                                $("#contentarea").show();
+                                                $("#logobox").css({marginTop: "2vh", marginBottom: "2vh", height: "10vh"});
+                                                $("#pagearea").css({width: "80vw"});
+                                                $("#menulist").css({marginLeft: "-20vw"});
+                                                $(".page").css({marginLeft: "5vw"});
+                                                $("#cover").css({opacity: 0.4});
+                                                $("#footer").show();
+                                                $("body").css({overflowY: "auto"});
+                                        });
+                                }*/
+                                
+                                updateMenu();
+                                                                
+                                window.onhashchange = function(){
+                                        updateMenu();
+                                        var target = window.location.hash.replace("#", "");
+                                        changeToPage(target);
+                                };
+                                
+                                function updateMenu()
+                                {
+                                        $("#menulist a").removeClass("present");
+                                        $("#menulist a").each(function(){
+                                                if($(this).attr("href") == window.location.hash.split("/")[0] || (window.location.hash == "" && $(this).attr("href") == "#home"))
+                                                {    
+                                                        $(this).addClass("present");
+                                                        return false;
+                                                }
+                                        });
+                                }
+                                
+                                function changeToPage(target)
+                                {
+                                        $("body").css({overflowY: "hidden"});
+                                        $(".page").animate({marginLeft: "-35vw"}, 300);
+                                        $("#contentarea").animate({width: 0}, 300, function(){
+                                                $("#contentarea").hide();
+                                                loadPage(target, function(){
+                                                        $("#contentarea").show();
+                                                        $("#contentarea").animate({width: "100%"}, 300, function(){
+                                                                $("body").css({overflowY: "auto"});
+                                                        });
+                                                        $(".page").animate({marginLeft: "5vw"}, 300);
+                                                });
+                                        });
+                                }
+                                
+                                function loadPage(page, callback)
+                                {
+                                        $.get("/pages/"+page, function(data){
+                                                $("#contentarea").html(data);
+                                        }).fail(function(){
+                                                $.get("/pages/404", function(data){
+                                                        $("#contentarea").html(data);
+                                                }).always(callback);;
+                                        }).done(callback);
+                                }
+                        
+                        });                        
+                </script>
+                        
         </head>
-        <body fullbleed unresolved layout vertical>
-                <core-drawer-panel id="drawer-panel" drawerWidth=200px forceNarrow>
-                        <core-header-panel drawer mode="waterfall" unselectable>
-                                <core-toolbar class="drawer" >
-                                        <span flex >Navigate!</span>
-                                </core-toolbar>
-                                <div id="main-menu">
-                                        
+        <body>
+                <div id="cover"></div>
+                <div id="logobox"></div>
+                <div id="pagearea">
+                        <div id="menu">
+                                <div id="menubox">
+                                        <ul id="menulist">
+                                                <li><a href="#home">Home</a></li>			
+                                                <li><a href="#1507">1507</a></li>				
+                                                <li><a href="#resume">Resume</a></li>
+                                                <li><a href="#portfolio">Portfolio</a></li>	
+                                                <li><a href="#projects">Projects</a></li>		
+                                        </ul>
                                 </div>
-                        </core-header-panel>
-                        <core-header-panel main mode="waterfall">
-                                <!--<core-tooltip id="feedback-button" class="fancy" label="Feedback">
-                                        <paper-fab icon="thumbs-up-down"></paper-fab>
-                                </core-tooltip>-->
-                                <core-toolbar class="main" layout vertical>
-                                        <paper-icon-button id="navicon" icon="menu"></paper-icon-button>
-                                        <span flex class="titleholder">
-                                                <a class="homeselect" href="/"><div class="title"></div></a>
-                                        </span>
-                                </core-toolbar>
-                                <div>
-                                        <template is="auto-binding">
-                                                <core-media-query query="max-width: 960px" queryMatches="{{phoneScreen}}"></core-media-query>
-                                                <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
-                                                        <paper-shadow id="profile-picture" z=2 class="card card-img fit" auto-vertical flex one>
-                                                                <img src="/media/profile.jpg">
-                                                        </paper-shadow>
-                                                        <div class="content" auto-vertical flex three>
-                                                                <h1 class="lead-text"><b>Hi! I'm George Moe.</b></h1>
-                                                                I'm a person who does things. Aside from designing websites, like this one, I also run
-                                                                innovation projects, make apps, study emergining sciences, craft kites, dabble in music and
-                                                                movies, write poetry, take photos, volunteer, and engage in other activities,
-                                                                which can be found in my <a href="/portfolio">portfolio</a> and <a href="/resume">resume</a>.
-                                                                <br /><br />
-                                                                As a high-school junior at the Illinois Math and Science Academy, I take "advance the human
-                                                                condition" to heart. I am always looking for new things to learn and new
-                                                                opportunities to explore so that one day, I can give something great to this world.
-                                                                <br /><br />
-                                                                So have a peek at what I busy myself with. Use the <a id="navlink" href="#">navigation menu</a> to get started.
-                                                                <script>
-                                                                        var drawer = document.getElementById("drawer-panel");
-                                                                        var navlink = document.getElementById("navlink");
-                                                                        navlink.addEventListener("click", function(){
-                                                                                drawer.togglePanel();
-                                                                        });
-                                                                </script>
-                                                        </div>
-                                                </paper-shadow>
-                                                <!--<paper-action-dialog id="feedback-dialog" backdrop autoCloseDisabled layered="false">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-                                                        <paper-button affirmative autofocus>Tap me to close</paper-button>
-                                                </paper-action-dialog>
-                                                <script>
-                                                                var feedback = document.getElementById("feedback-button");
-                                                                var dialog = document.getElementById("feedback-dialog");
-                                                                feedback.addEventListener("click", function(){
-                                                                        dialog.toggle()
-                                                                });
-                                                </script>-->
-                                        </template>
-                                </div>
-                        </core-header-panel>
-                </core-drawer-panel>
+                        </div>
+                        <div id="contentarea">
+                        </div>
+                </div>
+                <div id="footer">Copyright &copy; 2016 George Moe</div>
         </body>
 </html>
-
+        
+                 
