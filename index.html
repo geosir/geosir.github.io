@@ -6,10 +6,16 @@
                 <script src="https://code.jquery.com/jquery-1.12.2.min.js" integrity="sha256-lZFHibXzMHo3GGeehn1hudTAP3Sc0uKXBXAzHX1sjtk=" crossorigin="anonymous"></script>
                 <script src="/meta/ga.js"></script>
                 <script>
-                        $(document).ready(function(){
+                        var standardWidth = window.innerWidth;
+                        
+                        $("#logbox").ready(function(){
                              $("#logobox").css("margin-top", ((window.innerHeight - $("#logobox").height())*5/12));
                         });
                         $(document).ready(function(){
+                                if(window.innerWidth > window.innerHeight) $("body").css({"background-size": ""+window.innerWidth+"px auto"});
+                                else $("body").css({"background-size": "auto "+window.innerWidth+"px"});
+                                        
+                                console.log(window.innerWidth)
                                 var target = window.location.hash.replace("#", "");
                                 if(window.location.hash == "") target = "home";
                                 loadPage(target, function(){
@@ -18,6 +24,7 @@
                                                 $("#logobox").animate({marginTop: "2vh", marginBottom: "2vh", height: "10vh"}, 1000);
                                                 $("#pagearea").animate({width: "80vw"}, 1000, function(){
                                                         $("body").css({overflowY: "auto"});
+                                                        $("#pagearea").css({marginLeft: "10vw"});
                                                 });
                                                 $("#menulist").animate({marginLeft: "-20vw"}, 1000);
                                                 $(".page").animate({marginLeft: "5vw"}, 1000);
@@ -100,10 +107,8 @@
                                 <div id="menubox">
                                         <ul id="menulist">
                                                 <li><a href="#home">Home</a></li>			
-                                                <li><a href="#1507">1507</a></li>				
-                                                <li><a href="#resume">Resume</a></li>
-                                                <li><a href="#portfolio">Portfolio</a></li>	
-                                                <li><a href="#projects">Projects</a></li>		
+                                                <li><a href="#1507">1507</a></li>
+                                                <li><a href="#portfolio">Portfolio</a></li>		
                                         </ul>
                                 </div>
                         </div>
