@@ -10,9 +10,9 @@
                              $("#logobox").css("margin-top", ((window.innerHeight - $("#logobox").height())*5/12));
                         });
                         $(document).ready(function(){
-                                //if(window.location.hash == "")
-                                //{
-                                loadPage(window.location.hash.replace("#", ""), function(){
+                                var target = window.location.hash.replace("#", "");
+                                if(window.location.hash == "") target = "home";
+                                loadPage(target, function(){
                                         setTimeout(function(){
                                                 $("#contentarea").show();
                                                 $("#logobox").animate({marginTop: "2vh", marginBottom: "2vh", height: "10vh"}, 1000);
@@ -25,7 +25,7 @@
                                                 $("#cover").animate({opacity: 0.4}, 1000);
                                         }, 500);
                                 });
-                                //}
+                                
                                 /*else
                                 {
                                         var target = window.location.hash.replace("#", "");
