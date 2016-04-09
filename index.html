@@ -22,7 +22,6 @@
                                 else $("body").css({backgroundSize: "auto "+window.innerHeight+"px"});
                                 
                                 if(isMobile || window.innerWidth < 500) $("#menulist a").css({ fontSize: "2.5em" });
-                                console.log(window.innerWidth+" "+window.innerHeight);
                                 var target = window.location.hash.replace("#", "");
                                 if(window.location.hash == "") target = "home";
                                 loadPage(target, function(){
@@ -87,6 +86,7 @@
                                                                 $("body").css({overflowY: "auto"});
                                                         });
                                                         $(".page").animate({marginLeft: "5vw"}, 300);
+                                                        ga('send', 'pageview', location.pathname + target);
                                                 });
                                         });
                                 }
@@ -116,7 +116,8 @@
                                                 <li><a href="#home">Home</a></li>			
                                                 <li><a href="#1507">1507</a></li>
                                                 <li><a href="#sal">Senior-at-Large</a></li>
-                                                <li><a href="#portfolio">Portfolio</a></li>		
+                                                <li><a href="#portfolio">Portfolio</a></li>
+                                                <li><a href="#projects">Projects</a></li>		
                                         </ul>
                                 </div>
                         </div>
