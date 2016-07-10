@@ -1,6 +1,5 @@
 <!doctype html>
-<div class="page">        
-        <link rel="import" href="/meta/imports.html">                  
+<div class="page">                  
         <style id="style">
 		.class-form
 		{
@@ -12,7 +11,7 @@
 		{
 			table-layout: fixed;
 			border-collapse: separate;
-			border-spacing: 5px;
+			border-spacing: 4px;
 			width: 100%;
 			background-color: white;
 			text-align: center;
@@ -32,20 +31,20 @@
 		}
 		td, th
 		{
-			border-radius: 5px;
-			height: 5em;
+			border-radius: 0px;
+			height: 4.5em;
 			max-height: 5em;
 			overflow: hidden;
-			white-space: nowrap; 
-			margin: 1%;
+			white-space: nowrap;
 			box-sizing:border-box;
                         -moz-box-sizing:border-box;
                         -webkit-box-sizing:border-box;
                         color: white;
+		        text-align: center;
 		}
 		th
 		{
-			background-color: rgb(0, 80, 120);
+			background-color: #1359c9;
 			color: white;
 		}
 		
@@ -56,9 +55,19 @@
 		
 		td
 		{
-		        background-color: rgb(230,230,255);
-		        border: 1px solid gray;
+		        background-color: rgb(220, 220, 220);
+		        border: 1px solid rgb(200, 200, 200);
 	        }
+	        
+	        td p
+	        {
+			line-height: 1.2em;
+		}
+	        
+	        td:not(.mod)
+	        {
+			padding: 0;
+		}
 	        
 	        th.top
 	        {
@@ -70,28 +79,12 @@
 		{
 		        font-size: 1.2em;
 	        }
-	        #schedule-update, #print-button
-	        {
-	                color: white;
-	                background-color: #4285f4;
-	                margin: 0;
-                }
+	        
                 .section
                 {
                         border: 1px solid rgb(200,200,200);
                         padding: 1%;
                         margin: 2% 0%;
-                }
-                paper-checkbox
-                {
-                        padding: 1%;
-                        /*border-left: 1px solid rgb(200,200,200);
-                        border-right: 1px solid rgb(200,200,200);*/
-                }
-                
-                paper-input
-                {
-                        width: 100%;
                 }
                 
                 #color-label
@@ -110,153 +103,337 @@
                         margin: 2% 0;
                 }
                 
+                .protip {
+			margin: 0% 0% 1% 0%;
+			height: auto;
+			background-color: rgb(250, 250, 250);
+			color: rgb(100, 100, 100);
+			border-radius: 2px;
+			padding: 0.5em;
+		}
+		.protip.protip-green {
+			background-color: rgba(0, 182, 57, 0.3);
+			color: rgb(0, 100, 57);
+		}
+		
+		.protip.protip-yellow {
+			background-color: rgba(227, 182, 0, 0.3);
+			color: rgb(128, 100, 0);
+		}
+		
+		#success
+		{
+			color: rgb(0, 147, 59);
+		}
+		
+		#fail
+		{
+			color: rgb(191,21,21);
+		}
+		
+		#fail, #success, #messages 
+		{
+			opacity: 0;
+		}
+		
+		#iday-warning
+		{
+			opacity: 0;
+			color: #DEB928;
+			background-color: #F2DA77;
+			border: 1px solid #DEB928;
+			border-radius: 2px;
+			font-size: 12pt;
+		
+		[type="radio"][data-color="red"].with-gap:checked + label:before {
+			border-color: rgb(191,21,21);
+		}
+		[type="radio"][data-color="red"].with-gap:checked + label:after {
+			border-color: rgb(191,21,21);
+			background-color: rgb(191,21,21);
+		}
+		
+		[type="radio"][data-color="yellow"].with-gap:checked + label:before {
+			border-color: rgb(255,197,0);
+		}
+		[type="radio"][data-color="yellow"].with-gap:checked + label:after {
+			border-color: rgb(255,197,0);
+			background-color: rgb(255,197,0);
+		}
+		
+		[type="radio"][data-color="green"].with-gap:checked + label:before {
+			border-color: rgb(107,206,44);
+		}
+		[type="radio"][data-color="green"].with-gap:checked + label:after {
+			border-color: rgb(107,206,44);
+			background-color: rgb(107,206,44);
+		}
+		
+		[type="radio"][data-color="blue"].with-gap:checked + label:before {
+			border-color: rgb(18,72,153);
+		}
+		[type="radio"][data-color="blue"].with-gap:checked + label:after {
+			border-color: rgb(18,72,153);
+			background-color: rgb(18,72,153);
+		}
+		
+		[type="radio"][data-color="purple"].with-gap:checked + label:before {
+			border-color: rgb(85,28,118);
+		}
+		[type="radio"][data-color="purple"].with-gap:checked + label:after {
+			border-color: rgb(85,28,118);
+			background-color: rgb(85,28,118);
+		}
+		
+		[type="radio"][data-color="pink"].with-gap:checked + label:before {
+			border-color: rgb(226,83,193);
+		}
+		[type="radio"][data-color="pink"].with-gap:checked + label:after {
+			border-color: rgb(226,83,193);
+			background-color: rgb(226,83,193);
+		}
 	</style>
         <h1><b>George's Schedule Machine</b></h1>
-        <i>Designed for use by IMSA students.</i>
-        <p>Use the input box below to enter your class information, and watch your schedule magically appear! For classes that span multiple mods, insert the classes in the first mod, then add the classes in the second mod. Finally, once you're done, you can hit print to open a printable or screenshot-able view of your schedule.</p>
-        <p><b><i>Protip: Mistakes are OK! Double-click on a box to clear its contents.</b> This fights glitches, too!</i></p>
-        <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
-                <div class="content" auto-vertical flex>
-                        <h2>Input Box</h2>
-                        <div class="page-section">
-                                <div class="section" layout horizontal>
-                                        <div class="form-container" flex>
-                                                <paper-input id="class-name" label="Course Name" name="classname" floatingLabel></paper-input>
-                                                <paper-input id="teacher-name" label="Teacher" name="teacher" floatingLabel></paper-input>
-                                                <paper-input id="room-name" label="Room" name="room" floatingLabel></paper-input>
-                                        </div>
-                                        <div flex layout vertical>
-                                                <div class="form-container" flex layout vertical>
-                                                        <div flex>
-                                                                <b>Mod: </b>
-                                                                <paper-dropdown-menu label="Mod" floatingLabel>
-                                                                        <paper-dropdown class="dropdown">
-                                                                                <core-menu class="menu">
-                                                                                        <paper-item>1</paper-item>
-                                                                                        <paper-item>2</paper-item>
-                                                                                        <paper-item>3</paper-item>
-                                                                                        <paper-item>4</paper-item>
-                                                                                        <paper-item>5</paper-item>
-                                                                                        <paper-item>6</paper-item>
-                                                                                        <paper-item>7</paper-item>
-                                                                                        <paper-item>8</paper-item>
-                                                                                </core-menu>
-                                                                        </paper-dropdown>
-                                                                </paper-dropdown-menu>
-                                                        </div>
-                                                </div>
-                                                <div class="form-container" flex layout horizontal>
-                                                        <div flex layout horizontal>
-                                                                <b>Days: </b>
-                                                                <div flex>
-                                                                        <paper-checkbox class="days" name="days" label="A"></paper-checkbox>
-                                                                        <paper-checkbox class="days" name="days" label="B"></paper-checkbox>
-                                                                        <paper-checkbox class="days" name="days" label="C"></paper-checkbox>
-                                                                        <paper-checkbox class="days" name="days" label="D"></paper-checkbox>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                                <div class="form-container" flex layout horizontal>
-                                                        <b id="color-label">Color: </b>
-                                                        <paper-radio-group id="color-chooser" selected="red">
-                                                                <paper-radio-button name="red" label="Red"></paper-radio-button>
-                                                                <paper-radio-button name="yellow" label="Yellow"></paper-radio-button>
-                                                                <paper-radio-button name="green" label="Green"></paper-radio-button>
-                                                                <paper-radio-button name="blue" label="Blue"></paper-radio-button>
-                                                                <paper-radio-button name="purple" label="Purple"></paper-radio-button>
-                                                                <paper-radio-button name="pink" label="Pink"></paper-radio-button>
-                                                        </paper-radio-group>
-                                                </div>
-                                        </div>
-                                </div>
-                                <paper-button id="schedule-update" onClick="updateSchedule()">Update Schedule</paper-button>
-                                <core-icon id="success-indicator" icon="check-circle" style="opacity: 0; color: #00933B"></core-icon>
-                        </div>
-                </div>
-        </paper-shadow>
-        <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
-                <div class="content" auto-vertical flex>
-                        <h2>Your Schedule</h2>
-                        <div id="areaToPrint">
-	                        <table id="table">
-		                        <col id="blocks" />
-		                        <col id="A" />
-		                        <col id="B" />
-		                        <col id="C" />
-		                        <col id="D" />
-		                        <tr>
-			                        <th class="mods top">Mod</th>
-			                        <th class="top">A</th>
-			                        <th class="top">B</th>
-			                        <th class="top">C</th>
-			                        <th class="top">D</th>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">1<br />8:00AM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">2<br />9:00AM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">3<br />10:00AM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">4<br />11:00AM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">5<br />12:20PM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">6<br />1:20PM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">7<br />2:20PM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">8<br />3:20PM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-	
-	                        </table>
-                        </div>
-                        <paper-button id="print-button" onClick="printDiv()">Print</paper-button>
-                        <br><br>
-                        <i>Protip: If all you get are borders when you print, try clicking on "More Settings" and enabling background graphics. If you only get black and white, try printing with your system print dialog.</i>    
-                       
-                </div>
-        </paper-shadow>
-        <script>
+        <p><i>Designed for use by IMSA students.</i></p>
+        <p>Use the Schedule Commander below to enter information for your classes and watch your schedule magically appear!<p>
+        <p>For double-mod classes, insert the classes in the first mod, and then add the classes in the second mod. This way the scheduler can correctly draw the double-mod block.</p>
+        <p>Once you're done, you can hit "print" to open a more standardized view of your schedule for printing and screenshotting.</p>
+        <p class="protip protip-green"><i><b>Protip: Mistakes are OK! Double-click on a box to clear its contents.</b> This fights glitches, too!</i></p>
+	<p class="protip protip-yellow"><i><b>Note:</b> I-day MSI is a bit special. Use mods 1 and 3 on I-days for the first and second MSI classes, respectively.</i></p>
+	<div class="content">
+		<h2>Fancy Auto-Scheduler<h2>
+		<div class="page-section">
+			<div class="section">
+				<div class="row">
+					<p class="protip protip-yellow"><b>This feature is experimental.</b> Copy and paste the entire row from PowerSchool and hit "Update." The Schedule Machine will try to do the scheduling for you.</p>
+				</div>
+				<div class="row">
+					<div class="input-field col l12 s12 m12">
+						<input id="powerschool-entry" type="text" name="powerschool"></input>
+						<label for="powerschool-entry">PowerSchool Schedule Entry</label>
+					</div>
+				</div>
+			</div>
+		</div>	
+		<h2>Schedule Commander</h2>
+		<div class="page-section">
+			<div class="section row" style="padding-top: 20px;">
+				<div class="col s6">
+					<div class="row">
+						<div class="input-field col l12 s12 m12">
+							<input id="class-name" type="text" name="classname"></input>
+							<label for="class-name">Course Name</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col l12 s12 m12">
+							<input id="teacher-name" type="text" name="teacher"></input>
+							<label for="teacher-name">Teacher</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col l12 s12 m12">	
+							<input id="room-name" type="text" name="room"></input>
+							<label for="room-name">Room Number</label>
+						</div>
+					</div>
+				</div>
+				<div class="col s6">
+					<div class="row">
+						<div class="col l12">
+							<label>Days</label>
+							<div class="row">
+								<div class="col l2">
+									<p>
+										<input type="checkbox" class="days filled-in" id="day-A" />
+										<label for="day-A">A</label>
+									</p>
+								</div>
+								<div class="col l2">
+									<p>
+										<input type="checkbox" class="days filled-in" id="day-B" />
+										<label for="day-B">B</label>
+									</p>
+								</div>
+								<div class="col l2">
+									<p>
+										<input id="iday" type="checkbox" class="days filled-in" id="day-I" />
+										<label for="day-I">I</label>
+									</p>
+								</div>
+								<div class="col l2">
+									<p>
+										<input type="checkbox" class="days filled-in" id="day-C" />
+										<label for="day-C">C</label>
+									</p>
+								</div>
+								<div class="col l2">
+									<p>
+										<input type="checkbox" class="days filled-in" id="day-D" />
+										<label for="day-D">D</label>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col l12 s12 m12">
+							<select id="mods">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+							</select>
+							<label>Mod<label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="horizontal-formgroup col l12">
+							<label>Color: </label>
+							<div class="row">
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="red" name="colors" type="radio" id="color-red" checked/>
+										<label for="color-red">Red</label>
+									</p>
+								</div>
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="yellow" name="colors" type="radio" id="color-yellow"  />
+										<label for="color-yellow">Yellow</label>
+									</p>
+								</div>
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="green" name="colors" type="radio" id="color-green"  />
+										<label for="color-green">Green</label>
+									</p>
+								</div>
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="blue" name="colors" type="radio" id="color-blue"  />
+										<label for="color-blue">Blue</label>
+									</p>
+								</div>
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="purple" name="colors" type="radio" id="color-purple"  />
+										<label for="color-purple">Purple</label>
+									</p>
+								</div>
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="pink" name="colors" type="radio" id="color-pink"  />
+										<label for="color-pink">Pink</label>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<button id="submit-button" class="waves-effect waves-light btn-large" onClick="updateSchedule()">
+			<i class="material-icons left">input</i>
+			Update
+		</button>
+		<p style="display: inline-block;"><i id="success" class="small material-icons">thumb_up</i>
+		<i id="fail" class="small material-icons">thumb_down</i><span id="messages"></span><p>
+		
+	</div>
+	<div class="content">
+		<h2>Your Schedule</h2>
+		<div id="areaToPrint">
+			<table id="table">
+				<col id="blocks" />
+				<col id="A" />
+				<col id="B" />
+				<col id="I" />
+				<col id="C" />
+				<col id="D" />
+				<tr>
+					<th class="mods top">Mod</th>
+					<th class="top">A</th>
+					<th class="top">B</th>
+					<th class="top">I</th>
+					<th class="top">C</th>
+					<th class="top">D</th>
+				</tr>
+				<tr>
+					<th class="mods">1<br />8:00AM</th>
+					<td> </td>
+					<td> </td>
+					<td class="msi" rowspan="2"> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">2<br />9:00AM</th>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">3<br />10:00AM</th>
+					<td> </td>
+					<td> </td>
+					<td class="msi" rowspan="2"> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">4<br />11:00AM</th>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">5<br />12:20PM</th>
+					<td> </td>
+					<td> </td>
+					<td class="msi noclass" rowspan="4"> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">6<br />1:20PM</th>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">7<br />2:20PM</th>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">8<br />3:20PM</th>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+
+			</table>
+		</div>
+		<button id="print-button" class="waves-effect waves-light btn-large" onClick="printDiv()">
+			<i class="material-icons left">print</i>
+			Print
+		</button>
+		<br><br>
+		<p class="protip protip-green"><i><b>Protip:</b> If all you get are borders when you print, try clicking on "More Settings" and enabling background graphics. If you only get black and white, try printing with your system print dialog.</i></p>
+		
+	</div>
+        <script>        
 		function pad(n, width, z) 
 		{
                         z = z || '0';
@@ -264,88 +441,114 @@
                         return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
                 }
                 
-                //form elements                        
-                var colorChooser = document.getElementById("color-chooser");
-                
-                var className = document.getElementById("class-name");
-                var teacherName = document.getElementById("teacher-name");
-                var roomName = document.getElementById("room-name");
-                var mods = document.querySelector("paper-dropdown-menu");
-                var days = document.getElementsByClassName("days");
-                
-                //values                        
-                var colors = {"red": "rgb(191,21,21)", "yellow": "rgb(255,197,0)", "green": "rgb(107,206,44)", "blue": "rgb(18,72,153)", "purple": "rgb(85,28,118)", "pink":"rgb(226,83,193)"};
-                
-                var color = colors["red"];
-                
-		document.addEventListener("polymer-ready", function(){                                
-                        colorChooser.addEventListener("change", function(){
-                                console.log(colorChooser.selected);
-                                color = colors[colorChooser.selected];
-                        });
-                });
+                var updateSchedule;
+                var printDiv;
 		
-		function updateSchedule()
-		{
-			/*console.log(className.value);
-			console.log(teacherName.value);
-			console.log(roomName.value);
-			console.log(mods.selectedItemLabel);
-			console.log(days);*/
+		$(document).ready(function(){
+		
+			$('select').material_select();
 			
-			$("#success-indicator").css("opacity", 1);
-
-			table = document.getElementById("table");
+			//values
+			var colors = {"red": "rgb(191,21,21)", "yellow": "rgb(255,197,0)", "green": "rgb(107,206,44)", "blue": "rgb(18,72,153)", "purple": "rgb(85,28,118)", "pink":"rgb(226,83,193)"};
 			
-			for(i=0; i<days.length; i++)
+			var normalDayMods = [1,2,3,4,5,6,7,8];
+			var IDayMods = [1,3];
+			
+			updateSchedule = function()
 			{
-				if(days[i].checked==true)
-				{
-					table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].innerHTML = 
-						"<span class=\"text\"><p><b>"+className.value+"</b><br><i>"+roomName.value+"</i><br>"+teacherName.value+"</p></span>";
-					table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].setAttribute("data-schedule", className.value+" "+roomName.value+" "+teacherName.value);
-					table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].style.backgroundColor = color;
-					table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].style.border = "None"
+				//form elements                        
+				var className = $("#class-name").val();
+				var teacherName = $("#teacher-name").val();
+				var roomName = $("#room-name").val();
+				
+				var mods = $("#mods").val();
+				var days = $(".days");
+				var pickedColor = $("input[name='colors']:checked").attr("data-color");
+				
+				
+				var color = colors["red"];
+				if(pickedColor) {
+					color = colors[pickedColor]
+				}
+
+				/*console.log(className);
+				console.log(teacherName);
+				console.log(roomName);
+				console.log(mods);
+				console.log(days);
+				console.log(color);*/
+								
+				try {
+					table = $("#table")[0];
+					
+					for(i=0; i<days.length; i++)
+					{
+						if(days[i].checked==true)
+						{
+							//check that I-day and mod combination is OK
+							if(i == 2 && [1,3].indexOf(parseInt(mods)) < 0) {
+								$("#messages").text("I-Days only have mods 1 and 3. Ignoring invalid mods.");
+								$("#messages").css("opacity", 1);
+								$("#messages").delay(5000).animate({opacity: 0}, 2000);
+								continue;
+							}
+								
+							table.rows[parseInt(mods)].cells[i+1].innerHTML = 
+								"<span class=\"text\"><p><b>"+className+"</b></p><p><u>"+roomName+"</u></p><p>"+teacherName+"</p></span>";
+							table.rows[parseInt(mods)].cells[i+1].setAttribute("data-schedule", className.value+" "+roomName+" "+teacherName);
+							table.rows[parseInt(mods)].cells[i+1].style.backgroundColor = color;
+							table.rows[parseInt(mods)].cells[i+1].style.border = "1px solid transparent"
+						}
+					}
+					
+					for(r=0; r<table.rows.length; r++)
+					{
+						for(i=table.rows[r].cells.length-1; i>-1; i--)
+						{
+							if(r-1 > -1 && table.rows[r].cells[i].getAttribute("data-schedule") != null && table.rows[r].cells[i].getAttribute("data-schedule") == table.rows[r-1].cells[i].getAttribute("data-schedule"))
+							{
+								table.rows[r-1].cells[i].setAttribute("rowspan", 2);
+								table.rows[r].cells[i].style.display = "none";
+								
+							}
+							else if(r+1 < table.rows.length && table.rows[r].cells[i].getAttribute("data-schedule") != null && table.rows[r].cells[i].getAttribute("data-schedule") == table.rows[r+1].cells[i].getAttribute("data-schedule"))
+							{
+								table.rows[r].cells[i].setAttribute("rowspan", 2);
+								table.rows[r+1].cells[i].style.display = "none";
+							}
+						}
+					}
+					
+					$("#success").css("opacity", 1);
+					$("#success").animate({opacity: 0}, 1000);
+				} catch(e) {
+					console.log(e);
+					$("#fail").css("opacity", 1);
+					$("#messages").text("An error occured: "+e);
+					$("#messages").css("opacity", 1);
+					$("#messages").delay(5000).animate({opacity: 0}, 2000, function(){
+						$(this).text("");
+					});
+					$("#fail").animate({opacity: 0}, 1000);
 				}
 			}
-			for(r=0; r<table.rows.length; r++)
-			{
-			        for(i=table.rows[r].cells.length-1; i>-1; i--)
-			        {
-			                if(r-1 > -1 && table.rows[r].cells[i].getAttribute("data-schedule") != null && table.rows[r].cells[i].getAttribute("data-schedule") == table.rows[r-1].cells[i].getAttribute("data-schedule"))
-					{
-					        table.rows[r-1].cells[i].setAttribute("rowspan", 2);
-					        table.rows[r].cells[i].style.display = "none";
-					        
-				        }
-				        else if(r+1 < table.rows.length && table.rows[r].cells[i].getAttribute("data-schedule") != null && table.rows[r].cells[i].getAttribute("data-schedule") == table.rows[r+1].cells[i].getAttribute("data-schedule"))
-					{
-					        table.rows[r].cells[i].setAttribute("rowspan", 2);
-					        table.rows[r+1].cells[i].style.display = "none";
-				        }
-			        }
-		        }
 			
-			$("#success-indicator").animate({opacity: 0}, 500);
-		}
-		
-		function printDiv()
-		{
-			var divToPrint=document.getElementById("areaToPrint");
-			var style = document.getElementById("style");
-			newWin = window.open("");
-			newWin.document.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"/scheduler/meta/print.css\" />");
-			newWin.document.write(divToPrint.outerHTML);
-			newWin.document.getElementById
-		}
-		
-		$("document").ready(function(){
+			printDiv = function()
+			{
+				var divToPrint=document.getElementById("areaToPrint");
+				var style = document.getElementById("style");
+				newWin = window.open("");
+				newWin.document.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"/scheduler/meta/print.css\" />");
+				newWin.document.write(divToPrint.outerHTML);
+				newWin.document.getElementById
+			}
+			
 			$("td").dblclick(function(){
 				this.innerHTML = "";
 				this.style.backgroundColor = "";
 				this.style.border = "";
 				this.removeAttribute("data-schedule");
-				if(this.hasAttribute("rowspan"))
+				if(this.hasAttribute("rowspan") && !this.classList.contains("MSI"))
 				{
 				        var nextCell =  table.rows[$(this).parent().parent().children().index($(this).parent())+1].cells[$(this).parent().children().index($(this))];
 				        this.removeAttribute("rowspan");
@@ -357,24 +560,20 @@
 			        }
 				
 			});
-			//console.log("Click to erase loaded.");
 			
-			orig_border_width = parseInt($("td").css("border-width"));
-			orig_border_color = $("td").css("border-color");
-			$("td").hover(function(){
-			        this.style.border = String(orig_border_width*2)+"px"+" solid #FF4719"
+			$("td:not(.noclass)").hover(function(){
+			        this.style.border = "1px solid #1359c9"
 			},
 			function(){
 			        if(this.style.backgroundColor != "")
 			        {
-			                this.style.border = "None";
+			                this.style.border = "1px solid transparent";
 		                }
 		                else
 		                {
 				        this.style.border = "";
 			        }
 			});
-			//console.log("Border width change on hover loaded.");
 		});
 	</script>
 </div>

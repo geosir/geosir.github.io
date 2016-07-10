@@ -7,7 +7,7 @@ body
         background-repeat: no-repeat;
         background-position: center center;
         background-attachment: fixed;
-        font-family: "HelveticaW01-TextbookRg_709917", "Roboto", Arial, sans-serif;
+        font-family: "Roboto", Arial, sans-serif;
 	color: black;
         overflow: hidden;
 }
@@ -19,9 +19,19 @@ h1, h2, h3, h4, h5
 	margin-bottom: 20px;
 }
 
+h1 { font-size: 36px; }
+h2 { font-size: 30px; }
+h3 { font-size: 28px; }
+
 p, a
 {
-	font-size: 14pt;
+	font-size: 18px;
+}
+
+p 
+{
+	margin-top: 0px;
+	margin-bottom: 16px;
 }
 
 
