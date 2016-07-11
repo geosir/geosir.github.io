@@ -92,6 +92,7 @@
 			font-size: 1.2rem;
 			text-align: center;
 			border-radius: 0;
+			padding: 0;
 		}
 		
 		#mod-entry td:not(.selected):not(.mod):not(.noclass):hover
@@ -361,14 +362,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="input-field col l12 s12 m12">	
-							<button id="reset-button" class="waves-effect waves-light btn-large" onClick="resetScheduleCommand()">
-								<i class="material-icons left">replay</i>
-								Reset
-							</button>
-						</div>
-					</div>
 				</div>
 				<div class="col s6">
 					<div class="row">
@@ -448,6 +441,14 @@
 									<td></td>
 								</tr>
 							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col l12 s12 m12">	
+							<button id="reset-button" class="waves-effect waves-light btn-large right" onClick="resetScheduleCommand()">
+								<i class="material-icons left">replay</i>
+								Reset Commander
+							</button>
 						</div>
 					</div>
 				</div>
@@ -571,44 +572,76 @@
 			
 			//values
 			var colors = {"red": "rgb(255,62,62)", "yellow": "rgb(255,182,0)", "green": "rgb(0,212,85)", "blue": "rgb(40,144,255)", "purple": "rgb(155,72,208)", "pink":"rgb(255,85,217)", "brown":"rgb(136,87,12)", "cyan":"rgb(36,209,212)"};
+			var backcolors = invert(colors);
 			var daySequence = ["A", "B", "C", "D", "E"];
 			var calendarDaySequence = ["A", "B", "E", "C", "D"];
+			
+			function removeFromTable(className, teacherName, roomName) {
+				var table = $("#schedule")[0];
+				var datastring = className+"&#&#!"+roomName+"&#&#!"+teacherName;
+				
+				for(mod=1; mod<table.rows.length; mod++)
+				{
+					for(day=1; day<table.rows[mod].cells.length; day++)
+					{
+						if(table.rows[mod].cells[day].getAttribute("data-schedule") === datastring) {
+ 							var cell = table.rows[mod].cells[day];
+ 							console.log(table.rows[mod].cells[day].getAttribute("data-schedule"), datastring)
+ 							cell.innerHTML = "";
+ 							cell.style.backgroundColor = "";
+ 							cell.style.border = "";
+							cell.removeAttribute("data-schedule");
+							if(cell.hasAttribute("rowspan") && !cell.classList.contains("msi"))
+							{
+								var nextCell =  table.rows[mod+1].cells[day];
+								cell.removeAttribute("rowspan");
+								nextCell.style.display = "";
+								nextCell.innerHTML = "";
+								nextCell.style.backgroundColor = "";
+								nextCell.style.border = "";
+								nextCell.removeAttribute("data-schedule");				        
+							}
+						}
+					}
+				}
+			}
 			
 			function addToTable(className, teacherName, roomName, mods, color)
 			{
 				var table = $("#schedule")[0];
+				var datastring = className+"&#&#!"+roomName+"&#&#!"+teacherName;
 					
-					for(i=0; i<mods.length; i++)
+				for(i=0; i<mods.length; i++)
+				{
+					for(j=0; j<mods[i].length; j++)
 					{
-						for(j=0; j<mods[i].length; j++)
+						if(mods[i][j] == true)
 						{
-							if(mods[i][j] == true)
-							{
-								var mod = i+1;							
-								var day = j+1;								
-								table.rows[mod].cells[day].innerHTML = "<span class=\"text\"><p><b>"+className+"</b></p><p><u>"+roomName+"</u></p><p>"+teacherName+"</p></span>";
-								table.rows[mod].cells[day].setAttribute("data-schedule", className+" "+roomName+" "+teacherName);
-								table.rows[mod].cells[day].style.backgroundColor = color;
-								table.rows[mod].cells[day].style.border = "1px solid transparent"
-							}
+							var mod = i+1;							
+							var day = j+1;								
+							table.rows[mod].cells[day].innerHTML = "<span class=\"text\"><p><b>"+className+"</b></p><p><u>"+roomName+"</u></p><p>"+teacherName+"</p></span>";
+							table.rows[mod].cells[day].setAttribute("data-schedule", datastring);
+							table.rows[mod].cells[day].style.backgroundColor = color;
+							table.rows[mod].cells[day].style.border = "1px solid transparent"
 						}
 					}
-					
-					for(mod=1; mod<table.rows.length-1; mod++)
+				}
+				
+				for(mod=1; mod<table.rows.length-1; mod++)
+				{
+					for(day=1; day<table.rows[mod].cells.length; day++)
 					{
-						for(day=1; day<table.rows[mod].cells.length; day++)
-						{
-							if(table.rows[mod].cells[day].getAttribute("data-schedule") && table.rows[mod+1].cells[day].getAttribute("data-schedule")){
-								if(table.rows[mod].cells[day].getAttribute("data-schedule") == table.rows[mod+1].cells[day].getAttribute("data-schedule")){
-									if(table.rows[mod].cells[day].style.display != "none"){
-										table.rows[mod].cells[day].setAttribute("rowspan", 2);
-										table.rows[mod+1].cells[day].style.display = "none";
-									}
+						if(table.rows[mod].cells[day].getAttribute("data-schedule") && table.rows[mod+1].cells[day].getAttribute("data-schedule")){
+							if(table.rows[mod].cells[day].getAttribute("data-schedule") == table.rows[mod+1].cells[day].getAttribute("data-schedule")){
+								if(table.rows[mod].cells[day].style.display != "none"){
+									table.rows[mod].cells[day].setAttribute("rowspan", 2);
+									table.rows[mod+1].cells[day].style.display = "none";
 								}
-								
 							}
+							
 						}
 					}
+				}
 			}
 			
 			updateSchedule = function() {
@@ -621,8 +654,6 @@
 					var roomName = $("#room-name").val();
 					var pickedColor = $("input[type='radio'][name='colors']:checked").attr("data-color");
 					
-					
-					var modEntry = $("#mod-entry")[0];
 					var mods = [];
 					for(mod=1; mod<table.rows.length; mod++)
 					{
@@ -642,9 +673,8 @@
 					if(pickedColor) {
 						color = colors[pickedColor]
 					}
-					
-					console.log(className, teacherName, roomName, mods, color);
 
+					removeFromTable(className, teacherName, roomName);
 					addToTable(className, teacherName, roomName, mods, color)
 					
 					
@@ -759,8 +789,39 @@
 				$("#mod-entry td.selected").removeClass("selected");
 			};
 				
+			$("#schedule td").click(function(){
+				resetScheduleCommand();
+				
+				var table = $("#schedule")[0];
+				var modEntry = $("#mod-entry")[0];
+				var data=$(this).attr("data-schedule").split("&#&#!");
+				
+				$("#class-name").val(data[0]);
+				$("#teacher-name").val(data[2]);
+				$("#room-name").val(data[1]);
+				
+				$("input[type='radio'][name='colors']:checked").prop("checked", false);
+				
+				var color = backcolors[$(this).css("backgroundColor").replace(/ +/g, "")];
+				$("input[type='radio'][name='colors'][data-color='"+color+"']").prop("checked", true);
+				
+				for(mod=1; mod<table.rows.length; mod++)
+				{
+					for(day=1; day<table.rows[mod].cells.length; day++)
+					{
+						if(table.rows[mod].cells[day].getAttribute("data-schedule") === $(this).attr("data-schedule")) {
+							modEntry.rows[mod].cells[day].className = modEntry.rows[mod].cells[day].className +" selected";
+						}
+					}
+				}
+				
+				Materialize.updateTextFields();
+			});			
 			
 			$("#schedule td").dblclick(function(){
+			
+				var table = $("#schedule")[0];
+			
 				this.innerHTML = "";
 				this.style.backgroundColor = "";
 				this.style.border = "";
@@ -799,7 +860,18 @@
 				        this.style.border = "";
 			        }
 			});
+			
 		});
+		
+		function invert(obj) {
+			var new_obj = {};
+				for (var prop in obj) {
+					if(obj.hasOwnProperty(prop)) {
+						new_obj[obj[prop]] = prop;
+					}
+				}
+			return new_obj;
+		};
 	</script>
 </div>
 
