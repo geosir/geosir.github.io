@@ -267,7 +267,7 @@
 	</div>
 	<p class="protip"><i><b>That's pretty neat!</b> The Schedule Machine was first developed over the summer of 2014 as a bulk-input schedule visualizer. This is its 3rd iteration. It's changed in style a bit since then, but its goal is the same: make schedule-sharing easy and fun!</i></p>
 	<div class="content">
-		<h2>Fancy Auto-Scheduler<h2>
+		<h2>Fancy Auto-Scheduler</h2>
 		<div class="page-section">
 			<p class="protip protip-green"><b>This feature is experimental.</b> Copy and paste the entire semester table from PowerSchool into this text area. The sections should be separated by tabs, and each class should be on a new row. Then hit "Update"--The Schedule Machine will try to do the scheduling for you.</p>
 			<div class="section">
@@ -282,12 +282,13 @@
 			<i class="material-icons left">input</i>
 				Update
 			</button>
-			<p style="display: inline-block;"><i id="auto-success" class="small material-icons">thumb_up</i><span id="auto-messages"></span><p>
-			<h2>Schedule Commander</h2>
+			<p style="display: inline-block;"><i id="auto-success" class="small material-icons">thumb_up</i><span id="auto-messages"></span></p>
 		</div>
 		<div class="page-section">
+			<h2>Schedule Commander</h2>
+			<p class="protip protip-green"><i><b>Protip:</b> You can click on classes in the table to edit them here.</i></p>
 			<p class="protip protip-yellow"><i><b>Note:</b> I-day MSI might not follow the usual mod times, but for the sake of visualization, use the first block on I-day for the first MSI class, and the second one for the second class.</i></p>
-			<div class="section row" style="padding-top: 20px;">
+			<div id="schedule-command" class="section row" style="padding-top: 20px;">
 				<div class="col s6">
 					<div class="row">
 						<div class="input-field col l12 s12 m12">
@@ -458,7 +459,7 @@
 			<i class="material-icons left">input</i>
 			Update
 		</button>
-		<p style="display: inline-block;"><i id="success" class="small material-icons">thumb_up</i><span id="messages"></span><p>
+		<p style="display: inline-block;"><i id="success" class="small material-icons">thumb_up</i><span id="messages"></span></p>
 	</div>
 	<div class="content">
 		<h2>Your Schedule</h2>
@@ -576,9 +577,9 @@
 			var daySequence = ["A", "B", "C", "D", "E"];
 			var calendarDaySequence = ["A", "B", "E", "C", "D"];
 			
-			function removeFromTable(className, teacherName, roomName) {
+			function removeFromTable(datastring){
+			
 				var table = $("#schedule")[0];
-				var datastring = className+"&#&#!"+roomName+"&#&#!"+teacherName;
 				
 				for(mod=1; mod<table.rows.length; mod++)
 				{
@@ -586,7 +587,6 @@
 					{
 						if(table.rows[mod].cells[day].getAttribute("data-schedule") === datastring) {
  							var cell = table.rows[mod].cells[day];
- 							console.log(table.rows[mod].cells[day].getAttribute("data-schedule"), datastring)
  							cell.innerHTML = "";
  							cell.style.backgroundColor = "";
  							cell.style.border = "";
@@ -674,7 +674,10 @@
 						color = colors[pickedColor]
 					}
 
-					removeFromTable(className, teacherName, roomName);
+					if($("#schedule-command").attr("data-schedule")){
+						removeFromTable($("#schedule-command").attr("data-schedule"));
+						$("#schedule-command").attr("data-schedule", className+"&#&#!"+roomName+"&#&#!"+teacherName)
+					}
 					addToTable(className, teacherName, roomName, mods, color)
 					
 					
@@ -795,6 +798,7 @@
 				var table = $("#schedule")[0];
 				var modEntry = $("#mod-entry")[0];
 				var data=$(this).attr("data-schedule").split("&#&#!");
+				$("#schedule-command").attr("data-schedule", $(this).attr("data-schedule"));
 				
 				$("#class-name").val(data[0]);
 				$("#teacher-name").val(data[2]);
