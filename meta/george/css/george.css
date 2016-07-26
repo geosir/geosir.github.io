@@ -1,17 +1,39 @@
-@import url(https://fonts.googleapis.com/css?family=Advent+Pro:400,500);
-@import url(https://fonts.googleapis.com/css?family=Lato);
-
+@import "https://fonts.googleapis.com/css?family=Montserrat|Roboto";
 body
 {
         margin: 0;
-        background: url("/media/grandteton.jpg");
+        background: url("/media/grandteton.jpg") #1359c9;
         background-size: cover;
         background-repeat: no-repeat;
-        background-position: 0 0;
+        background-position: center center;
         background-attachment: fixed;
-        font-family: "Lato", serif;
+        font-family: "Roboto", Arial, sans-serif;
+	color: black;
         overflow: hidden;
 }
+
+h1, h2, h3, h4, h5
+{
+	font-family: "Montserrat", sans-serif;
+	color: black;
+	margin-bottom: 20px;
+}
+
+h1 { font-size: 36px; }
+h2 { font-size: 30px; }
+h3 { font-size: 28px; }
+
+p, a
+{
+	font-size: 18px;
+}
+
+p 
+{
+	margin-top: 0px;
+	margin-bottom: 16px;
+}
+
 
 #cover
 {

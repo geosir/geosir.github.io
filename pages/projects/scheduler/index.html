@@ -1,6 +1,5 @@
 <!doctype html>
-<div class="page">        
-        <link rel="import" href="/meta/imports.html">                  
+<div class="page">                  
         <style id="style">
 		.class-form
 		{
@@ -8,21 +7,20 @@
 			padding: 1rem;
 		}
 		
-		table
+		#schedule
 		{
 			table-layout: fixed;
 			border-collapse: separate;
-			border-spacing: 5px;
+			border-spacing: 4px;
 			width: 100%;
 			background-color: white;
 			text-align: center;
-			margin: 2% 0;
 		}
-		table span.text
+		#schedule span.text
 		{
 			veritcal-align: center;
 		}
-		table span.text p
+		#schedule span.text p
 		{
                         margin: 0;
                 }
@@ -30,68 +28,103 @@
 		{
 			width: 5em;
 		}
-		td, th
+		#schedule td, #schedule th
 		{
-			border-radius: 5px;
-			height: 5em;
+			border-radius: 0px;
+			height: 4.5em;
 			max-height: 5em;
 			overflow: hidden;
-			white-space: nowrap; 
-			margin: 1%;
+			white-space: nowrap;
 			box-sizing:border-box;
                         -moz-box-sizing:border-box;
                         -webkit-box-sizing:border-box;
                         color: white;
+		        text-align: center;
 		}
-		th
+		#schedule th
 		{
-			background-color: rgb(0, 80, 120);
+			background-color: rgb(18, 89, 201);
 			color: white;
 		}
 		
-		th.mods
+		#schedule th.mods
 		{
 		        background-color: rgb(20,20,20);
 	        }
 		
-		td
+		#schedule td
 		{
-		        background-color: rgb(230,230,255);
-		        border: 1px solid gray;
+		        background-color: rgb(240, 240, 240);
+		        border: 1px solid rgb(200, 200, 200);
 	        }
 	        
-	        th.top
+	        #schedule td p
+	        {
+			line-height: 1.2em;
+		}
+	        
+	        #schedule td:not(.mod)
+	        {
+			padding: 0;
+		}
+	        
+	        #schedule th.top
 	        {
                         height: 3em;
 	        }
+	        
+	        #mod-entry
+	        {
+			table-layout: fixed;
+			border-collapse: separate;
+			border-spacing: 2px;
+			width: 100%;
+			background-color: white;
+			text-align: center;
+		}
 		
+		#mod-entry th, td
+		{
+			font-weight: normal;
+			font-family: "Roboto", Arial, sans-serif;
+			color: black;
+			border: 1px solid black;
+			font-size: 1.2rem;
+			text-align: center;
+			border-radius: 0;
+			padding: 0;
+		}
+		
+		#mod-entry td:not(.selected):not(.mod):not(.noclass):hover
+		{
+			background-color: rgba(0, 182, 57, 0.3);
+		}
+		
+		#mod-entry .noclass
+		{
+			background-color: rgb(240,240,240);
+		}
+		
+		#mod-entry td.selected
+		{
+			background-color: rgb(0, 182, 57);
+		}
+		
+		#mod-entry td.selected:hover
+		{
+			background-color: rgba(255,62,62, 0.3);
+		}
 	        
 		input
 		{
 		        font-size: 1.2em;
 	        }
-	        #schedule-update, #print-button
-	        {
-	                color: white;
-	                background-color: #4285f4;
-	                margin: 0;
-                }
+	        
                 .section
                 {
                         border: 1px solid rgb(200,200,200);
                         padding: 1%;
                         margin: 2% 0%;
-                }
-                paper-checkbox
-                {
-                        padding: 1%;
-                        /*border-left: 1px solid rgb(200,200,200);
-                        border-right: 1px solid rgb(200,200,200);*/
-                }
-                
-                paper-input
-                {
-                        width: 100%;
                 }
                 
                 #color-label
@@ -110,153 +143,419 @@
                         margin: 2% 0;
                 }
                 
+                .protip {
+			margin: 0% 0% 1% 0%;
+			height: auto;
+			background-color: rgb(250, 250, 250);
+			color: rgb(100, 100, 100);
+			border-radius: 2px;
+			padding: 0.5em;
+		}
+		.protip.protip-green {
+			background-color: rgba(0, 182, 57, 0.3);
+			color: rgb(0, 100, 57);
+		}
+		
+		.protip.protip-yellow {
+			background-color: rgba(227, 182, 0, 0.3);
+			color: rgb(128, 100, 0);
+		}
+		
+		#success, #auto-success
+		{
+			color: rgb(0, 147, 59);
+		}
+		
+		#fail, #success, #messages, #auto-success, #auto-messages
+		{
+			opacity: 0;
+		}
+		
+		#iday-warning
+		{
+			opacity: 0;
+			color: #DEB928;
+			background-color: #F2DA77;
+			border: 1px solid #DEB928;
+			border-radius: 2px;
+			font-size: 12pt;
+		}
+		
+		.nodisplay
+		{
+			display: none;
+		}
+		
+		#submit-button, #auto-button, #print-button, #reset-button
+		{
+			font-size: 12pt;
+			font-weight: 300;
+		}
+		
+		[type="radio"][data-color="red"].with-gap:checked + label:before {
+			border-color: rgb(255,62,62);
+		}
+		[type="radio"][data-color="red"].with-gap:checked + label:after {
+			border-color: rgb(255,62,62);
+			background-color: rgb(255,62,62);
+		}
+		
+		[type="radio"][data-color="yellow"].with-gap:checked + label:before {
+			border-color: rgb(255,182,0);
+		}
+		[type="radio"][data-color="yellow"].with-gap:checked + label:after {
+			border-color: rgb(255,182,0);
+			background-color: rgb(255,182,0);
+		}
+		
+		[type="radio"][data-color="green"].with-gap:checked + label:before {
+			border-color: rgb(0,212,85);
+		}
+		[type="radio"][data-color="green"].with-gap:checked + label:after {
+			border-color: rgb(0,212,85);
+			background-color: rgb(0,212,85);
+		}
+		
+		[type="radio"][data-color="blue"].with-gap:checked + label:before {
+			border-color: rgb(40,144,255);
+		}
+		[type="radio"][data-color="blue"].with-gap:checked + label:after {
+			border-color: rgb(40,144,255);
+			background-color: rgb(40,144,255);
+		}
+		
+		[type="radio"][data-color="purple"].with-gap:checked + label:before {
+			border-color: rgb(155,72,208);
+		}
+		[type="radio"][data-color="purple"].with-gap:checked + label:after {
+			border-color: rgb(155,72,208);
+			background-color: rgb(155,72,208);
+		}
+		
+		[type="radio"][data-color="pink"].with-gap:checked + label:before {
+			border-color: rgb(255,85,217);
+		}
+		[type="radio"][data-color="pink"].with-gap:checked + label:after {
+			border-color: rgb(255,85,217);
+			background-color: rgb(255,85,217);
+		}
+		
+		[type="radio"][data-color="brown"].with-gap:checked + label:before {
+			border-color: rgb(136,87,12);
+		}
+		[type="radio"][data-color="brown"].with-gap:checked + label:after {
+			border-color: rgb(136,87,12);
+			background-color: rgb(136,87,12);
+		}
+		
+		[type="radio"][data-color="cyan"].with-gap:checked + label:before {
+			border-color: rgb(36,209,212);
+		}
+		[type="radio"][data-color="cyan"].with-gap:checked + label:after {
+			border-color: rgb(36,209,212);
+			background-color: rgb(36,209,212);
+		}
+		
+					var colors = {"red": "rgb(255,62,62)", "yellow": "rgb(255,182,0)", "green": "rgb(0,212,85)", "blue": "rgb(40,144,255)", "purple": "rgb(155,72,208)", "pink":"rgb(255,85,217)", "brown":"rgb(136,87,12)", "cyan":"rgb(36,209,212)"};
 	</style>
         <h1><b>George's Schedule Machine</b></h1>
-        <i>Designed for use by IMSA students.</i>
-        <p>Use the input box below to enter your class information, and watch your schedule magically appear! For classes that span multiple mods, insert the classes in the first mod, then add the classes in the second mod. Finally, once you're done, you can hit print to open a printable or screenshot-able view of your schedule.</p>
-        <p><b><i>Protip: Mistakes are OK! Double-click on a box to clear its contents.</b> This fights glitches, too!</i></p>
-        <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
-                <div class="content" auto-vertical flex>
-                        <h2>Input Box</h2>
-                        <div class="page-section">
-                                <div class="section" layout horizontal>
-                                        <div class="form-container" flex>
-                                                <paper-input id="class-name" label="Course Name" name="classname" floatingLabel></paper-input>
-                                                <paper-input id="teacher-name" label="Teacher" name="teacher" floatingLabel></paper-input>
-                                                <paper-input id="room-name" label="Room" name="room" floatingLabel></paper-input>
-                                        </div>
-                                        <div flex layout vertical>
-                                                <div class="form-container" flex layout vertical>
-                                                        <div flex>
-                                                                <b>Mod: </b>
-                                                                <paper-dropdown-menu label="Mod" floatingLabel>
-                                                                        <paper-dropdown class="dropdown">
-                                                                                <core-menu class="menu">
-                                                                                        <paper-item>1</paper-item>
-                                                                                        <paper-item>2</paper-item>
-                                                                                        <paper-item>3</paper-item>
-                                                                                        <paper-item>4</paper-item>
-                                                                                        <paper-item>5</paper-item>
-                                                                                        <paper-item>6</paper-item>
-                                                                                        <paper-item>7</paper-item>
-                                                                                        <paper-item>8</paper-item>
-                                                                                </core-menu>
-                                                                        </paper-dropdown>
-                                                                </paper-dropdown-menu>
-                                                        </div>
-                                                </div>
-                                                <div class="form-container" flex layout horizontal>
-                                                        <div flex layout horizontal>
-                                                                <b>Days: </b>
-                                                                <div flex>
-                                                                        <paper-checkbox class="days" name="days" label="A"></paper-checkbox>
-                                                                        <paper-checkbox class="days" name="days" label="B"></paper-checkbox>
-                                                                        <paper-checkbox class="days" name="days" label="C"></paper-checkbox>
-                                                                        <paper-checkbox class="days" name="days" label="D"></paper-checkbox>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                                <div class="form-container" flex layout horizontal>
-                                                        <b id="color-label">Color: </b>
-                                                        <paper-radio-group id="color-chooser" selected="red">
-                                                                <paper-radio-button name="red" label="Red"></paper-radio-button>
-                                                                <paper-radio-button name="yellow" label="Yellow"></paper-radio-button>
-                                                                <paper-radio-button name="green" label="Green"></paper-radio-button>
-                                                                <paper-radio-button name="blue" label="Blue"></paper-radio-button>
-                                                                <paper-radio-button name="purple" label="Purple"></paper-radio-button>
-                                                                <paper-radio-button name="pink" label="Pink"></paper-radio-button>
-                                                        </paper-radio-group>
-                                                </div>
-                                        </div>
-                                </div>
-                                <paper-button id="schedule-update" onClick="updateSchedule()">Update Schedule</paper-button>
-                                <core-icon id="success-indicator" icon="check-circle" style="opacity: 0; color: #00933B"></core-icon>
-                        </div>
-                </div>
-        </paper-shadow>
-        <paper-shadow z=4 class="card" layout horizontal?={{!phoneScreen}}>
-                <div class="content" auto-vertical flex>
-                        <h2>Your Schedule</h2>
-                        <div id="areaToPrint">
-	                        <table id="table">
-		                        <col id="blocks" />
-		                        <col id="A" />
-		                        <col id="B" />
-		                        <col id="C" />
-		                        <col id="D" />
-		                        <tr>
-			                        <th class="mods top">Mod</th>
-			                        <th class="top">A</th>
-			                        <th class="top">B</th>
-			                        <th class="top">C</th>
-			                        <th class="top">D</th>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">1<br />8:00AM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">2<br />9:00AM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">3<br />10:00AM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">4<br />11:00AM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">5<br />12:20PM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">6<br />1:20PM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">7<br />2:20PM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-		                        <tr>
-			                        <th class="mods">8<br />3:20PM</th>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-			                        <td> </td>
-		                        </tr>
-	
-	                        </table>
-                        </div>
-                        <paper-button id="print-button" onClick="printDiv()">Print</paper-button>
-                        <br><br>
-                        <i>Protip: If all you get are borders when you print, try clicking on "More Settings" and enabling background graphics. If you only get black and white, try printing with your system print dialog.</i>    
-                       
-                </div>
-        </paper-shadow>
-        <script>
+	<p class="protip"><i>Designed for use by IMSA students. Best if used on a desktop browser.</i></p>
+	<div class="section" style="padding: 16px 1% 0 1%;">
+		<p>Powerschool Schedule doesn't make sense? Or maybe it's just too ugly. In any case, this schedule machine is here to help!</p>
+		<p>Use the Fancy Auto-Scheduler or the Schedule Commander below to enter your classes and watch your schedule automagically appear!</p>
+		<p>When you're done, you can hit "Print" to open a formatted view of your schedule for printing and screenshotting.</p>
+	</div>
+	<p class="protip"><i><b>That's pretty neat!</b> The Schedule Machine was first developed over the summer of 2014 as a bulk-input schedule visualizer. This is its 3rd iteration. It's changed in style a bit since then, but its goal is the same: make schedule-sharing easy and fun!</i></p>
+	<div class="content">
+		<h2>Fancy Auto-Scheduler</h2>
+		<div class="page-section">
+			<p class="protip protip-green"><b>This feature is experimental.</b> Copy and paste the entire semester table from PowerSchool into this text area. The sections should be separated by tabs, and each class should be on a new row. Then hit "Update"--The Schedule Machine will try to do the scheduling for you.</p>
+			<div class="section">
+				<div class="row">
+					<div class="input-field col l12 s12 m12">
+						<textarea id="powerschool-entry" class="materialize-textarea" name="powerschool"></textarea>
+						<label for="powerschool-entry">PowerSchool Schedule</label>
+					</div>
+				</div>
+			</div>
+			<button id="auto-button" class="waves-effect waves-light btn-large" onClick="autoSchedule()">
+			<i class="material-icons left">input</i>
+				Update
+			</button>
+			<p style="display: inline-block;"><i id="auto-success" class="small material-icons">thumb_up</i><span id="auto-messages"></span></p>
+		</div>
+		<div class="page-section">
+			<h2>Schedule Commander</h2>
+			<p class="protip protip-green"><i><b>Protip:</b> You can click on classes in the table to edit them here.</i></p>
+			<p class="protip protip-yellow"><i><b>Note:</b> I-day MSI might not follow the usual mod times, but for the sake of visualization, use the first block on I-day for the first MSI class, and the second one for the second class.</i></p>
+			<div id="schedule-command" class="section row" style="padding-top: 20px;">
+				<div class="col s6">
+					<div class="row">
+						<div class="input-field col l12 s12 m12">
+							<input id="class-name" type="text" name="classname"></input>
+							<label for="class-name">Course Name</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col l12 s12 m12">
+							<input id="teacher-name" type="text" name="teacher"></input>
+							<label for="teacher-name">Teacher</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col l12 s12 m12">	
+							<input id="room-name" type="text" name="room"></input>
+							<label for="room-name">Room Number</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="horizontal-formgroup col l12">
+							<label>Color: </label>
+							<div class="row">
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="red" name="colors" type="radio" id="color-red" checked/>
+										<label for="color-red">Red</label>
+									</p>
+								</div>
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="yellow" name="colors" type="radio" id="color-yellow"  />
+										<label for="color-yellow">Yellow</label>
+									</p>
+								</div>
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="green" name="colors" type="radio" id="color-green"  />
+										<label for="color-green">Green</label>
+									</p>
+								</div>
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="blue" name="colors" type="radio" id="color-blue"  />
+										<label for="color-blue">Blue</label>
+									</p>
+								</div>
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="purple" name="colors" type="radio" id="color-purple"  />
+										<label for="color-purple">Purple</label>
+									</p>
+								</div>
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="pink" name="colors" type="radio" id="color-pink"  />
+										<label for="color-pink">Pink</label>
+									</p>
+								</div>
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="brown" name="colors" type="radio" id="color-brown"  />
+										<label for="color-brown">Brown</label>
+									</p>
+								</div>
+								<div class="col l3">
+									<p>
+										<input class="with-gap" data-color="cyan" name="colors" type="radio" id="color-cyan"  />
+										<label for="color-cyan">Cyan</label>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col s6">
+					<div class="row">
+						<div class="col l12">
+							<label>Mods and Days</label>
+							<table id="mod-entry">
+								<tr>
+									<th style="border: none"></th>
+									<th>A</th>
+									<th>B</th>
+									<th>I/E</th>
+									<th>C</th>
+									<th>D</th>
+								</tr>
+								<tr>
+									<td class="mod">1</td>
+									<td></td>
+									<td></td>
+									<td rowspan="2"></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="mod">2</td>
+									<td></td>
+									<td></td>
+									<td class="nodisplay"></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="mod">3</td>
+									<td></td>
+									<td></td>
+									<td rowspan="2"></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="mod">4</td>
+									<td></td>
+									<td></td>
+									<td class="nodisplay"></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="mod">5</td>
+									<td></td>
+									<td></td>
+									<td rowspan="4" class="noclass"></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="mod">6</td>
+									<td></td>
+									<td></td>
+									<td class="nodisplay"></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="mod">7</td>
+									<td></td>
+									<td></td>
+									<td class="nodisplay"></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td class="mod">8</td>
+									<td></td>
+									<td></td>
+									<td class="nodisplay"></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col l12 s12 m12">	
+							<button id="reset-button" class="waves-effect waves-light btn-large right" onClick="resetScheduleCommand()">
+								<i class="material-icons left">replay</i>
+								Reset Commander
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<button id="submit-button" class="waves-effect waves-light btn-large" onClick="updateSchedule()">
+			<i class="material-icons left">input</i>
+			Update
+		</button>
+		<p style="display: inline-block;"><i id="success" class="small material-icons">thumb_up</i><span id="messages"></span></p>
+	</div>
+	<div class="content">
+		<h2>Your Schedule</h2>
+		<div id="areaToPrint" class="section">
+			<table id="schedule">
+				<col id="blocks" />
+				<col id="A" />
+				<col id="B" />
+				<col id="I" />
+				<col id="C" />
+				<col id="D" />
+				<tr>
+					<th class="mods top">Mod</th>
+					<th class="top">A</th>
+					<th class="top">B</th>
+					<th class="top">I/E</th>
+					<th class="top">C</th>
+					<th class="top">D</th>
+				</tr>
+				<tr>
+					<th class="mods">1<br />8:00AM</th>
+					<td> </td>
+					<td> </td>
+					<td class="msi" rowspan="2"> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">2<br />9:00AM</th>
+					<td> </td>
+					<td> </td>
+					<td class="nodisplay"> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">3<br />10:00AM</th>
+					<td> </td>
+					<td> </td>
+					<td class="msi" rowspan="2"> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">4<br />11:00AM</th>
+					<td> </td>
+					<td> </td>
+					<td class="nodisplay"> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">5<br />12:20PM</th>
+					<td> </td>
+					<td> </td>
+					<td class="msi noclass" rowspan="4"> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">6<br />1:20PM</th>
+					<td> </td>
+					<td> </td>
+					<td class="nodisplay"> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">7<br />2:20PM</th>
+					<td> </td>
+					<td> </td>
+					<td class="nodisplay"> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<th class="mods">8<br />3:20PM</th>
+					<td> </td>
+					<td> </td>
+					<td class="nodisplay"> </td>
+					<td> </td>
+					<td> </td>
+				</tr>
+
+			</table>
+		</div>
+		<button id="print-button" class="waves-effect waves-light btn-large" onClick="printDiv()">
+			<i class="material-icons left">print</i>
+			Print
+		</button>
+		<br><br>
+		<p class="protip protip-green"><i><b>Protip: Mistakes are OK! Double-click on a box to clear its contents.</b> This fights glitches, too!</i></p>
+		<p class="protip protip-green"><i><b>Protip:</b> If all you get are borders when you print, try clicking on "More Settings" and enabling background graphics. If you only get black and white, try printing with your system print dialog.</i></p>
+		
+	</div>
+        <script>        
 		function pad(n, width, z) 
 		{
                         z = z || '0';
@@ -264,88 +563,274 @@
                         return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
                 }
                 
-                //form elements                        
-                var colorChooser = document.getElementById("color-chooser");
-                
-                var className = document.getElementById("class-name");
-                var teacherName = document.getElementById("teacher-name");
-                var roomName = document.getElementById("room-name");
-                var mods = document.querySelector("paper-dropdown-menu");
-                var days = document.getElementsByClassName("days");
-                
-                //values                        
-                var colors = {"red": "rgb(191,21,21)", "yellow": "rgb(255,197,0)", "green": "rgb(107,206,44)", "blue": "rgb(18,72,153)", "purple": "rgb(85,28,118)", "pink":"rgb(226,83,193)"};
-                
-                var color = colors["red"];
-                
-		document.addEventListener("polymer-ready", function(){                                
-                        colorChooser.addEventListener("change", function(){
-                                console.log(colorChooser.selected);
-                                color = colors[colorChooser.selected];
-                        });
-                });
+                var updateSchedule;
+                var autoSchedule;
+                var printDiv;
 		
-		function updateSchedule()
-		{
-			/*console.log(className.value);
-			console.log(teacherName.value);
-			console.log(roomName.value);
-			console.log(mods.selectedItemLabel);
-			console.log(days);*/
+		$(document).ready(function(){
+		
+			$('select').material_select();
 			
-			$("#success-indicator").css("opacity", 1);
-
-			table = document.getElementById("table");
+			//values
+			var colors = {"red": "rgb(255,62,62)", "yellow": "rgb(255,182,0)", "green": "rgb(0,212,85)", "blue": "rgb(40,144,255)", "purple": "rgb(155,72,208)", "pink":"rgb(255,85,217)", "brown":"rgb(136,87,12)", "cyan":"rgb(36,209,212)"};
+			var backcolors = invert(colors);
+			var daySequence = ["A", "B", "C", "D", "E"];
+			var calendarDaySequence = ["A", "B", "E", "C", "D"];
 			
-			for(i=0; i<days.length; i++)
-			{
-				if(days[i].checked==true)
+			function removeFromTable(datastring){
+			
+				var table = $("#schedule")[0];
+				
+				for(mod=1; mod<table.rows.length; mod++)
 				{
-					table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].innerHTML = 
-						"<span class=\"text\"><p><b>"+className.value+"</b><br><i>"+roomName.value+"</i><br>"+teacherName.value+"</p></span>";
-					table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].setAttribute("data-schedule", className.value+" "+roomName.value+" "+teacherName.value);
-					table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].style.backgroundColor = color;
-					table.rows[parseInt(mods.selectedItemLabel)].cells[i+1].style.border = "None"
+					for(day=1; day<table.rows[mod].cells.length; day++)
+					{
+						if(table.rows[mod].cells[day].getAttribute("data-schedule") === datastring) {
+ 							var cell = table.rows[mod].cells[day];
+ 							cell.innerHTML = "";
+ 							cell.style.backgroundColor = "";
+ 							cell.style.border = "";
+							cell.removeAttribute("data-schedule");
+							if(cell.hasAttribute("rowspan") && !cell.classList.contains("msi"))
+							{
+								var nextCell =  table.rows[mod+1].cells[day];
+								cell.removeAttribute("rowspan");
+								nextCell.style.display = "";
+								nextCell.innerHTML = "";
+								nextCell.style.backgroundColor = "";
+								nextCell.style.border = "";
+								nextCell.removeAttribute("data-schedule");				        
+							}
+						}
+					}
 				}
 			}
-			for(r=0; r<table.rows.length; r++)
-			{
-			        for(i=table.rows[r].cells.length-1; i>-1; i--)
-			        {
-			                if(r-1 > -1 && table.rows[r].cells[i].getAttribute("data-schedule") != null && table.rows[r].cells[i].getAttribute("data-schedule") == table.rows[r-1].cells[i].getAttribute("data-schedule"))
-					{
-					        table.rows[r-1].cells[i].setAttribute("rowspan", 2);
-					        table.rows[r].cells[i].style.display = "none";
-					        
-				        }
-				        else if(r+1 < table.rows.length && table.rows[r].cells[i].getAttribute("data-schedule") != null && table.rows[r].cells[i].getAttribute("data-schedule") == table.rows[r+1].cells[i].getAttribute("data-schedule"))
-					{
-					        table.rows[r].cells[i].setAttribute("rowspan", 2);
-					        table.rows[r+1].cells[i].style.display = "none";
-				        }
-			        }
-		        }
 			
-			$("#success-indicator").animate({opacity: 0}, 500);
-		}
-		
-		function printDiv()
-		{
-			var divToPrint=document.getElementById("areaToPrint");
-			var style = document.getElementById("style");
-			newWin = window.open("");
-			newWin.document.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"/scheduler/meta/print.css\" />");
-			newWin.document.write(divToPrint.outerHTML);
-			newWin.document.getElementById
-		}
-		
-		$("document").ready(function(){
-			$("td").dblclick(function(){
+			function addToTable(className, teacherName, roomName, mods, color)
+			{
+				var table = $("#schedule")[0];
+				var datastring = className+"&#&#!"+roomName+"&#&#!"+teacherName;
+					
+				for(i=0; i<mods.length; i++)
+				{
+					for(j=0; j<mods[i].length; j++)
+					{
+						if(mods[i][j] == true)
+						{
+							var mod = i+1;							
+							var day = j+1;								
+							table.rows[mod].cells[day].innerHTML = "<span class=\"text\"><p><b>"+className+"</b></p><p><u>"+roomName+"</u></p><p>"+teacherName+"</p></span>";
+							table.rows[mod].cells[day].setAttribute("data-schedule", datastring);
+							table.rows[mod].cells[day].style.backgroundColor = color;
+							table.rows[mod].cells[day].style.border = "1px solid transparent"
+						}
+					}
+				}
+				
+				for(mod=1; mod<table.rows.length-1; mod++)
+				{
+					for(day=1; day<table.rows[mod].cells.length; day++)
+					{
+						if(table.rows[mod].cells[day].getAttribute("data-schedule") && table.rows[mod+1].cells[day].getAttribute("data-schedule")){
+							if(table.rows[mod].cells[day].getAttribute("data-schedule") == table.rows[mod+1].cells[day].getAttribute("data-schedule")){
+								if(table.rows[mod].cells[day].style.display != "none"){
+									table.rows[mod].cells[day].setAttribute("rowspan", 2);
+									table.rows[mod+1].cells[day].style.display = "none";
+								}
+							}
+							
+						}
+					}
+				}
+			}
+			
+			updateSchedule = function() {
+				try {
+					var table = $("#mod-entry")[0];
+					
+					//form elements                        
+					var className = $("#class-name").val();
+					var teacherName = $("#teacher-name").val();
+					var roomName = $("#room-name").val();
+					var pickedColor = $("input[type='radio'][name='colors']:checked").attr("data-color");
+					
+					var mods = [];
+					for(mod=1; mod<table.rows.length; mod++)
+					{
+						var rowSelect = []
+						for(day=1; day<table.rows[mod].cells.length; day++)
+						{
+							if(table.rows[mod].cells[day].classList.contains("selected")) {
+								rowSelect.push(true);
+							} else {
+								rowSelect.push(false);
+							}
+						}
+						mods.push(rowSelect);
+					}
+					
+					var color = colors["red"];
+					if(pickedColor) {
+						color = colors[pickedColor]
+					}
+
+					if($("#schedule-command").attr("data-schedule")){
+						removeFromTable($("#schedule-command").attr("data-schedule"));
+						$("#schedule-command").attr("data-schedule", className+"&#&#!"+roomName+"&#&#!"+teacherName)
+					}
+					addToTable(className, teacherName, roomName, mods, color)
+					
+					
+					$("#success").css("opacity", 1);
+					$("#success").animate({opacity: 0}, 1000);
+				} catch (e) {
+					$("#messages").html("An error occured. Please let George know what happened: <a href=\"mailto:george@george.moe\" target=\"_blank\">george@george.moe</a>.");
+					$("#messages").css("opacity", 1);
+					$("#messages").delay(5000).animate({opacity: 0}, 2000);
+					console.log(e);
+				}
+			};
+			
+			autoSchedule = function(){
+				try {
+					var powerschool = $("#powerschool-entry").val();
+					powerschool = powerschool.split("\n");
+					powerschool = powerschool.map(function(entry){return entry.split("\t")});
+					
+					powerschool.forEach(function(entry){
+						var expression = entry[0];
+						var className = entry[3];
+						var teacherName = entry[4];
+						var roomName = entry[5];
+						
+						var color = colors[Object.keys(colors)[Math.floor(Math.random()*Object.keys(colors).length)]];
+						
+						expression = expression.replace(/ +/g, "");
+						expression = expression.split(/\),*(?=[0-9])/g);
+						expression = expression.map(function(v, i, a){ if(i<a.length-1) return v+")"; else return v; });
+						expression.forEach(function(exp){
+							exp = exp.replace(")", "");
+							exp = exp.split("(");
+							var selectedMods = [].concat(...exp[0].split(",").map(function(range){
+								var rangeCaps = range.split("-");
+								if(rangeCaps.length >= 2) {
+									var result = [];
+									var direction = 1;
+									if(parseInt(rangeCaps[0]) > parseInt(rangeCaps[1])) {
+										direction = -1;
+									}
+									for(i=parseInt(rangeCaps[0]); i!=parseInt(rangeCaps[1])+direction; i=i+direction) {
+										result.push(i);
+									}
+									return result;
+								} else {
+									return [parseInt(rangeCaps[0])];
+								}
+							}));
+							var selectedDays = [].concat(...exp[1].split(",").map(function(range){
+								var rangeCaps = range.split("-");
+								if(rangeCaps.length >= 2) {
+									var result = [];
+									var direction = 1;
+									if(daySequence.indexOf(rangeCaps[0]) > daySequence.indexOf(rangeCaps[1])) {
+										direction = -1;
+									}
+									for(i=daySequence.indexOf(rangeCaps[0]); i!=daySequence.indexOf(rangeCaps[1]); i=i+direction) {
+										result.push(daySequence[i]);
+									}
+									result.push(rangeCaps[1]);
+									return result;
+								} else {
+									return [rangeCaps[0]];
+								}
+							}));
+							
+							var mods = [];
+							for(i=0; i<8; i++) {
+								var rowSelect = [];
+								for(j=0; j<5; j++){
+									rowSelect.push(selectedMods.includes(i+1) && selectedDays.includes(calendarDaySequence[j]));
+								}
+								mods.push(rowSelect);
+							}
+							if(mods[1][2] == true) {
+								mods[1][2] = false;
+								mods[2][2] = true;
+							}
+							
+							addToTable(className, teacherName, roomName, mods, color)
+						});
+					});
+					$("#auto-success").css("opacity", 1);
+					$("#auto-success").animate({opacity: 0}, 1000);
+				} catch (e) {
+					$("#auto-messages").html("An error occured. Please let George know what happened: <a href=\"mailto:george@george.moe\" target=\"_blank\">george@george.moe</a>.");
+					$("#auto-messages").css("opacity", 1);
+					$("#auto-messages").delay(5000).animate({opacity: 0}, 2000);
+					console.log(e);
+				}	
+			};
+			
+			printDiv = function() {
+				var divToPrint=document.getElementById("areaToPrint");
+				var style = document.getElementById("style");
+				newWin = window.open("");
+				newWin.document.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"/pages/projects/scheduler/meta/print.css\" />");
+				newWin.document.write(divToPrint.outerHTML);
+				newWin.document.getElementById
+			};
+			
+			resetScheduleCommand = function() {
+				var table = $("#mod-entry")[0];
+					
+				//form elements                        
+				$("#class-name").val("");
+				$("#teacher-name").val("");
+				$("#room-name").val("");
+				$("input[type='radio'][name='colors']:checked").prop("checked", false);
+				$("input[type='radio'][name='colors'][data-color='red']").prop("checked", true);
+				$("#mod-entry td.selected").removeClass("selected");
+			};
+				
+			$("#schedule td").click(function(){
+				resetScheduleCommand();
+				
+				var table = $("#schedule")[0];
+				var modEntry = $("#mod-entry")[0];
+				var data=$(this).attr("data-schedule").split("&#&#!");
+				$("#schedule-command").attr("data-schedule", $(this).attr("data-schedule"));
+				
+				$("#class-name").val(data[0]);
+				$("#teacher-name").val(data[2]);
+				$("#room-name").val(data[1]);
+				
+				$("input[type='radio'][name='colors']:checked").prop("checked", false);
+				
+				var color = backcolors[$(this).css("backgroundColor").replace(/ +/g, "")];
+				$("input[type='radio'][name='colors'][data-color='"+color+"']").prop("checked", true);
+				
+				for(mod=1; mod<table.rows.length; mod++)
+				{
+					for(day=1; day<table.rows[mod].cells.length; day++)
+					{
+						if(table.rows[mod].cells[day].getAttribute("data-schedule") === $(this).attr("data-schedule")) {
+							modEntry.rows[mod].cells[day].className = modEntry.rows[mod].cells[day].className +" selected";
+						}
+					}
+				}
+				
+				Materialize.updateTextFields();
+			});			
+			
+			$("#schedule td").dblclick(function(){
+			
+				var table = $("#schedule")[0];
+			
 				this.innerHTML = "";
 				this.style.backgroundColor = "";
 				this.style.border = "";
 				this.removeAttribute("data-schedule");
-				if(this.hasAttribute("rowspan"))
+				if(this.hasAttribute("rowspan") && !this.classList.contains("msi"))
 				{
 				        var nextCell =  table.rows[$(this).parent().parent().children().index($(this).parent())+1].cells[$(this).parent().children().index($(this))];
 				        this.removeAttribute("rowspan");
@@ -357,25 +842,40 @@
 			        }
 				
 			});
-			//console.log("Click to erase loaded.");
 			
-			orig_border_width = parseInt($("td").css("border-width"));
-			orig_border_color = $("td").css("border-color");
-			$("td").hover(function(){
-			        this.style.border = String(orig_border_width*2)+"px"+" solid #FF4719"
+			$("#mod-entry td:not(.mod):not(.noclass)").click(function(){
+				if($(this).hasClass("selected")){
+					$(this).removeClass("selected");
+				} else {
+					$(this).addClass("selected");
+				}
+			});
+			
+			$("#schedule td:not(.noclass)").hover(function(){
+			        this.style.border = "1px solid #1359c9"
 			},
 			function(){
 			        if(this.style.backgroundColor != "")
 			        {
-			                this.style.border = "None";
+			                this.style.border = "1px solid transparent";
 		                }
 		                else
 		                {
 				        this.style.border = "";
 			        }
 			});
-			//console.log("Border width change on hover loaded.");
+			
 		});
+		
+		function invert(obj) {
+			var new_obj = {};
+				for (var prop in obj) {
+					if(obj.hasOwnProperty(prop)) {
+						new_obj[obj[prop]] = prop;
+					}
+				}
+			return new_obj;
+		};
 	</script>
 </div>
 
