@@ -789,6 +789,7 @@
 				$("input[type='radio'][name='colors']:checked").prop("checked", false);
 				$("input[type='radio'][name='colors'][data-color='red']").prop("checked", true);
 				$("#mod-entry td.selected").removeClass("selected");
+				$("#schedule-command").removeAttr("data-schedule");
 			};
 				
 			$("#schedule td").click(function(){
