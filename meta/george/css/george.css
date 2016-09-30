@@ -5,7 +5,7 @@ body {
     background: url("/media/grandteton.jpg") #1359c9;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: 0 center;
     background-attachment: fixed;
     font-family: "Roboto", Arial, sans-serif;
     color: black;
