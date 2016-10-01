@@ -255,8 +255,6 @@
 			border-color: rgb(36,209,212);
 			background-color: rgb(36,209,212);
 		}
-		
-					var colors = {"red": "rgb(255,62,62)", "yellow": "rgb(255,182,0)", "green": "rgb(0,212,85)", "blue": "rgb(40,144,255)", "purple": "rgb(155,72,208)", "pink":"rgb(255,85,217)", "brown":"rgb(136,87,12)", "cyan":"rgb(36,209,212)"};
 	</style>
         <h1><b>George's Schedule Machine</b></h1>
 	<p class="protip"><i>Designed for use by IMSA students. Best if used on a desktop browser.</i></p>
@@ -269,7 +267,8 @@
 	<div class="content">
 		<h2>Fancy Auto-Scheduler</h2>
 		<div class="page-section">
-			<p class="protip protip-green"><b>This feature is experimental.</b> Copy and paste the entire semester table from PowerSchool into this text area. The sections should be separated by tabs, and each class should be on a new row. Then hit "Update"--The Schedule Machine will try to do the scheduling for you.</p>
+			<p class="protip protip-green"><b>This feature is experimental.</b> Copy and paste the entire semester table from PowerSchool into this text area. The sections should be separated by tabs, and each class should be on a new row. Then hit "Update"&ndash;The Schedule Machine will try to do the scheduling for you.<b> Be sure to check that it's correct!</b></p>
+			<p class="protip protip-yellow"><b>Known bugs:</b><br />-> Empty lines in your schedule (such as at the end), will result in an error, but the scheduler still works nonetheless. Scroll down and take a look!<br />-> PowerSchool's table can sometimes have quirks. If there are mistakes, you edit the classes with the Schedule Commander below. You can also use it to change the colors!</p>
 			<div class="section">
 				<div class="row">
 					<div class="input-field col l12 s12 m12">
@@ -790,6 +789,7 @@
 				$("input[type='radio'][name='colors']:checked").prop("checked", false);
 				$("input[type='radio'][name='colors'][data-color='red']").prop("checked", true);
 				$("#mod-entry td.selected").removeClass("selected");
+				$("#schedule-command").removeAttr("data-schedule");
 			};
 				
 			$("#schedule td").click(function(){

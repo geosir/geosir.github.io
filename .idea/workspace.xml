@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8218e375-777b-435e-8c19-7d4487d9b77d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/projects/index.html" afterPath="$PROJECT_DIR$/pages/projects/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/projects/clubhub/index.html" afterPath="$PROJECT_DIR$/pages/projects/clubhub/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/projects/scheduler/index.html" afterPath="$PROJECT_DIR$/pages/projects/scheduler/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/projects/scheduler/meta/print.css" afterPath="$PROJECT_DIR$/pages/projects/scheduler/meta/print.css" />
     </list>
     <ignored path="george.moe.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -82,7 +83,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/projects/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
@@ -151,12 +152,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/projects/clubhub/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2055">
-              <caret line="137" column="106" selection-start-line="137" selection-start-column="106" selection-end-line="137" selection-end-column="106" />
+            <state relative-caret-position="-3220">
+              <caret line="0" column="18" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
               <folding>
+                <element signature="e#836#841#0" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -182,12 +184,12 @@
       <list>
         <option value="$PROJECT_DIR$/pages/portfolio/index.html" />
         <option value="$PROJECT_DIR$/meta/main.css" />
-        <option value="$PROJECT_DIR$/pages/projects/clubhub/index.html" />
         <option value="$PROJECT_DIR$/pages/contact/index.html" />
         <option value="$PROJECT_DIR$/pages/home/index.html" />
         <option value="$PROJECT_DIR$/meta/george/css/george.css" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/pages/projects/index.html" />
+        <option value="$PROJECT_DIR$/pages/projects/clubhub/index.html" />
       </list>
     </option>
   </component>
@@ -409,12 +411,12 @@
       <workItem from="1474604099160" duration="6386000" />
       <workItem from="1474957447524" duration="781000" />
       <workItem from="1475212232651" duration="6805000" />
-      <workItem from="1475298182699" duration="1994000" />
+      <workItem from="1475298182699" duration="2301000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28677000" />
+    <option name="totallyTimeSpent" value="28984000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1440" height="873" extended-state="6" />
@@ -536,6 +538,7 @@
         <state relative-caret-position="2055">
           <caret line="137" column="106" selection-start-line="137" selection-start-column="106" selection-end-line="137" selection-end-column="106" />
           <folding>
+            <element signature="e#836#841#0" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -655,6 +658,7 @@
         <state relative-caret-position="2055">
           <caret line="137" column="106" selection-start-line="137" selection-start-column="106" selection-end-line="137" selection-end-column="106" />
           <folding>
+            <element signature="e#836#841#0" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -788,6 +792,7 @@
         <state relative-caret-position="645">
           <caret line="43" column="80" selection-start-line="41" selection-start-column="4" selection-end-line="43" selection-end-column="80" />
           <folding>
+            <element signature="e#836#841#0" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -921,6 +926,7 @@
         <state relative-caret-position="645">
           <caret line="43" column="80" selection-start-line="41" selection-start-column="4" selection-end-line="43" selection-end-column="80" />
           <folding>
+            <element signature="e#836#841#0" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -1054,6 +1060,7 @@
         <state relative-caret-position="645">
           <caret line="43" column="80" selection-start-line="41" selection-start-column="4" selection-end-line="43" selection-end-column="80" />
           <folding>
+            <element signature="e#836#841#0" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -1187,6 +1194,7 @@
         <state relative-caret-position="645">
           <caret line="43" column="80" selection-start-line="41" selection-start-column="4" selection-end-line="43" selection-end-column="80" />
           <folding>
+            <element signature="e#836#841#0" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -1509,18 +1517,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/projects/clubhub/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2055">
-          <caret line="137" column="106" selection-start-line="137" selection-start-column="106" selection-end-line="137" selection-end-column="106" />
-          <folding>
-            <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/meta/george/css/george.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1592,6 +1588,19 @@
             <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#1;n#li#2;n#ul#2;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#1;n#li#3;n#ul#2;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#1;n#div#0;n#div#0;n#div#1;n#li#3;n#ul#2;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/projects/clubhub/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3220">
+          <caret line="0" column="18" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
+          <folding>
+            <element signature="e#836#841#0" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#a#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
