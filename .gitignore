@@ -1,5 +1,0 @@
-#ignore gedit temporary files
-*~
-
-#ignore kde directory files
-.directory
