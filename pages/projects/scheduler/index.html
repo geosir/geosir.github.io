@@ -173,6 +173,10 @@
     </style>
     <h1><b>George's Schedule Machine</b></h1>
     <p class="protip"><i>Designed for use by IMSA students. Best if used on a desktop browser.</i></p>
+    <p class="protip hidemenu"><i><a onclick="hideMenu()" href="javascript:void(0);">Click here</a> to hide the side
+        bar.</i></p>
+    <p class="protip showmenu"><i><a onclick="showMenu()" href="javascript:void(0);">Click here</a> to show the side
+        bar.</i></p>
     <div class="section" style="padding: 16px 1% 0 1%;">
         <p>Powerschool Schedule doesn't make sense? Or maybe it's just too ugly. In any case, this schedule machine is
             here to help!</p>
@@ -616,7 +620,7 @@
                                     return [parseInt(rangeCaps[0])];
                                 }
                             })
-                            )
+                        )
                             ;
                             var selectedDays = [].concat(...exp[1].split(",").map(function (range) {
                                 var rangeCaps = range.split("-");
@@ -635,7 +639,7 @@
                                     return [rangeCaps[0]];
                                 }
                             })
-                            )
+                        )
                             ;
 
                             var mods = [];
@@ -738,16 +742,16 @@
             });
 
             $("#schedule td:not(.noclass)").hover(function () {
-                        this.style.border = "1px solid #1359c9"
-                    },
-                    function () {
-                        if (this.style.backgroundColor != "") {
-                            this.style.border = "1px solid transparent";
-                        }
-                        else {
-                            this.style.border = "";
-                        }
-                    });
+                    this.style.border = "1px solid #1359c9"
+                },
+                function () {
+                    if (this.style.backgroundColor != "") {
+                        this.style.border = "1px solid transparent";
+                    }
+                    else {
+                        this.style.border = "";
+                    }
+                });
 
         });
 

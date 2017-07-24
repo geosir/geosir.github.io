@@ -17,20 +17,6 @@ $(document).ready(function () {
         changeToPage(target);
     };
 
-    $("#hidemenu").click(function () {
-        $("#content-column").attr("class", "twelve columns");
-        $("#sidebar-column").attr("class", "");
-        $("#sidebar-column").hide();
-        $("#showmenu").show();
-    });
-
-    $("#showmenu").click(function () {
-        $("#content-column").attr("class", "nine columns");
-        $("#sidebar-column").attr("class", "three columns");
-        $("#sidebar-column").show();
-        $("#showmenu").hide();
-    });
-
     function updateMenu() {
         $("#menulist a").removeClass("present");
 
@@ -67,3 +53,19 @@ $(document).ready(function () {
         }).done(callback);
     }
 });
+
+function hideMenu() {
+    $("#content-column").attr("class", "twelve columns");
+    $("#sidebar-column").attr("class", "");
+    $("#sidebar-column").hide();
+    $(".showmenu").show();
+    $(".hidemenu").hide();
+}
+
+function showMenu() {
+    $("#content-column").attr("class", "nine columns");
+    $("#sidebar-column").attr("class", "three columns");
+    $("#sidebar-column").show();
+    $(".hidemenu").show();
+    $(".showmenu").hide();
+}
