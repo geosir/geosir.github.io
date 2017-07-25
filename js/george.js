@@ -43,10 +43,15 @@ $(document).ready(function () {
     }
 
     function loadPage(page, callback) {
-        $.get("/pages/" + page + "/", function (data) {
+        var anchor = "";
+        if (page.indexOf("#") > -1) {
+            var pageparts = page.split("#");
+            page = pageparts[0];
+            anchor = pageparts[1];
+        }
+        $.get("/pages/" + page, function (data) {
             $("#contentarea").html(data);
-            if (page.indexOf("#") > -1) {
-                var anchor = page.split("#")[1];
+            if (anchor.length > 0) {
                 $('html, body').animate({
                     scrollTop: $("#" + anchor).offset().top
                 }, 500);
