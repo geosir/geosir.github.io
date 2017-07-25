@@ -101,6 +101,10 @@ body {
     margin-right: 5%;
 }
 
+.picture img {
+    width: 100%;
+}
+
 .protip {
     margin: 0% 0% 1% 0%;
     height: auto;
