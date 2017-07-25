@@ -45,6 +45,12 @@ $(document).ready(function () {
     function loadPage(page, callback) {
         $.get("/pages/" + page + "/", function (data) {
             $("#contentarea").html(data);
+            if (page.indexOf("#") > -1) {
+                var anchor = page.split("#")[1];
+                $('html, body').animate({
+                    scrollTop: $("#" + anchor).offset().top
+                }, 500);
+            }
         }).fail(function () {
             $.get("/pages/404/", function (data) {
                 $("#contentarea").html(data);
