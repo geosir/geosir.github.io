@@ -21,8 +21,9 @@ $(document).ready(function () {
         $("#menulist a").removeClass("present");
 
         var matched = false;
+        var page = "#" + window.location.hash.replace("#", "").split("#")[0];
         $("#menulist a").each(function () {
-            if ($(this).attr("href") == window.location.hash) {
+            if ($(this).attr("href") == page) {
                 $(this).addClass("present");
                 matched = true;
                 return false;
@@ -30,7 +31,7 @@ $(document).ready(function () {
         });
         if (!matched) {
             $("#menulist a").each(function () {
-                if ($(this).attr("href") == window.location.hash.split("/")[0] || (window.location.hash == "" && $(this).attr("href") == "#home")) {
+                if ($(this).attr("href") == page.split("/")[0] || (page == "#" && $(this).attr("href") == "#home")) {
                     $(this).addClass("present");
                     return false;
                 }
@@ -49,7 +50,7 @@ $(document).ready(function () {
             page = pageparts[0];
             anchor = pageparts[1];
         }
-        $.get("/pages/" + page, function (data) {
+        $.get("/pages/" + page + "/", function (data) {
             $("#contentarea").html(data);
             if (anchor.length > 0) {
                 $('html, body').animate({
@@ -60,7 +61,6 @@ $(document).ready(function () {
             $.get("/pages/404/", function (data) {
                 $("#contentarea").html(data);
             }).always(callback);
-            ;
         }).done(callback);
     }
 });
