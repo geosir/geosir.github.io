@@ -7,13 +7,18 @@ $(document).ready(function () {
 
     var target = window.location.hash.replace("#", "");
     if (window.location.hash == "") target = "home";
+    target = target.split("?")[0];
     loadPage(target)
 
     updateMenu();
 
     window.onhashchange = function () {
+        ga('send', 'pageview', {
+            'page': location.pathname + location.search + location.hash
+        });
         updateMenu();
         var target = window.location.hash.replace("#", "");
+        target = target.split("?")[0];
         changeToPage(target);
     };
 

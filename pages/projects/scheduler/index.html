@@ -438,6 +438,16 @@
             return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
         }
 
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
         var updateSchedule;
         var autoSchedule;
         var printDiv;
@@ -733,6 +743,11 @@
                         this.style.border = "";
                     }
                 });
+
+            if (getParameterByName("scode") != null) {
+                $("#powerschool-entry").val(getParameterByName("scode"));
+                autoSchedule();
+            }
 
         });
 
