@@ -1,0 +1,61 @@
+<div class="page">
+    <script>
+        function addMessage(source, message) {
+            var d = $('#messages');
+            d.append("<p class='message'>" + source + ": " + message + "</p>");
+            d.scrollTop(d.prop("scrollHeight"));
+        }
+
+        $.getScript("https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js", function () {
+            $.getScript("http://peterolson.github.io/BigInteger.js/BigInteger.min.js", function () {
+                $.getScript("https://tab2compute.george.moe/tab2compute_client.js", function () {
+                    addMessage("Client", "Connecting to Tab2Compute Server...");
+
+                    var url = "https://tab2compute.george.moe";
+                    var t2c = new Tab2ComputeClient(url);
+
+                    t2c.oncomm('welcome', function (data) {
+                        addMessage("Tab2Compute Server", data);
+                    });
+                    t2c.on('connected', function (e) {
+                            addMessage("Client", "Connection successful.");
+                        }
+                    );
+                    t2c.oncomm('geoip_echo', function (data) {
+                        addMessage("Tab2Compute Server", "CLIENT DETAILS: " + JSON.stringify(data));
+                    });
+                    t2c.on('assigned_id', function (e) {
+                        addMessage("Client", "Assigned ID: " + e.detail.id);
+                    });
+                    t2c.on('assigned_script', function (e) {
+                        addMessage("Client", "Assigned script \"" + e.detail.name + "\" from " + e.detail.url);
+                    });
+                    t2c.on('assigned_job', function (e) {
+                        addMessage("Client", "Assigned job: " + JSON.stringify(e.detail))
+                    });
+                    t2c.on('completed_job', function (e) {
+                        addMessage("Client", "Completed job: " + JSON.stringify(e.detail))
+                    });
+                    t2c.oncomm('thanks', function () {
+                        addMessage("Tab2Compute Server", "Thanks.");
+                        addMessage("Client", "You're welcome.");
+                    });
+                    t2c.oncomm('no_work', function () {
+                        addMessage("Tab2Compute Server", "No more work.");
+                    });
+                });
+            });
+        });
+
+    </script>
+    <h1>Tab2Compute</h1>
+    <div id="messages" style="
+            background: #aaa;
+            padding: 2%;
+            font-family: monospace;
+            word-break: break-all;
+            width: 80%;
+            height: 50vh;
+            overflow: scroll;">
+    </div>
+</div>
