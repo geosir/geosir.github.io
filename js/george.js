@@ -45,6 +45,9 @@ $(document).ready(function () {
     }
 
     function changeToPage(target) {
+        if (window.tab2compute_connected != undefined) {
+            window.location.reload();
+        }
         loadPage(target);
     }
 
