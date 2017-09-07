@@ -58,7 +58,8 @@
                         lastDate = new Date();
                     } else {
                         var newDate = new Date();
-                        $("#stats").text("lag: " + (newDate - lastDate - 1000) + " | difficulty: " + t2c.difficulty().toFixed(6) + " | jobs_done: " + t2c.jobsDone());
+                        $("#stats").text("lag: " + ((newDate - lastDate - 1000)/10).toFixed(2) + "% | difficulty: " + t2c.difficulty().toFixed(6) + " | jobs_done: " + 
+t2c.jobsDone());
                         lastDate = newDate;
                     }
                     setTimeout(cycleDot, 1000);
