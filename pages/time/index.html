@@ -4,7 +4,7 @@
         <div class="col l12">
             <p id="lifetime" style="text-align: center; font-size: 2em; font-weight: bold; margin: 0; user-select: none;">. . .</p>
             <script>
-                var destiny = new Date(1812027600000);
+                var inception = new Date(1496507400000);
 
                 setInterval(function () {
                     var now = new Date();
@@ -15,7 +15,7 @@
                     var msperday = msperhour * 24;
                     var msperyear = msperday * 365.25;
 
-                    var delta = destiny - now;
+                    var delta = now - inception;
                     var years = Math.floor(delta / msperyear);
                     delta -= years * msperyear
                     var days = Math.floor(delta / msperday);
