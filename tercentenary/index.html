@@ -87,7 +87,7 @@
                 f2_cleft = left0,
                 f2_ctop = top0;
 
-            setInterval(updateParallax, 20);
+            setInterval(updateParallax, 10);
 
             function updateParallax() {
                 var swing_weight = 0.05;
@@ -97,6 +97,13 @@
                 f1_ctop = (f1_ctop * (1 - swing_weight) + f1_ttop * swing_weight);
                 f2_cleft = (f2_cleft * (1 - swing_weight) + f2_tleft * swing_weight);
                 f2_ctop = (f2_ctop * (1 - swing_weight) + f2_ttop * swing_weight);
+
+                if (Math.abs(bg.offsetLeft - bg_cleft) < 0.3) bg_tleft = bg_cleft;
+                if (Math.abs(bg.offsetTop - bg_ctop) < 0.3) bg_ttop = bg_ctop;
+                if (Math.abs(f1.offsetLeft - f1_cleft) < 0.3) f1_tleft = f1_cleft;
+                if (Math.abs(f1.offsetTop - f1_ctop) < 0.3) f1_ttop = f1_ctop;
+                if (Math.abs(f2.offsetLeft - f2_cleft) < 0.3) f2_tleft = f2_cleft;
+                if (Math.abs(f2.offsetTop - f2_ctop) < 0.3) f2_ttop = f2_ctop;
 
                 bg.style.left = bg_cleft + "px";
                 bg.style.top = bg_ctop + "px";
