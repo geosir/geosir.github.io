@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tercentenary Labs</title>
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #bg, #f1, #f2 {
+            width: 110vw;
+            height: 110vh;
+            position: absolute;
+            left: -5vw;
+            top: -5vh;
+        }
+
+        #bg {
+            background-image: url("space.jpg");
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        #f1 {
+            background-image: url("fill.png");
+            background-size: 200%;
+            background-position: top left;
+            z-index: 25;
+        }
+
+        #f2 {
+            background-image: url("fill.png");
+            background-size: 180%;
+            background-position: bottom right;
+            z-index: 50;
+        }
+
+        #t {
+            background: url(tercentenary.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 40vw;
+            height: 40vh;
+            position: absolute;
+            left: 30vw;
+            top: 30vh;
+            z-index: 75;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+
+            var body = document.getElementById('body');
+            var bg = document.getElementById('bg');
+            var f1 = document.getElementById('f1');
+            var f2 = document.getElementById('f2');
+            var left0 = bg.offsetLeft,
+                top0 = bg.offsetTop;
+
+            body.onmousemove = function (event) {
+                event = event || window.event;
+                var x = event.clientX,
+                    y = event.clientY;
+                var offset_x = 2 * x / parseInt(body.offsetWidth) - 1;
+                var offset_y = 2 * y / parseInt(body.offsetHeight) - 1;
+
+                bg.style.left = (1 + offset_x * 0.05) * left0 + "px";
+                bg.style.top = (1 + offset_y * 0.05) * top0 + "px";
+                f1.style.left = (1 + offset_x * 0.15) * left0 + "px";
+                f1.style.top = (1 + offset_y * 0.15) * top0 + "px";
+                f2.style.left = (1 + offset_x * 0.1) * left0 + "px";
+                f2.style.top = (1 + offset_y * 0.1) * top0 + "px";
+            };
+        }
+    </script>
+</head>
+<body id="body">
+<div id="bg"></div>
+<div id="f2"></div>
+<div id="f1"></div>
+<div id="t"></div>
+</body>
+</html>
