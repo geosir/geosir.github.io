@@ -1,77 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>George's Website</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>George's Website</title><base href="/"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/x-icon" href="favicon.ico"><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-55205533-9"></script><script>window.dataLayer = window.dataLayer || [];
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    function gtag() {
+      dataLayer.push(arguments);
+    }
 
-    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    gtag('js', new Date());
 
-    <link rel="stylesheet" href="/css/normalize.css">
-    <link rel="stylesheet" href="/css/skeleton.css">
-    <link rel="stylesheet" href="/css/george.css">
-    <link rel="stylesheet" href="/gallerize/gallerize.css">
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/gallerize/gallerize.js"></script>
-
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-55205533-9', 'auto');
-        ga('send', 'pageview');
-
-    </script>
-    <script src="/js/george.js"></script>
-
-    <link rel="icon" type="/media/icon" href="favicon.ico">
-
-</head>
-<body>
-<div id="logobox"></div>
-<div id="cover"></div>
-<div id="main-container" class="container">
-    <div id="showmenu" class="showmenu">
-        <a onclick="showMenu()" href="javascript:void(0);">show menu</a>
-    </div>
-    <div class="row">
-        <div id="sidebar-column" class="three columns">
-            <nav id="sidebar">
-                <img id="profile-image" src="/media/profile.jpg">
-                <h4>g&#8288;e&#8288;o&#8288;r&#8288;g&#8288;e.m&#8288;o&#8288;e</h4>
-                <ul id="menulist">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#projects/noaa">NOAA</a></li>
-                    <li><a href="#projects/clubhub">Club Hub</a></li>
-                    <li><a href="#projects/scheduler">Schedule Maker</a></li>
-                    <li><a href="#connect">Connect</a></li>
-                </ul>
-                <a id="hidemenu" class="hidemenu" onclick="hideMenu()" href="javascript:void(0);">hide menu</a>
-            </nav>
-        </div>
-        <div id="content-column" class="nine columns">
-            <div id="contentarea"></div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="twelve columns">
-        <p id="copyright">Copyright &copy; 2018 George Moe</p>
-    </div>
-</div>
-</body>
-</html>
+    gtag('config', 'UA-55205533-9');</script><!-- Start Single Page Apps for GitHub Pages --><script type="text/javascript">// Single Page Apps for GitHub Pages
+    // https://github.com/rafrex/spa-github-pages
+    // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+    // ----------------------------------------------------------------------
+    // This script checks to see if a redirect is present in the query string
+    // and converts it back into the correct url and adds it to the
+    // browser's history using window.history.replaceState(...),
+    // which won't cause the browser to attempt to load the new url.
+    // When the single page app is loaded further down in this file,
+    // the correct url will be waiting in the browser's history for
+    // the single page app to route accordingly.
+    (function (l) {
+      if (l.search) {
+        var q = {};
+        l.search.slice(1).split('&').forEach(function (v) {
+          var a = v.split('=');
+          q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+        });
+        if (q.p !== undefined) {
+          window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + (q.p || '') +
+            (q.q ? ('?' + q.q) : '') +
+            l.hash
+          );
+        }
+      }
+    }(window.location))</script><!-- End Single Page Apps for GitHub Pages --><link href="styles.e215576cf0e077d5e6c7.bundle.css" rel="stylesheet"/></head><body><app-root></app-root><script type="text/javascript" src="inline.318b50c57b4eba3d437b.bundle.js"></script><script type="text/javascript" src="polyfills.bf95165a1d5098766b92.bundle.js"></script><script type="text/javascript" src="scripts.893e202be15ebe7bb105.bundle.js"></script><script type="text/javascript" src="main.49080dc6f503dd82a2ae.bundle.js"></script></body></html>
