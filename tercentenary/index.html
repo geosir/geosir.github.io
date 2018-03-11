@@ -3,151 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <title>Tercentenary Labs</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
     <style>
-        body {
-            overflow: hidden;
+        body, html {
+            width: 100%;
+            height: 100%;
+            padding: 0;
             margin: 0;
-            width: 100vw;
-            height: 100vh;
+            overflow: hidden;
+        }
+
+        #scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
         }
 
         #bg, #f1, #f2 {
-            width: 110vw;
-            height: 110vh;
-            position: absolute;
-            left: -5vw;
-            top: -5vh;
+            margin: -10vh -10vw;
+            width: 120vw;
+            height: 120vh;
         }
 
         #bg {
-            background-image: url("space.jpg");
-            background-size: cover;
+            background-image: url('space.jpg');
             background-position: center;
-            z-index: 0;
+            background-size: cover;
         }
 
         #f1 {
-            background-image: url("fill.png");
-            background-size: 200%;
+            background-image: url('fill.png');
             background-position: top left;
-            z-index: 25;
+            background-size: 150%;
         }
 
         #f2 {
-            background-image: url("fill.png");
-            background-size: 180%;
+            background-image: url('fill.png');
             background-position: bottom right;
-            z-index: 50;
+            background-size: 200%;
+        }
+
+        #tp {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
         }
 
         #t {
-            background: url(tercentenary.png);
+            background-image: url('tercentenary.png');
+            background-position: center;
             background-size: contain;
             background-repeat: no-repeat;
-            background-position: center;
-            width: 40vw;
-            height: 40vh;
-            position: absolute;
-            left: 30vw;
-            top: 30vh;
-            z-index: 100;
-        }
 
-        #c {
-            background-color: black;
-            opacity: 1;
-            width: 100vw;
-            height: 100vh;
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: 75;
+            height: 100%;
+            max-width: 500px;
+            margin: 0 auto;
         }
     </style>
-    <script>
-        window.onload = function () {
-
-            var body = document.getElementById('body');
-            var bg = document.getElementById('bg');
-            var f1 = document.getElementById('f1');
-            var f2 = document.getElementById('f2');
-            var left0 = bg.offsetLeft,
-                top0 = bg.offsetTop;
-
-            var bg_tleft = left0,
-                bg_ttop = top0,
-                f1_tleft = left0,
-                f1_ttop = top0,
-                f2_tleft = left0,
-                f2_ttop = top0;
-            var bg_cleft = left0,
-                bg_ctop = top0,
-                f1_cleft = left0,
-                f1_ctop = top0,
-                f2_cleft = left0,
-                f2_ctop = top0;
-
-            setInterval(updateParallax, 10);
-
-            function updateParallax() {
-                var swing_weight = 0.05;
-                bg_cleft = (bg_cleft * (1 - swing_weight) + bg_tleft * swing_weight);
-                bg_ctop = (bg_ctop * (1 - swing_weight) + bg_ttop * swing_weight);
-                f1_cleft = (f1_cleft * (1 - swing_weight) + f1_tleft * swing_weight);
-                f1_ctop = (f1_ctop * (1 - swing_weight) + f1_ttop * swing_weight);
-                f2_cleft = (f2_cleft * (1 - swing_weight) + f2_tleft * swing_weight);
-                f2_ctop = (f2_ctop * (1 - swing_weight) + f2_ttop * swing_weight);
-
-                if (Math.abs(bg.offsetLeft - bg_cleft) < 0.3) bg_tleft = bg_cleft;
-                if (Math.abs(bg.offsetTop - bg_ctop) < 0.3) bg_ttop = bg_ctop;
-                if (Math.abs(f1.offsetLeft - f1_cleft) < 0.3) f1_tleft = f1_cleft;
-                if (Math.abs(f1.offsetTop - f1_ctop) < 0.3) f1_ttop = f1_ctop;
-                if (Math.abs(f2.offsetLeft - f2_cleft) < 0.3) f2_tleft = f2_cleft;
-                if (Math.abs(f2.offsetTop - f2_ctop) < 0.3) f2_ttop = f2_ctop;
-
-                bg.style.left = bg_cleft + "px";
-                bg.style.top = bg_ctop + "px";
-                f1.style.left = f1_cleft + "px";
-                f1.style.top = f2_ctop + "px";
-                f2.style.left = f2_cleft + "px";
-                f2.style.top = f2_ctop + "px";
-            }
-
-            body.onmousemove = function (event) {
-                event = event || window.event;
-                var x = event.clientX,
-                    y = event.clientY;
-                var offset_x = 2 * x / parseInt(body.offsetWidth) - 1;
-                var offset_y = 2 * y / parseInt(body.offsetHeight) - 1;
-
-                bg_tleft = (1 + offset_x * 0.1) * left0;
-                bg_ttop = (1 + offset_y * 0.1) * top0;
-                f1_tleft = (1 + offset_x * 1) * left0;
-                f1_ttop = (1 + offset_y * 1) * top0;
-                f2_tleft = (1 + offset_x * 0.5) * left0;
-                f2_ttop = (1 + offset_y * 0.5) * top0;
-            };
-
-            var cover_c = 1;
-            var cover = document.getElementById("c");
-
-            function fadeCover() {
-                if (cover_c > 0) {
-                    cover_c = Math.max(0, cover_c - 0.01);
-                    cover.style.opacity = cover_c;
-                    setTimeout(fadeCover, 10);
-                }
-            }
-
-            setTimeout(fadeCover, 1000);
-        }
-    </script>
 </head>
-<body id="body">
-<div id="bg"></div>
-<div id="f2"></div>
-<div id="f1"></div>
-<div id="t"></div>
-<div id="c"></div>
+<body>
+<div id="scene">
+    <div id="bg" data-depth="0.05"></div>
+    <div id="f1" data-depth="0.1"></div>
+    <div id="f2" data-depth="0.3"></div>
+</div>
+<div id="tp">
+    <div id="t"></div>
+</div>
+<script>
+    var scene = document.getElementById('scene');
+    var parallaxInstance = new Parallax(scene);
+</script>
 </body>
 </html>
