@@ -1,0 +1,24 @@
+<div data-title="home" class="strollcontent strollcontent-centered">
+    <div class="container">
+        <h1>This page has moved!</h1>
+        <div class="text">
+            <p>The page you are looking for is now hosted at <a href="" id="continuity-target"></a>. Please update your
+                bookmarks accordingly.</p>
+
+            <p>Redirecting in 5 seconds...</p>
+        </div>
+    </div>
+</div>
+<img src="" onerror="
+    let target = '';
+    switch(window.location.pathname) {
+        case '/continuity/clubhub.h':
+            target = 'https://whatdo.fyi';
+            break;
+        default:
+            break;
+    }
+    document.getElementById('continuity-target').href = target;
+    document.getElementById('continuity-target').innerHTML = target;
+    setTimeout(()=>window.location.replace(target), 5000);
+"/>
