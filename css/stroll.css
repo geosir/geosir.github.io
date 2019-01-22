@@ -65,13 +65,17 @@
 }
 
 .strollnav td {
-    padding: 4px;
     text-align: center;
     width: 5%;
 }
 
+.strollnav .arrow {
+    line-height: 0;
+}
+
 .strollnav .action {
     width: 30%;
+    padding: 8px;
     cursor: pointer;
 }
 

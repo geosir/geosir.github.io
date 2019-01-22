@@ -31,6 +31,7 @@ class Stroll {
         this.swipeStartTime = null;
         this.swipeDir = null;
         this.displacement = {x: 0, y: 0};
+        this.isAnimating = false;
 
         this.view = {
             root: document.getElementById("stroll"),
@@ -46,7 +47,7 @@ class Stroll {
         this.offsetView(0, 0);
         this.setupListeners();
 
-        toggleFullScreen();
+        // toggleFullScreen();
 
         window.onpopstate = () => {
             this.handleRoute()
@@ -232,14 +233,16 @@ class Stroll {
             right: `${hasdir.right ? this.strollmap[page.right].hname : "&nbsp"}`
         }
 
-        this.view.nav.innerHTML = "<table class=\"strollnav\">" +
-            `<tr><td></td><td colspan=\"3\" class="action up">${navtext.up}</td><td></td></tr>` +
-            `<tr><td rowspan=\"3\" class=\"action left\">${navtext.left}</td>` +
-            `<td></td><td>${hasdir.up ? "&uarr;" : "&nbsp"}</td><td></td>` +
-            `<td rowspan=\"3\" class="action right">${navtext.right}</td></tr>` +
-            `<tr><td>${hasdir.left ? "&larr;" : "&nbsp"}</td><td class="action middle"><b>${page.hname}</b></td><td>${hasdir.right ? "&rarr;" : "&nbsp"}</td></tr>` +
-            `<td></td><td>${hasdir.down ? "&darr;" : "&nbsp"}</td><td></td>` +
-            `<tr><td></td><td colspan=\"3\" class="action down">${navtext.down}</td><td></td></tr>` +
+        this.view.nav.innerHTML = '<table class="strollnav">' +
+            `<tr><td></td><td colspan="3" class="action up">${navtext.up}</td><td></td></tr>` +
+            `<tr><td rowspan="3" class="action left">${navtext.left}</td>` +
+            `<td></td><td class="arrow">${hasdir.up ? "&uarr;" : "&nbsp"}</td><td></td>` +
+            `<td rowspan="3" class="action right">${navtext.right}</td></tr>` +
+            `<tr><td class="arrow">${hasdir.left ? "&larr;" : "&nbsp"}</td>` +
+            `<td class="action middle"><b>${page.hname}</b></td>` +
+            `<td class="arrow">${hasdir.right ? "&rarr;" : "&nbsp"}</td></tr>` +
+            `<td></td><td class="arrow">${hasdir.down ? "&darr;" : "&nbsp"}</td><td></td>` +
+            `<tr><td></td><td colspan="3" class="action down">${navtext.down}</td><td></td></tr>` +
             "</table>";
 
         const navup = this.view.nav.querySelector(".strollnav .up");
@@ -394,8 +397,11 @@ class Stroll {
     }
 
     animateToDisplacement(start, end, time, callback = undefined, steptime = 10) {
+        this.isAnimating = true;
+
         if (time < steptime) {
             this.offsetView(end.x, end.y);
+            this.isAnimating = false;
             if (callback) callback();
             return;
         }
@@ -520,6 +526,7 @@ class Stroll {
     }
 
     pageMove(direction) {
+        if (this.isAnimating) return;
         const page = this.strollmap[this.current];
         let target = null;
         let nextpage = this.current;

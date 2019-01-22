@@ -1,10 +1,24 @@
 <div data-title="home" class="strollcontent strollcontent-centered">
     <div class="container">
-        <h1 style="margin-bottom: 0">Hello!</h1>
-        <img src="/media/profile.jpg" alt="George Moe Profile Image"
-             style="width: 50%; max-width: 300px; border-radius: 50%; border: 2px solid white; margin-top: 4px;"
-             align="center"/>
-        <p>My name is George.</p>
-        <p>Welcome to my website!</p>
+        <h1 id="home-hello" style="margin-bottom: 0; opacity: 0; position: relative;">Hello!</h1>
+        <img src="/media/profile.jpg" alt="Profile"
+             style="width: 50%; max-width: 300px; border-radius: 50%; border: 2px solid transparent; margin-top: 4px; color: rgba(255, 255, 255, 0.2);"
+             align="center" onload='
+             this.style.borderColor = "white";
+             let hello = document.getElementById("home-hello");
+             document.getElementById("home-message").style.opacity = 1;
+             function animateHello(offset, opacity) {
+                 if(offset <= 0) {
+                     hello.style.top = 0;
+                     hello.style.opacity = 1;
+                 } else {
+                     hello.style.top = offset + "em";
+                     hello.style.opacity = opacity;
+                     setTimeout(()=>animateHello(offset-0.08, opacity + 0.08), 30);
+                 }
+             }
+             animateHello(1.5, 0);
+        '/>
+        <p id="home-message" style="opacity: 0;">Welcome to my website!</p>
     </div>
 </div>

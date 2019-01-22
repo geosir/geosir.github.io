@@ -35,6 +35,8 @@
 
         #stroll-nav {
             border-top: 3px double white;
+            font-size: 0.8em;
+            line-height: 0.9em;
         }
 
         .strollnav .action:hover {
@@ -72,9 +74,11 @@
         }
 
         #stroll.strollarticle #stroll-nav {
-            font-size: 0.8em;
-            line-height: 0.5em;
             border-color: black;
+        }
+
+        #stroll.strollarticle .strollnav .action:hover {
+            background-color: #eeeeee;
         }
 
         .project-thumb {
@@ -163,13 +167,13 @@
                 href: "/pages/projects/korsak.html",
                 up: "projects",
                 down: "projects/semaphore",
-                right: "link/korsak",
+                left: "link/korsak",
             },
             "link/korsak": {
                 type: "link",
                 hname: "Try Korsak",
                 href: "https://korsak.ovbot.net",
-                left: "projects/korsak",
+                right: "projects/korsak",
                 noroute: true,
             },
             "projects/semaphore": {
@@ -201,13 +205,13 @@
                 href: "/pages/projects/questtracker.html",
                 up: "projects/semaphore",
                 down: "projects/whatdo",
-                right: "link/questtracker",
+                left: "link/questtracker",
             },
             "link/questtracker": {
                 type: "link",
                 hname: "Try Quest&#8203;Tracker",
                 href: "https://questtracker.me",
-                left: "projects/questtracker",
+                right: "projects/questtracker",
                 noroute: true,
             },
             "projects/whatdo": {
@@ -216,13 +220,13 @@
                 href: "/pages/projects/whatdo.html",
                 up: "projects/questtracker",
                 down: "projects/clubhub",
-                right: "link/whatdo",
+                left: "link/whatdo",
             },
             "link/whatdo": {
                 type: "link",
                 hname: "Try WhatDo",
                 href: "https://whatdo.fyi",
-                left: "projects/whatdo",
+                right: "projects/whatdo",
                 noroute: true,
             },
             "projects/clubhub": {
@@ -236,7 +240,7 @@
             },
             "projects/clubhub/detail": {
                 type: "page",
-                hname: "Club Hub Detail",
+                hname: "Club Hub Story",
                 href: "/pages/projects/clubhub/detail.html",
                 left: "projects/clubhub",
                 mode: "article",
@@ -268,7 +272,7 @@
                 hname: "Scheduler",
                 href: "/pages/projects/scheduler.html",
                 up: "projects/noaa",
-                right: "scheduler",
+                left: "scheduler",
             },
             "scheduler": {
                 type: "link",
