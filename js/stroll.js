@@ -2,6 +2,21 @@
 // Copyright (c) 2019 George Moe
 // License: MIT (https://opensource.org/licenses/MIT)
 
+function toggleFullScreen() {
+    var doc = window.document;
+    var docEl = doc.documentElement;
+
+    var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+    var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+    if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+        requestFullScreen.call(docEl);
+    } else {
+        cancelFullScreen.call(doc);
+    }
+}
+
+
 class Stroll {
     constructor(titlebase, strollmap, index, trackingID = null) {
         // Setup state
@@ -13,6 +28,7 @@ class Stroll {
         this.loaded = [];
         this.isSwiping = false;
         this.swipeStart = null;
+        this.swipeStartTime = null;
         this.swipeDir = null;
         this.displacement = {x: 0, y: 0};
 
@@ -30,6 +46,7 @@ class Stroll {
         this.offsetView(0, 0);
         this.setupListeners();
 
+        toggleFullScreen();
 
         window.onpopstate = () => {
             this.handleRoute()
@@ -300,16 +317,13 @@ class Stroll {
     handleSwipeEnd(e) {
         if (!this.isSwiping) return;
 
-        if (this.displacement.y > window.innerWidth * 0.5) {
+        if (this.displacement.y > window.innerHeight * 0.2) {
             this.pageMove("up");
-        }
-        if (this.displacement.y < -window.innerHeight * 0.5) {
+        } else if (this.displacement.y < -window.innerHeight * 0.2) {
             this.pageMove("down");
-        }
-        if (this.displacement.x > window.innerWidth * 0.5) {
+        } else if (this.displacement.x > window.innerWidth * 0.2) {
             this.pageMove("left");
-        }
-        if (this.displacement.x < -window.innerWidth * 0.5) {
+        } else if (this.displacement.x < -window.innerWidth * 0.2) {
             this.pageMove("right");
         } else {
             this.animateToDisplacement(this.displacement, {x: 0, y: 0}, 200);
