@@ -6,7 +6,8 @@
              align="center" onload='
              this.style.borderColor = "white";
              let hello = document.getElementById("home-hello");
-             document.getElementById("home-message").style.opacity = 1;
+             let message = document.getElementById("home-message");
+             message.style.opacity = 1;
              function animateHello(offset, opacity) {
                  if(offset <= 0) {
                      hello.style.top = 0;
@@ -18,6 +19,27 @@
                  }
              }
              animateHello(1.5, 0);
+
+             const easteregg_fry = (e) => {
+                 const keycode = e.key || e.keyIdentifier || e.keyCode || e.which;
+                 if(keycode === 85 || keycode === "f") {
+                     setTimeout(() => {
+                         if(!window.easteregg_fry_keyup) {
+                             this.src = "/media/fried.jpg";
+                             hello.innerText = "Oh noe";
+                             message.innerText = "wat have u done";
+                             window.easteregg_fry_keyup = false;
+                         }
+                     }, 3000)
+                 }
+             };
+             const easteregg_fry_holdlisten = (e) => {
+                 window.easteregg_fry_keyup = true;
+             };
+             document.removeEventListener("keyup", easteregg_fry_holdlisten);
+             document.addEventListener("keyup", easteregg_fry_holdlisten);
+             document.removeEventListener("keydown", easteregg_fry);
+             document.addEventListener("keydown", easteregg_fry);
         '/>
         <p id="home-message" style="opacity: 0;">Welcome to my website!</p>
     </div>
