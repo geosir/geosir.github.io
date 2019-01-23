@@ -100,7 +100,7 @@ class Stroll {
                         console.error("Stroll: File " + href + " does not exist.");
                         reject(404);
                     }
-                    console.info("Stroll: Got " + href);
+                    // console.info("Stroll: Got " + href);
                     resolve(xhr.response);
                 } else {
                     console.error("Stroll: Problem getting " + href + ": " + xhr.status + ": " + xhr.statusText);
@@ -117,7 +117,7 @@ class Stroll {
     }
 
     async focus(name, push = true, replace = false) {
-        console.info("Stroll: Focus " + name);
+        // console.info("Stroll: Focus " + name);
         const page = this.strollmap[name];
         if (!page || page.noroute) {
             console.error("Stroll: Route " + name + "not found.");

@@ -22,19 +22,22 @@
 
              const easteregg_fry = (e) => {
                  const keycode = e.key || e.keyIdentifier || e.keyCode || e.which;
-                 if(keycode === 85 || keycode === "f") {
+                 if((keycode === 85 || keycode === "f") && !window.easteregg_fry_trial) {
+                     window.easteregg_fry_trial = true;
                      setTimeout(() => {
-                         if(!window.easteregg_fry_keyup) {
+                         if(window.easteregg_fry_trial) {
                              this.src = "/media/fried.jpg";
                              hello.innerText = "Oh noe";
                              message.innerText = "wat have u done";
-                             window.easteregg_fry_keyup = false;
+                             window.easteregg_fry_trial = false;
                          }
-                     }, 3000)
+                     }, 2000)
                  }
              };
              const easteregg_fry_holdlisten = (e) => {
-                 window.easteregg_fry_keyup = true;
+                 if(window.easteregg_fry_trial) {
+                     window.easteregg_fry_trial = false;
+                 }
              };
              document.removeEventListener("keyup", easteregg_fry_holdlisten);
              document.addEventListener("keyup", easteregg_fry_holdlisten);
