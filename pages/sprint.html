@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sprint</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        #root {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #header {
+            padding: 16px;
+            text-align: center;
+        }
+
+        #body {
+            flex: 1;
+            margin: 16px 0;
+        }
+
+        #footer {
+            padding: 16px;
+            text-align: center;
+        }
+
+        #tasks {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #current {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        #todo {
+            flex: 1;
+            border: 1px solid gray;
+            border-radius: 4px;
+        }
+
+        .task {
+            color: white;
+            margin: 8px;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+        }
+
+        .task .task-name {
+            font-weight: bold;
+        }
+
+        .task .task-dur {
+            font-style: italic;
+        }
+
+        .time-rule {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 8px;
+        }
+
+        .time-rule .line {
+            height: 0;
+            flex: 1;
+            border-bottom: 1px solid gray;
+            margin-right: 8px;
+        }
+
+        .time-rule .time {
+            color: gray;
+        }
+
+        .time-rule.delayed .line {
+            border-color: red;
+        }
+
+        .time-rule.delayed .time {
+            color: red;
+        }
+
+        .time-rule.early .line {
+            border-color: green;
+        }
+
+        .time-rule.early .time {
+            color: green;
+        }
+
+        #sprint-control {
+            margin: 16px;
+            text-align: center;
+        }
+
+        #sprint-control button {
+            margin: 8px;
+        }
+
+        hr {
+            border-color: gray;
+        }
+
+        #current-timer {
+            color: gray;
+        }
+
+        #control {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #current, #sprint-summary, #sprint-control, #task-input, #task-edit {
+            flex: 1;
+        }
+
+        .current-task {
+            border: 4px solid red;
+        }
+
+        #summary {
+            text-align: center;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script>
+        // Utils -------------------------------
+        function mapTimerules(f) {
+            const timerules = document.getElementsByClassName("time-rule");
+            Array.from(timerules).map(f);
+        }
+
+        function removeTimerules() {
+            mapTimerules((e) => e.remove());
+        }
+
+        function makeDeltaTimeString(date, delta) {
+            const newdate = new Date(date.getTime() + delta);
+            return `${newdate.getHours() > 12 ? newdate.getHours() - 12 : (newdate.getHours() === 0 ? 12 : newdate.getHours())}:${String(newdate.getMinutes()).padStart(2, '0')} ${newdate.getHours() > 12 ? "pm" : "am"}`;
+        }
+
+
+        // Sprint -------------------------------
+        let sprintInterval = null;
+
+        function initSprint() {
+            removeTimerules();
+
+            taskData.startTime = new Date();
+            taskData.currentTask = -1;
+            taskData.tasks = [];
+
+            let timerule = document.createElement("div");
+            timerule.classList.add("time-rule");
+            timerule.setAttribute("data-time", taskData.startTime.getTime());
+            timerule.innerHTML = `<div class="line"></div><span class="time">${makeDeltaTimeString(taskData.startTime, 0)}</span>`;
+            document.getElementById("todo").prepend(timerule);
+
+            const taskElements = document.getElementsByClassName("task");
+            let totalDelta = 0;
+            let counter = 0;
+            Array.from(taskElements).forEach((e) => {
+                e.id = `task-${counter}`;
+                e.querySelector(".task-compdur").innerHTML = "";
+
+                taskData.tasks.push({
+                    name: e.getAttribute("data-name"),
+                    duration: parseFloat(e.getAttribute("data-dur")),
+                    startTime: null
+                });
+
+                // Make time rules
+                totalDelta += parseFloat(e.getAttribute("data-dur"));
+                let timerule = document.createElement("div");
+                timerule.classList.add("time-rule");
+                timerule.setAttribute("data-time", taskData.startTime.getTime() + totalDelta);
+                timerule.innerHTML = `<div class="line"></div><span class="time">${makeDeltaTimeString(taskData.startTime, totalDelta)}</span>`;
+                e.parentNode.insertBefore(timerule, e.nextSibling);
+
+                counter++;
+            });
+
+            taskData.expectedEndTime = new Date(taskData.startTime.getTime() + totalDelta);
+
+            nextTask();
+        }
+
+        function sprintRoutine() {
+            const now = new Date();
+            const task = taskData.tasks[taskData.currentTask];
+            const elapsed = now.getTime() - task.startTime.getTime();
+            const remaining = task.duration - elapsed;
+
+            // Update timer
+            document.getElementById("current-taskname").innerHTML = task.name;
+            document.getElementById("current-timer").innerHTML = `${Math.floor(elapsed / 60000)}:${String(Math.floor((elapsed - 60000 * Math.floor(elapsed / 60000)) / 1000)).padStart(2, '0')} / ${remaining < 0 ? '-' : ''}${Math.floor(Math.abs(remaining) / 60000)}:${String(Math.floor((Math.abs(remaining) - 60000 * Math.floor(Math.abs(remaining) / 60000)) / 1000)).padStart(2, '0')}`;
+
+            // Update gain
+            const gain = Math.floor((taskData.tasks[taskData.currentTask].startTime.getTime() + Math.max(task.duration, elapsed) + taskData.tasks.slice(taskData.currentTask + 1).reduce((acc, e) => acc + e.duration, 0) - taskData.expectedEndTime.getTime()) / 1000);
+            const currentGain = document.getElementById("current-gain");
+            currentGain.innerHTML = `${gain > 0 ? '-' : '+'}${Math.floor(Math.abs(gain) / 60)}:${String(Math.abs(gain) - 60 * Math.floor(Math.abs(gain) / 60)).padStart(2, '0')}`;
+            if (gain > 0) currentGain.style.color = "red";
+            else currentGain.style.color = "green";
+
+            // Update timerules
+            let newTime = taskData.startTime.getTime();
+            Array.from(document.getElementById("todo").children).forEach((e) => {
+                if (e.classList.contains("task")) {
+                    if (e.classList.contains("complete")) {
+                        newTime += parseFloat(e.getAttribute("data-compdur"));
+                    } else {
+                        newTime += Math.max(parseFloat(e.getAttribute("data-dur")), elapsed);
+                    }
+                } else if (e.classList.contains("time-rule")) {
+                    if (newTime > parseFloat(e.getAttribute("data-time"))) {
+                        e.classList.remove("early");
+                        e.classList.add("delayed");
+                        e.querySelector(".time").innerHTML = `${makeDeltaTimeString(new Date(newTime), 0)} (${makeDeltaTimeString(new Date(parseFloat(e.getAttribute("data-time"))), 0)})`;
+                    } else if (newTime < parseFloat(e.getAttribute("data-time"))) {
+                        e.classList.remove("delayed");
+                        e.classList.add("early");
+                        e.querySelector(".time").innerHTML = `${makeDeltaTimeString(new Date(newTime), 0)} (${makeDeltaTimeString(new Date(parseFloat(e.getAttribute("data-time"))), 0)})`;
+                    } else {
+                        e.classList.remove("delayed");
+                        e.classList.remove("early");
+                        e.querySelector(".time").innerHTML = `${makeDeltaTimeString(new Date(newTime), 0)}`;
+                    }
+                }
+            });
+        }
+
+        function startSprint() {
+            hideEditForm();
+            document.getElementById("task-input").hidden = true;
+            document.getElementById("sprint-control-pre").hidden = true;
+            document.getElementById("sprint-control-during").hidden = false;
+            document.getElementById("current").hidden = false;
+            document.getElementById("summary").innerHTML = "";
+
+            initSprint();
+
+            sprintRoutine();
+            sprintInterval = window.setInterval(sprintRoutine, 1000);
+        }
+
+        function stopSprint() {
+            window.clearInterval(sprintInterval);
+
+            taskData.stopTime = new Date();
+
+            document.getElementById("sprint-control-during").hidden = true;
+            document.getElementById("current").hidden = true;
+            document.getElementById("task-input").hidden = false;
+            document.getElementById("sprint-control-pre").hidden = false;
+
+            if (document.querySelector(".current-task")) {
+                document.querySelector(".current-task").classList.remove("current-task");
+            }
+
+            const gain = Math.floor(((new Date()).getTime() - taskData.expectedEndTime.getTime()) / 1000);
+            document.getElementById("summary").innerHTML = `
+<h1>Sprint Complete!</h1>
+<h2>Completed at ${makeDeltaTimeString(taskData.stopTime, 0)}</h2>
+<h2 style="color: ${gain > 0 ? "red" : "green"}">${gain > 0 ? '-' : '+'}${Math.floor(Math.abs(gain) / 60)}:${String(Math.abs(gain) - 60 * Math.floor(Math.abs(gain) / 60)).padStart(2, '0')}</h2>`;
+        }
+
+        // Task flow -------------------------------
+        function startTask() {
+            document.getElementById(`task-${taskData.currentTask}`).classList.add("current-task");
+            taskData.tasks[taskData.currentTask].startTime = new Date();
+        }
+
+
+        function completeTask() {
+            taskData.tasks[taskData.currentTask].stopTime = new Date();
+            const currentTask = document.getElementById(`task-${taskData.currentTask}`);
+            const compDur = taskData.tasks[taskData.currentTask].stopTime.getTime() - taskData.tasks[taskData.currentTask].startTime.getTime();
+            currentTask.classList.remove("current-task");
+            currentTask.classList.add("complete");
+            currentTask.setAttribute("data-compdur", compDur);
+            currentTask.querySelector(".task-compdur").innerHTML = ` &mdash; <i>completed in ${Math.floor(compDur / 60000)} minutes</i>`;
+            sprintRoutine();
+            nextTask();
+        }
+
+        function nextTask() {
+            taskData.currentTask++;
+            if (taskData.currentTask < taskData.tasks.length) {
+                startTask();
+            } else {
+                stopSprint();
+            }
+        }
+
+        // Task edit -------------------------------
+        let taskUIDcounter = 0;
+        let taskData = {};
+
+        function addTask(form) {
+            const tasksView = document.getElementById("todo");
+
+            let newTask = document.createElement("div");
+            newTask.classList.add("task");
+            newTask.setAttribute("data-name", form.taskname.value);
+            newTask.setAttribute("data-dur", parseFloat(form.taskdur.value) * 60000);
+            newTask.setAttribute("data-id", taskUIDcounter++);
+            newTask.innerHTML = `<p><span class="task-name">${form.taskname.value}</span> &mdash; <span class="task-dur">${form.taskdur.value} minutes</span><span class="task-compdur"></span></p>`;
+            newTask.style.backgroundColor = `rgb(${Math.floor(Math.random() * 127)}, ${Math.floor(Math.random() * 127)}, ${Math.floor(Math.random() * 127)})`;
+            newTask.onclick = function () {
+                showEditForm(this);
+            };
+            tasksView.append(newTask);
+
+            clearTaskInput();
+            removeTimerules();
+        }
+
+        function clearTaskInput() {
+            document.getElementById("task-input-form").reset();
+            document.getElementById("task-input-taskname").focus();
+        }
+
+        function showEditForm(e) {
+            document.getElementById("task-input").hidden = true;
+            document.getElementById("task-input-form").reset();
+            document.getElementById("task-edit").hidden = false;
+            document.getElementById("task-edit-taskname").value = e.getAttribute("data-name");
+            document.getElementById("task-edit-taskdur").value = Math.floor(e.getAttribute("data-dur") / 60000);
+            document.getElementById("task-edit").setAttribute("data-id", e.getAttribute("data-id"));
+        }
+
+        function hideEditForm() {
+            document.getElementById("task-edit").hidden = true;
+            document.getElementById("task-edit-form").reset();
+            document.getElementById("task-input").hidden = false;
+            document.getElementById("task-edit").removeAttribute("data-id");
+        }
+
+        function deleteTask() {
+            document.querySelector(`.task[data-id="${document.getElementById("task-edit").getAttribute("data-id")}"]`).remove();
+            hideEditForm();
+        }
+
+        function updateTask(form) {
+            const task = document.querySelector(`.task[data-id="${document.getElementById("task-edit").getAttribute("data-id")}"]`);
+            task.setAttribute("data-name", form.taskname.value);
+            task.setAttribute("data-dur", parseFloat(form.taskdur.value) * 60000);
+            task.querySelector(".task-name").innerHTML = form.taskname.value;
+            task.querySelector(".task-dur").innerHTML = `${form.taskdur.value} minutes`;
+
+            hideEditForm();
+            removeTimerules();
+        }
+
+        function moveTask(direction) {
+            removeTimerules();
+
+            const task = document.querySelector(`.task[data-id="${document.getElementById("task-edit").getAttribute("data-id")}"]`);
+            if (direction === "up" && task.previousSibling) {
+                task.parentNode.insertBefore(task, task.previousSibling);
+            } else if (direction === "down" && task.nextSibling) {
+                task.parentNode.insertBefore(task, task.nextSibling.nextSibling);
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="root" class="container">
+    <div class="row">
+        <div id="header" class="col">
+            <h1>Sprint Tool</h1>
+        </div>
+    </div>
+    <div id="body" class="row">
+        <div id="control" class="col">
+            <div id="current" hidden>
+                <h1>&gt;&gt; <span id="current-taskname"></span> &lt;&lt;</h1>
+                <h1><span id="current-timer"></span></h1>
+                <h1><span id="current-gain"></span></h1>
+            </div>
+            <div id="task-input" class="row">
+                <div class="col">
+                    <form id="task-input-form" action="javascript:;" onsubmit="addTask(this)">
+                        <div class="form-group">
+                            <input id="task-input-taskname" class="form-control" type="text" name="taskname"
+                                   placeholder="Task Name" required autofocus>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input id="task-input-taskdur" class="form-control" type="number" name="taskdur"
+                                   placeholder="Task Duration" aria-label="Task Duration"
+                                   aria-describedby="basic-addon2" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">minutes</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right">
+                            <button type="submit" class="btn btn-primary">Add Task</button>
+                            <button type="button" onclick="clearTaskInput()" class="btn btn-secondary">Clear</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="task-edit" class="row" hidden>
+                <div class="col">
+                    <form id="task-edit-form" action="javascript:;" onsubmit="updateTask(this)">
+                        <div class="form-group">
+                            <input id="task-edit-taskname" class="form-control" type="text" name="taskname"
+                                   placeholder="Task Name" required autofocus>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input id="task-edit-taskdur" class="form-control" type="number" name="taskdur"
+                                   placeholder="Task Duration" aria-label="Task Duration"
+                                   aria-describedby="basic-addon2" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">minutes</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right">
+                            <button type="submit" class="btn btn-primary">Update Task</button>
+                            <button type="button" onclick="moveTask('up')" class="btn btn-info">Up</button>
+                            <button type="button" onclick="moveTask('down')" class="btn btn-info">Down</button>
+                            <button type="button" onclick="deleteTask()" class="btn btn-danger">Delete</button>
+                            <button type="button" onclick="hideEditForm()" class="btn btn-secondary">Done</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="sprint-summary" class="row">
+                <div class="col">
+                    <div id="summary"></div>
+                </div>
+            </div>
+            <div id="sprint-control" class="row">
+                <div class="col">
+                    <div id="sprint-control-pre">
+                        <button type="button" class="btn btn-success btn-lg" onclick="startSprint()">
+                            Start Sprint
+                        </button>
+                        <br/>
+                        <button type="button" onclick="window.location.reload()" class="btn btn-danger btn-lg">
+                            Reset
+                        </button>
+                    </div>
+                    <div id="sprint-control-during" hidden>
+                        <button type="button" class="btn btn-primary btn-lg" onclick="completeTask()">Complete Task
+                        </button>
+                        <!--<button type="button" class="btn btn-warning btn-lg" onclick="previousTask()">Undo</button>-->
+                        <br/>
+                        <button type="button" class="btn btn-danger btn-lg" onclick="stopSprint()">Stop Sprint</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tasks" class="col">
+            <div id="todo"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="footer" class="col">
+            <p><a href="mailto:george@george.moe">Feedback</a></p>
+            <p>
+                Presented by Wonder Research, Inc.<br/>
+                Copyright &copy; 2019 George Moe
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
