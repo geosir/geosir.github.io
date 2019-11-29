@@ -29,7 +29,7 @@
                                 if (window.easteregg_fry_trial) {
                                     this.src = "/media/fried.jpg";
                                     hello.innerText = "Oh noe";
-                                    message.innerText = "wat have u done";
+                                    message.innerHTML = "<p>wat have u done</p>";
                                     window.easteregg_fry_trial = false;
                                 }
                             }, 2000)
@@ -50,8 +50,10 @@
                     this.removeEventListener("touchstart", easteregg_fry);
                     this.addEventListener("touchstart", easteregg_fry);
                 '/>
-        <p id="home-message" style="opacity: 0;">Welcome to my website!</p>
-        <p>Use the menu below or <span id="navhint">arrow keys</span> to explore.</p>
+        <div id="home-message" style="opacity: 0;">
+            <p>Welcome to my website!</p>
+            <p>Use the menu below or <span id="navhint">arrow keys</span> to explore.</p>
+        </div>
     </div>
 </div>
 <script>

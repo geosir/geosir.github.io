@@ -295,6 +295,10 @@ class Stroll {
     hideMenu() {
         if (!this.showingMenu) return;
 
+        // Refuse to hide if forceMenu is enabled
+        const page = this.strollmap[this.current];
+        if (page.options && page.options.forceMenu) return;
+
         // Check if menu is being hovered
         if (this.view.nav.parentElement.querySelector(':hover') === this.view.nav) return;
 
@@ -362,7 +366,7 @@ class Stroll {
 
         document.addEventListener("keydown", boundHandleArrowKey);
 
-        // Nav Menu listeners
+        // Nav Menu hover listeners
         const boundShowMenu = this.showMenu.bind(this);
         this.view.nav.addEventListener("mousemove", boundShowMenu);
         this.view.nav.addEventListener("touchmove", boundShowMenu);
@@ -378,7 +382,6 @@ class Stroll {
         let pos = e;
         if (e.type === "touchstart") pos = e.changedTouches[0];
         this.swipeStart = {x: pos.pageX, y: pos.pageY};
-        this.swipeStartTime = new Date();
         this.swipeDir = null;
         this.displacement = {x: 0, y: 0};
     }
@@ -404,15 +407,12 @@ class Stroll {
     resetSwipe() {
         this.isSwiping = false;
         this.swipeStart = null;
-        this.swipeStartTime = null;
         this.swipeDir = null;
         this.displacement = {x: 0, y: 0};
     }
 
     handleSwipeMove(e) {
         if (!this.isSwiping) return;
-
-        this.showMenu();
 
         let pos = e;
         if (e.type === "touchmove") pos = e.changedTouches[0];
@@ -443,7 +443,6 @@ class Stroll {
     }
 
     handleArrowKey(e) {
-        this.showMenu();
         const keycode = e.key || e.keyIdentifier || e.keyCode || e.which;
         switch (keycode) {
             case "ArrowUp":
@@ -468,14 +467,17 @@ class Stroll {
     }
 
     animateToDisplacement(start, end, time, callback = undefined, steptime = 10) {
-        this.isAnimating = true;
-
-        if (time < steptime) {
+        // Snap if displacement is too small, or if out of time
+        if ((Math.abs(start.x - end.x) < 2 && Math.abs(start.y - end.y) < 2) ||
+            time < steptime
+        ) {
             this.offsetView(end.x, end.y);
             this.isAnimating = false;
             if (callback) callback();
             return;
         }
+
+        this.isAnimating = true;
 
         const xstep = (end.x - start.x) / time * steptime;
         const ystep = (end.y - start.y) / time * steptime;
@@ -597,6 +599,8 @@ class Stroll {
     }
 
     pageMove(direction) {
+        this.showMenu();
+
         if (this.isAnimating) return;
         const page = this.strollmap[this.current];
         let target = null;
