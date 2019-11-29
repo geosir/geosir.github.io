@@ -1,0 +1,119 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+
+    /* Don't allow pull-to-refresh */
+    overscroll-behavior-y: contain;
+}
+
+body {
+    font-family: 'Work Sans', sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: 'Fredoka One', cursive;
+    font-weight: normal;
+}
+
+h1 {
+    font-size: 3.5em;
+}
+
+#stroll-nav {
+    border-top: 1px solid white;
+    font-size: 0.8em;
+    line-height: 0.9em;
+}
+
+.strollnav .action:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Set default background */
+#stroll:before {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+
+    display: block;
+
+    background-image: url("/media/defaultbg.jpg");
+    background-size: cover;
+    background-position: center;
+
+    box-shadow: 0 3000vw rgba(19, 89, 201, 0.35) inset;
+
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+
+    transform: scale(1.03);
+}
+
+#stroll {
+    color: white;
+}
+
+#stroll.strollarticle {
+    background-color: white;
+    color: black;
+}
+
+#stroll a {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+#stroll a:hover {
+    color: #1359c9;
+    background-color: white;
+}
+
+#stroll.strollarticle a {
+    color: #1359c9;
+    background-color: transparent;
+}
+
+#stroll.strollarticle a:hover {
+    text-decoration: underline;
+}
+
+#stroll.strollarticle #stroll-nav {
+    border-color: black;
+    background-color: #fff;
+}
+
+#stroll.strollarticle .strollnav .action:hover {
+    background-color: #eeeeee;
+}
+
+.project-thumb {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    border: 2px solid white;
+}
+
+.protip {
+    background-color: #dcdcdc;
+    border-radius: 2px;
+    color: #505050;
+    padding: 12px;
+}
+
+.caption {
+    color: #505050;
+    font-style: italic;
+    text-align: center;
+}

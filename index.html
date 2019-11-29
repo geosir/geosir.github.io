@@ -9,100 +9,7 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Work+Sans" rel="stylesheet">
     <link rel="stylesheet" href="/css/stroll.css"/>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-
-            /* Don't allow pull-to-refresh */
-            overscroll-behavior-y: contain;
-        }
-
-        body {
-            font-family: 'Work Sans', sans-serif;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Fredoka One', cursive;
-            font-weight: normal;
-        }
-
-        h1 {
-            font-size: 3.5em;
-        }
-
-        #stroll-nav {
-            border-top: 3px double white;
-            font-size: 0.8em;
-            line-height: 0.9em;
-        }
-
-        .strollnav .action:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        #stroll {
-            background-color: #1359c9;
-            color: white;
-        }
-
-        #stroll.strollarticle {
-            background-color: white;
-            color: black;
-        }
-
-        #stroll a {
-            color: white;
-            background-color: rgba(255, 255, 255, 0.2);
-            text-decoration: none;
-        }
-
-        #stroll a:hover {
-            color: #1359c9;
-            background-color: white;
-        }
-
-        #stroll.strollarticle a {
-            color: #1359c9;
-            background-color: transparent;
-        }
-
-        #stroll.strollarticle a:hover {
-            text-decoration: underline;
-        }
-
-        #stroll.strollarticle #stroll-nav {
-            border-color: black;
-        }
-
-        #stroll.strollarticle .strollnav .action:hover {
-            background-color: #eeeeee;
-        }
-
-        .project-thumb {
-            display: block;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-            border: 2px solid white;
-        }
-
-        .protip {
-            background-color: #dcdcdc;
-            border-radius: 2px;
-            color: #505050;
-            padding: 12px;
-        }
-
-        .caption {
-            color: #505050;
-            font-style: italic;
-            text-align: center;
-        }
-
-    </style>
+    <link rel="stylesheet" href="/css/george.css"/>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55205533-9"></script>
@@ -128,29 +35,46 @@
                 type: "page",
                 hname: "Home",
                 href: "/pages/home.html",
-                down: "projects",
-                left: "scheduler",
-                right: "about",
+                nav: {
+                    down: "projects",
+                    left: "scheduler",
+                    right: "about",
+                },
+                options: {
+                    forceMenu: true,
+                }
             },
             "about": {
                 type: "page",
                 hname: "About",
                 href: "/pages/about.html",
-                down: "meta",
-                left: "home",
-                right: "contact",
+                nav: {
+                    down: "meta",
+                    left: "home",
+                    right: "contact",
+                },
+                options: {
+                    forceMenu: true,
+                }
             },
             "meta": {
                 type: "page",
                 hname: "About Site",
                 href: "/pages/about-site.html",
-                up: "about",
+                nav: {
+                    up: "about",
+                },
             },
             "contact": {
                 type: "page",
                 hname: "Contact",
                 href: "/pages/contact.html",
-                left: "about",
+                nav: {
+                    left: "about",
+                },
+                options: {
+                    forceMenu: true,
+                }
             },
 
             // Projects
@@ -158,134 +82,162 @@
                 type: "page",
                 hname: "Projects",
                 href: "/pages/projects/contents.html",
-                up: "home",
-                down: "projects/korsak",
+                nav: {
+                    up: "home",
+                    down: "projects/korsak",
+                },
             },
             "projects/korsak": {
                 type: "page",
                 hname: "Korsak",
                 href: "/pages/projects/korsak.html",
-                up: "projects",
-                down: "projects/semaphore",
-                left: "link/korsak",
-		right: "link/korsakpaper",
+                nav: {
+                    up: "projects",
+                    down: "projects/semaphore",
+                    left: "link/korsak",
+                },
             },
             "link/korsak": {
                 type: "link",
                 hname: "Try Korsak",
                 href: "https://korsak.ovbot.net",
-                right: "projects/korsak",
-                noroute: true,
-            },
-            "link/korsakpaper": {
-                type: "link",
-                hname: "Read the Paper",
-                href: "https://george.moe/media/projects/korsak/korsak_20181217_lowres_scan.pdf",
-                left: "projects/korsak",
+                nav: {
+                    right: "projects/korsak",
+                },
             },
             "projects/semaphore": {
                 type: "page",
                 hname: "Semaphore",
                 href: "/pages/projects/semaphore.html",
-                up: "projects/korsak",
-                down: "projects/questtracker",
-                left: "link/semaphore-video",
-                right: "link/semaphore",
+                nav: {
+                    up: "projects/korsak",
+                    down: "projects/questtracker",
+                    left: "link/semaphore-video",
+                    right: "link/semaphore",
+                },
             },
             "link/semaphore": {
                 type: "link",
                 hname: "Semaphore DevPost",
                 href: "https://devpost.com/software/semaphore",
-                left: "projects/semaphore",
-                noroute: true,
+                nav: {
+                    left: "projects/semaphore",
+                },
             },
             "link/semaphore-video": {
                 type: "link",
                 hname: "Semaphore Video",
                 href: "https://www.youtube.com/watch?v=ElZh8Gh7SD8",
-                right: "projects/semaphore",
-                noroute: true,
+                nav: {
+                    right: "projects/semaphore",
+                },
+                options: {
+                    noRoute: true,
+                }
             },
             "projects/questtracker": {
                 type: "page",
                 hname: "Quest&#8203;Tracker",
                 href: "/pages/projects/questtracker.html",
-                up: "projects/semaphore",
-                down: "projects/whatdo",
-                left: "link/questtracker",
+                nav: {
+                    up: "projects/semaphore",
+                    down: "projects/whatdo",
+                    left: "link/questtracker",
+                },
             },
             "link/questtracker": {
                 type: "link",
                 hname: "Try Quest&#8203;Tracker",
                 href: "https://questtracker.me",
-                right: "projects/questtracker",
-                noroute: true,
+                nav: {
+                    right: "projects/questtracker",
+                },
             },
             "projects/whatdo": {
                 type: "page",
                 hname: "WhatDo",
                 href: "/pages/projects/whatdo.html",
-                up: "projects/questtracker",
-                down: "projects/clubhub",
-                left: "link/whatdo",
+                nav: {
+                    up: "projects/questtracker",
+                    down: "projects/clubhub",
+                    left: "link/whatdo",
+                },
             },
             "link/whatdo": {
                 type: "link",
                 hname: "Try WhatDo",
                 href: "https://whatdo.fyi",
-                right: "projects/whatdo",
-                noroute: true,
+                nav: {
+                    right: "projects/whatdo",
+                },
             },
             "projects/clubhub": {
                 type: "page",
                 hname: "Club Hub",
                 href: "/pages/projects/clubhub/summary.html",
-                up: "projects/whatdo",
-                down: "projects/noaa",
-                left: "link/clubhub",
-                right: "projects/clubhub/detail",
+                nav: {
+                    up: "projects/whatdo",
+                    down: "projects/noaa",
+                    left: "link/clubhub",
+                    right: "projects/clubhub/detail",
+                },
             },
             "projects/clubhub/detail": {
                 type: "page",
                 hname: "Club Hub Story",
                 href: "/pages/projects/clubhub/detail.html",
-                left: "projects/clubhub",
-                mode: "article",
+                nav: {
+                    left: "projects/clubhub",
+                },
+                options: {
+                    format: "article",
+                }
             },
             "link/clubhub": {
                 type: "link",
                 hname: "Club Hub Home",
                 href: "https://clubhub.live",
-                left: "projects/clubhub",
-                noroute: true,
+                nav: {
+                    left: "projects/clubhub",
+                },
             },
             "projects/noaa": {
                 type: "page",
                 hname: "NOAA",
                 href: "/pages/projects/noaa/summary.html",
-                up: "projects/clubhub",
-                down: "projects/scheduler",
-                right: "projects/noaa/detail",
+                nav: {
+                    up: "projects/clubhub",
+                    down: "projects/scheduler",
+                    right: "projects/noaa/detail",
+                },
             },
             "projects/noaa/detail": {
                 type: "page",
                 hname: "NOAA Detail",
                 href: "/pages/projects/noaa/detail.html",
-                left: "projects/noaa",
-                mode: "article"
+                nav: {
+                    left: "projects/noaa",
+                },
+                options: {
+                    format: "article",
+                },
             },
             "projects/scheduler": {
                 type: "page",
                 hname: "Scheduler",
                 href: "/pages/projects/scheduler.html",
-                up: "projects/noaa",
-                left: "scheduler",
+                nav: {
+                    up: "projects/noaa",
+                    left: "scheduler",
+                },
             },
             "scheduler": {
                 type: "link",
                 hname: "Scheduler",
                 href: "https://george.moe/imsa-scheduler/",
-                right: "home",
+                nav: {
+                    right: "home",
+                },
             },
 
             // Singleton pages
@@ -293,26 +245,36 @@
                 type: "page",
                 hname: "Privacy",
                 href: "/pages/privacy.html",
-                left: "home",
-                mode: "article"
+                nav: {
+                    left: "home",
+                },
+                options: {
+                    format: "article",
+                },
             },
             "time": {
                 type: "page",
                 hname: "Time",
                 href: "/pages/time.html",
-                left: "home",
+                nav: {
+                    left: "home",
+                },
             },
             "domains": {
                 type: "page",
                 hname: "Domains",
                 href: "/pages/domains.html",
-                left: "home",
+                nav: {
+                    left: "home",
+                },
             },
             "sprint": {
                 type: "link",
                 hname: "Sprint Tool",
                 href: "/pages/sprint.html",
-                left: "home",
+                nav: {
+                    left: "home",
+                },
             },
 
             // Continuity
@@ -327,12 +289,18 @@
                 type: "page",
                 href: "/pages/404.html",
                 hname: "404",
-                left: "home",
+                nav: {
+                    left: "home",
+                },
             }
         };
 
         function begin() {
-            let stroll = new Stroll("George's Website", strollmap, "home", "UA-55205533-9");
+            window.stroll = new Stroll(strollmap, {
+                index: "home",
+                titleBase: "George's Website",
+                trackingID: "UA-55205533-9",
+            });
         }
 
         if (document.readyState === "loading") {

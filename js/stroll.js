@@ -2,36 +2,19 @@
 // Copyright (c) 2019 George Moe
 // License: MIT (https://opensource.org/licenses/MIT)
 
-function toggleFullScreen() {
-    var doc = window.document;
-    var docEl = doc.documentElement;
-
-    var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-    var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
-
-    if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-        requestFullScreen.call(docEl);
-    } else {
-        cancelFullScreen.call(doc);
-    }
-}
-
-
 class Stroll {
-    constructor(titlebase, strollmap, index, trackingID = null) {
+    constructor(strollmap, options = {}) {
         // Setup state
-        this.titlebase = titlebase;
-        this.trackingID = trackingID;
         this.strollmap = strollmap;
-        this.index = index;
+        this.options = options;
         this.current = null;
         this.loaded = [];
         this.isSwiping = false;
         this.swipeStart = null;
-        this.swipeStartTime = null;
         this.swipeDir = null;
         this.displacement = {x: 0, y: 0};
         this.isAnimating = false;
+        this.showingMenu = true;
 
         this.view = {
             root: document.getElementById("stroll"),
@@ -56,12 +39,32 @@ class Stroll {
         if (!this.fixPath(window.location.pathname)) {
             const path = this.parsePath(window.location.pathname);
             if (path === "") {
-                this.focus(this.index, false, true);
+                this.focus(this.options.index || "index", false, true);
             } else {
                 this.focus(path, false, true);
             }
         }
     }
+
+    // ===== Utils =====
+    // TODO: Future tools that may be integrated into the Stroll namespace.
+    // toggleFullScreen() {
+    //     var doc = window.document;
+    //     var docEl = doc.documentElement;
+    //
+    //     var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+    //     var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+    //
+    //     if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+    //         requestFullScreen.call(docEl);
+    //     } else {
+    //         cancelFullScreen.call(doc);
+    //     }
+    // }
+
+    // textSelected() {
+    //     return !(window.getSelection().isCollapsed)
+    // }
 
     // ===== Routing =====
 
@@ -119,14 +122,14 @@ class Stroll {
     async focus(name, push = true, replace = false) {
         // console.info("Stroll: Focus " + name);
         const page = this.strollmap[name];
-        if (!page || page.noroute) {
+        if (!page || (page.options && page.options.noRoute)) {
             console.error("Stroll: Route " + name + "not found.");
             await this.focus("notfound", false, false);
             return;
         }
 
-        if (gtag && this.trackingID) {
-            gtag('config', this.trackingID, {'page_path': name});
+        if (gtag && this.options.trackingID) {
+            gtag('config', this.options.trackingID, {'page_path': name});
         }
 
         // Update state
@@ -134,7 +137,7 @@ class Stroll {
         this.current = name;
 
         this.updateStrollnav(page);
-        this.view.title.innerHTML = `${page.hname} | ${this.titlebase}`;
+        this.view.title.innerHTML = `${page.hname}${this.options.titleBase ? " | " + this.options.titleBase : ""}`;
         await this.load(name, this.view.main);
 
         // Handle behavior
@@ -143,7 +146,7 @@ class Stroll {
                 window.location.replace(page.href);
                 break;
             case "page":
-                switch (page.mode) {
+                switch (page.options && page.options.format) {
                     case "article":
                         this.view.root.className += " strollarticle";
                         break;
@@ -152,22 +155,31 @@ class Stroll {
                         break;
                 }
 
-                if (page.script) {
-                    let newscript = document.createElement('script')
-
-                }
-
                 if (push) window.history.pushState({name: name, type: "page"}, name.hname, `/${name}`);
                 if (replace) window.history.replaceState({name: name, type: "page"}, name.hname, `/${name}`);
 
-                if (page.up) this.load(page.up, this.view.up, true);
-                if (page.down) this.load(page.down, this.view.down, true);
-                if (page.left) this.load(page.left, this.view.left, true);
-                if (page.right) this.load(page.right, this.view.right, true);
+                if (page.nav) {
+                    if (page.nav.up) this.load(page.nav.up, this.view.up, true);
+                    if (page.nav.down) this.load(page.nav.down, this.view.down, true);
+                    if (page.nav.left) this.load(page.nav.left, this.view.left, true);
+                    if (page.nav.right) this.load(page.nav.right, this.view.right, true);
+                }
                 break;
             default:
                 break;
         }
+
+        // Handle styling
+        this.showMenu();
+
+        // Run scripts
+        const scripts = this.view.main.querySelectorAll("script");
+        scripts.forEach((e) => {
+            const newElem = document.createElement("script");
+            newElem.innerHTML = e.innerHTML;
+            e.remove();
+            this.view.main.append(newElem);
+        });
     }
 
     pagePreMoveHook(name) {
@@ -203,6 +215,9 @@ class Stroll {
                     throw Error("Stroll: Unknown page type `" + page.type + "`.");
             }
 
+            // Handle page styling
+            if (page.style && page.style.background) target.style.backgroundImage = `url('${page.style.background}')`;
+
             target.setAttribute("data-page", name);
             if (this.loaded.indexOf(name) < 0) this.loaded.push(name);
         } catch (e) {
@@ -215,23 +230,24 @@ class Stroll {
         if (!name) return;
         target.innerHTML = "";
         target.removeAttribute("data-page");
+        target.style = "";
         if (this.loaded.indexOf(name) > -1) this.loaded.splice(this.loaded.indexOf(name), 1);
     }
 
     async updateStrollnav(page) {
         const hasdir = {
-            up: page.up && this.strollmap[page.up],
-            down: page.down && this.strollmap[page.down],
-            left: page.left && this.strollmap[page.left],
-            right: page.right && this.strollmap[page.right]
+            up: page.nav && page.nav.up && this.strollmap[page.nav.up],
+            down: page.nav && page.nav.down && this.strollmap[page.nav.down],
+            left: page.nav && page.nav.left && this.strollmap[page.nav.left],
+            right: page.nav && page.nav.right && this.strollmap[page.nav.right]
         };
 
         const navtext = {
-            up: `${hasdir.up ? this.strollmap[page.up].hname : "&nbsp"}`,
-            down: `${hasdir.down ? this.strollmap[page.down].hname : "&nbsp"}`,
-            left: `${hasdir.left ? this.strollmap[page.left].hname : "&nbsp"}`,
-            right: `${hasdir.right ? this.strollmap[page.right].hname : "&nbsp"}`
-        }
+            up: `${hasdir.up ? this.strollmap[page.nav.up].hname : "&nbsp"}`,
+            down: `${hasdir.down ? this.strollmap[page.nav.down].hname : "&nbsp"}`,
+            left: `${hasdir.left ? this.strollmap[page.nav.left].hname : "&nbsp"}`,
+            right: `${hasdir.right ? this.strollmap[page.nav.right].hname : "&nbsp"}`
+        };
 
         this.view.nav.innerHTML = '<table class="strollnav">' +
             `<tr><td></td><td colspan="3" class="action up">${navtext.up}</td><td></td></tr>` +
@@ -249,15 +265,58 @@ class Stroll {
         const navdown = this.view.nav.querySelector(".strollnav .down");
         const navleft = this.view.nav.querySelector(".strollnav .left");
         const navright = this.view.nav.querySelector(".strollnav .right");
+        // const navmiddle = this.view.nav.querySelector(".strollnav .middle");
 
-        if (page.up) navup.onclick = () => this.pageMove("up");
+        if (page.nav && page.nav.up) navup.onclick = () => this.pageMove("up");
         else navup.onclick = undefined;
-        if (page.down) navdown.onclick = () => this.pageMove("down");
+        if (page.nav && page.nav.down) navdown.onclick = () => this.pageMove("down");
         else navdown.onclick = undefined;
-        if (page.left) navleft.onclick = () => this.pageMove("left");
+        if (page.nav && page.nav.left) navleft.onclick = () => this.pageMove("left");
         else navleft.onclick = undefined;
-        if (page.right) navright.onclick = () => this.pageMove("right");
+        if (page.nav && page.nav.right) navright.onclick = () => this.pageMove("right");
         else navright.onclick = undefined;
+    }
+
+    showMenu() {
+        const page = this.strollmap[this.current];
+        if (this.hideMenuTimeout) clearTimeout(this.hideMenuTimeout);
+        if (this.hideMenuAnimationTimeout) clearTimeout(this.hideMenuAnimationTimeout);
+        if (!(page.options && page.options.forceMenu)) {
+            this.hideMenuTimeout = setTimeout(this.hideMenu.bind(this), 3000);
+        }
+
+        if (this.showingMenu) return;
+
+        this.view.nav.style.marginBottom = "0";
+
+        this.showingMenu = true;
+    }
+
+    hideMenu() {
+        if (!this.showingMenu) return;
+
+        // Check if menu is being hovered
+        if (this.view.nav.parentElement.querySelector(':hover') === this.view.nav) return;
+
+        const navheight = this.view.nav.offsetHeight;
+        const navtoppad = getComputedStyle(this.view.nav, null)
+            .getPropertyValue('padding-top').replace("px", "");
+        const navmarbot = getComputedStyle(this.view.nav, null)
+            .getPropertyValue('margin-bottom').replace("px", "");
+
+        const targetmargin = -(navheight - navtoppad);
+
+        const hideMenuAnimation = (current) => {
+            if (current - targetmargin > 10) {
+                this.view.nav.style.marginBottom = String(current) + "px";
+                this.hideMenuAnimationTimeout = setTimeout(hideMenuAnimation, 10, current - 10);
+            } else {
+                this.view.nav.style.marginBottom = String(targetmargin) + "px";
+            }
+        };
+        this.hideMenuAnimationTimeout = setTimeout(hideMenuAnimation, 10, navmarbot);
+
+        this.showingMenu = false;
     }
 
     // ===== Swipe and Offset =====
@@ -282,6 +341,7 @@ class Stroll {
     }
 
     setupListeners() {
+        // Gesture and keyboard navigation listeners
         const boundHandleSwipeStart = this.handleSwipeStart.bind(this);
         const boundHandleSwipeEnd = this.handleSwipeEnd.bind(this);
         const boundHandleSwipeMove = this.handleSwipeMove.bind(this);
@@ -294,12 +354,18 @@ class Stroll {
         this.view.root.addEventListener("touchmove", boundHandleSwipeMove);
         this.view.root.addEventListener("scroll", boundHandleScroll, true);
 
-        // Mouse drag support
+        // TODO: Mouse drag support
+        // Currently disabled because need elegant solution to discern mouse drag vs text select.
         // this.view.root.addEventListener("mousedown", boundHandleSwipeStart);
         // this.view.root.addEventListener("mouseup", boundHandleSwipeEnd);
         // this.view.root.addEventListener("mousemove", boundHandleSwipeMove);
 
         document.addEventListener("keydown", boundHandleArrowKey);
+
+        // Nav Menu listeners
+        const boundShowMenu = this.showMenu.bind(this);
+        this.view.nav.addEventListener("mousemove", boundShowMenu);
+        this.view.nav.addEventListener("touchmove", boundShowMenu);
     }
 
     nullifySwipe(e) {
@@ -346,24 +412,28 @@ class Stroll {
     handleSwipeMove(e) {
         if (!this.isSwiping) return;
 
+        this.showMenu();
+
         let pos = e;
         if (e.type === "touchmove") pos = e.changedTouches[0];
         const displacement = {x: pos.pageX - this.swipeStart.x, y: pos.pageY - this.swipeStart.y};
         const page = this.strollmap[this.current];
 
+        if (!page.nav) return;
+
         if ((Math.abs(displacement.x) > Math.abs(displacement.y) || this.swipeDir === "h") && this.swipeDir !== "v") {
             if (Math.abs(displacement.x) > window.innerWidth * 0.25) {
                 this.swipeDir = "h";
             }
-            if (displacement.x < 0 && !page.right) return;
-            if (displacement.x > 0 && !page.left) return;
+            if (displacement.x < 0 && !page.nav.right) return;
+            if (displacement.x > 0 && !page.nav.left) return;
             this.displacement = {x: displacement.x, y: 0};
         } else {
             if (Math.abs(displacement.y) > window.innerHeight * 0.25) {
                 this.swipeDir = "v";
             }
-            if (displacement.y < 0 && !page.down) return;
-            if (displacement.y > 0 && !page.up) return;
+            if (displacement.y < 0 && !page.nav.down) return;
+            if (displacement.y > 0 && !page.nav.up) return;
             this.displacement = {x: 0, y: displacement.y};
         }
 
@@ -373,6 +443,7 @@ class Stroll {
     }
 
     handleArrowKey(e) {
+        this.showMenu();
         const keycode = e.key || e.keyIdentifier || e.keyCode || e.which;
         switch (keycode) {
             case "ArrowUp":
@@ -530,22 +601,28 @@ class Stroll {
         const page = this.strollmap[this.current];
         let target = null;
         let nextpage = this.current;
+
+        if (!page.nav) {
+            console.error("Page does not have nav.");
+            return;
+        }
+
         switch (direction) {
             case "up":
                 target = this.view.up;
-                nextpage = page.up;
+                nextpage = page.nav.up;
                 break;
             case "down":
                 target = this.view.down;
-                nextpage = page.down;
+                nextpage = page.nav.down;
                 break;
             case "left":
                 target = this.view.left;
-                nextpage = page.left;
+                nextpage = page.nav.left;
                 break;
             case "right":
                 target = this.view.right;
-                nextpage = page.right;
+                nextpage = page.nav.right;
                 break;
             default:
                 return;
