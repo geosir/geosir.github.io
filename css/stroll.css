@@ -18,7 +18,7 @@
 
 #stroll-nav {
     overflow: hidden;
-    padding: 12px;
+    padding: 8px;
 }
 
 .strollpage {
@@ -61,14 +61,14 @@
 
 .strollnav {
     width: 100%;
-    max-width: 480px;
+    height: 100%;
+    max-width: 640px;
     margin: 0 auto;
     border-collapse: collapse;
 }
 
 .strollnav td {
     text-align: center;
-    width: 5%;
 }
 
 .strollnav .arrow {
@@ -76,19 +76,7 @@
 }
 
 .strollnav .action {
-    width: 30%;
-    padding: 8px;
+    width: 20%;
+    padding: 2px;
     cursor: pointer;
-}
-
-.strollnav .up, .strollnav .down {
-    text-align: center;
-}
-
-.strollnav .left {
-    text-align: right;
-}
-
-.strollnav .right {
-    text-align: left;
 }

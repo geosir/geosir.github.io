@@ -169,9 +169,6 @@ class Stroll {
                 break;
         }
 
-        // Handle styling
-        this.showMenu();
-
         // Run scripts
         const scripts = this.view.main.querySelectorAll("script");
         scripts.forEach((e) => {
@@ -250,16 +247,12 @@ class Stroll {
         };
 
         this.view.nav.innerHTML = '<table class="strollnav">' +
-            `<tr><td></td><td colspan="3" class="action up">${navtext.up}</td><td></td></tr>` +
-            `<tr><td rowspan="3" class="action left">${navtext.left}</td>` +
-            `<td></td><td class="arrow">${hasdir.up ? "&uarr;" : "&nbsp"}</td><td></td>` +
-            `<td rowspan="3" class="action right">${navtext.right}</td></tr>` +
-            `<tr><td class="arrow">${hasdir.left ? "&larr;" : "&nbsp"}</td>` +
+            `<tr><td class="action left">${hasdir.left ? "&larr;" : ""} ${navtext.left}</td>` +
+            `<td class="action up">${hasdir.up ? "&uarr;" : ""} ${navtext.up}</td>` +
             `<td class="action middle"><b>${page.hname}</b></td>` +
-            `<td class="arrow">${hasdir.right ? "&rarr;" : "&nbsp"}</td></tr>` +
-            `<td></td><td class="arrow">${hasdir.down ? "&darr;" : "&nbsp"}</td><td></td>` +
-            `<tr><td></td><td colspan="3" class="action down">${navtext.down}</td><td></td></tr>` +
-            "</table>";
+            `<td class="action down">${hasdir.down ? "&darr;" : ""} ${navtext.down}</td>` +
+            `<td class="action right">${hasdir.right ? "&rarr;" : ""} ${navtext.right}</td></tr>` +
+            '</table>';
 
         const navup = this.view.nav.querySelector(".strollnav .up");
         const navdown = this.view.nav.querySelector(".strollnav .down");
@@ -275,52 +268,6 @@ class Stroll {
         else navleft.onclick = undefined;
         if (page.nav && page.nav.right) navright.onclick = () => this.pageMove("right");
         else navright.onclick = undefined;
-    }
-
-    showMenu() {
-        const page = this.strollmap[this.current];
-        if (this.hideMenuTimeout) clearTimeout(this.hideMenuTimeout);
-        if (this.hideMenuAnimationTimeout) clearTimeout(this.hideMenuAnimationTimeout);
-        if (!(page.options && page.options.forceMenu)) {
-            this.hideMenuTimeout = setTimeout(this.hideMenu.bind(this), 3000);
-        }
-
-        if (this.showingMenu) return;
-
-        this.view.nav.style.marginBottom = "0";
-
-        this.showingMenu = true;
-    }
-
-    hideMenu() {
-        if (!this.showingMenu) return;
-
-        // Refuse to hide if forceMenu is enabled
-        const page = this.strollmap[this.current];
-        if (page.options && page.options.forceMenu) return;
-
-        // Check if menu is being hovered
-        if (this.view.nav.parentElement.querySelector(':hover') === this.view.nav) return;
-
-        const navheight = this.view.nav.offsetHeight;
-        const navtoppad = getComputedStyle(this.view.nav, null)
-            .getPropertyValue('padding-top').replace("px", "");
-        const navmarbot = getComputedStyle(this.view.nav, null)
-            .getPropertyValue('margin-bottom').replace("px", "");
-
-        const targetmargin = -(navheight - navtoppad);
-
-        const hideMenuAnimation = (current) => {
-            if (current - targetmargin > 10) {
-                this.view.nav.style.marginBottom = String(current) + "px";
-                this.hideMenuAnimationTimeout = setTimeout(hideMenuAnimation, 10, current - 10);
-            } else {
-                this.view.nav.style.marginBottom = String(targetmargin) + "px";
-            }
-        };
-        this.hideMenuAnimationTimeout = setTimeout(hideMenuAnimation, 10, navmarbot);
-
-        this.showingMenu = false;
     }
 
     // ===== Swipe and Offset =====
@@ -365,11 +312,6 @@ class Stroll {
         // this.view.root.addEventListener("mousemove", boundHandleSwipeMove);
 
         document.addEventListener("keydown", boundHandleArrowKey);
-
-        // Nav Menu hover listeners
-        const boundShowMenu = this.showMenu.bind(this);
-        this.view.nav.addEventListener("mousemove", boundShowMenu);
-        this.view.nav.addEventListener("touchmove", boundShowMenu);
     }
 
     nullifySwipe(e) {
@@ -599,8 +541,6 @@ class Stroll {
     }
 
     pageMove(direction) {
-        this.showMenu();
-
         if (this.isAnimating) return;
         const page = this.strollmap[this.current];
         let target = null;
