@@ -415,8 +415,19 @@ class Stroll {
         ) {
             this.offsetView(end.x, end.y);
             this.isAnimating = false;
+
+            for (let e of document.getElementsByClassName("strollcontent")) {
+                e.style.overflow = "";
+            }
+
             if (callback) callback();
             return;
+        }
+
+        if (!this.isAnimating) {
+            for (let e of document.getElementsByClassName("strollcontent")) {
+                e.style.overflow = "hidden";
+            }
         }
 
         this.isAnimating = true;

@@ -2,7 +2,19 @@
     <div class="container">
         <h1>Page Not Found</h1>
         <div class="text">
-            <p>:'(</p>
+            <p id="react"></p>
         </div>
     </div>
 </div>
+<script>
+    const reacts = [":0", ":(", "):", "D:", ")X", "X|", ":|", ":3"];
+    let reactcounter = 0;
+
+    function cyclereact() {
+        document.getElementById("react").innerText = reacts[reactcounter++];
+        reactcounter %= reacts.length;
+        setTimeout(cyclereact, 1000);
+    }
+
+    cyclereact();
+</script>

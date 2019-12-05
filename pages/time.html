@@ -9,36 +9,34 @@
         </div>
     </div>
 </div>
-<img src="" onerror='
-        console.log("HEY");
+<script>
+    const inception = new Date(1496507400000);
+    setInterval(() => {
+        const now = new Date();
 
-        const inception = new Date(1496507400000);
-        setInterval(() => {
-            const now = new Date();
+        const mspersec = 1000;
+        const msperminute = mspersec * 60;
+        const msperhour = msperminute * 60;
+        const msperday = msperhour * 24;
+        const msperyear = msperday * 365.25;
 
-            const mspersec = 1000;
-            const msperminute = mspersec * 60;
-            const msperhour = msperminute * 60;
-            const msperday = msperhour * 24;
-            const msperyear = msperday * 365.25;
+        let delta = now.getTime() - inception.getTime();
 
-            let delta = now.getTime() - inception.getTime();
+        const years = Math.floor(delta / msperyear);
+        delta -= years * msperyear;
+        const days = Math.floor(delta / msperday);
+        delta -= days * msperday;
+        const hours = Math.floor(delta / msperhour);
+        delta -= hours * msperhour;
+        const minutes = Math.floor(delta / msperminute);
+        delta -= minutes * msperminute;
+        const seconds = Math.floor(delta / mspersec);
+        // delta -= seconds * mspersec;
+        // const milleseconds = delta;
 
-            const years = Math.floor(delta / msperyear);
-            delta -= years * msperyear;
-            const days = Math.floor(delta / msperday);
-            delta -= days * msperday;
-            const hours = Math.floor(delta / msperhour);
-            delta -= hours * msperhour;
-            const minutes = Math.floor(delta / msperminute);
-            delta -= minutes * msperminute;
-            const seconds = Math.floor(delta / mspersec);
-            // delta -= seconds * mspersec;
-            // const milleseconds = delta;
+        document.getElementById("timestring").innerHTML = years + " years, " + days + " days, "
+            + hours + " hours, " + minutes + " minutes, "
+            + seconds + " seconds...";
 
-            document.getElementById("timestring").innerHTML = years + " years, " + days + " days, "
-                + hours + " hours, " + minutes + " minutes, "
-                + seconds + " seconds...";
-
-        }, 10);
-'/>
+    }, 10);
+</script>

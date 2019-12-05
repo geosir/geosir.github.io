@@ -75,7 +75,43 @@
                 href: "/pages/projects/contents.html",
                 nav: {
                     up: "home",
+                    down: "projects/troav",
+                },
+            },
+            "projects/troav": {
+                type: "page",
+                hname: "Troav",
+                href: "/pages/projects/troav.html",
+                nav: {
+                    up: "projects",
+                    down: "projects/unitopia",
+                    left: "link/troav",
+                },
+            },
+            "link/troav": {
+                type: "link",
+                hname: "Troav Website",
+                href: "https://troav.com",
+                nav: {
+                    right: "projects/troav",
+                },
+            },
+            "projects/unitopia": {
+                type: "page",
+                hname: "Unitopia",
+                href: "/pages/projects/unitopia.html",
+                nav: {
+                    up: "projects/troav",
                     down: "projects/korsak",
+                    left: "link/unitopia",
+                },
+            },
+            "link/unitopia": {
+                type: "link",
+                hname: "Unitopia Website",
+                href: "https://george.moe/unitopia",
+                nav: {
+                    right: "projects/unitopia",
                 },
             },
             "projects/korsak": {
@@ -83,9 +119,10 @@
                 hname: "Korsak",
                 href: "/pages/projects/korsak.html",
                 nav: {
-                    up: "projects",
+                    up: "projects/unitopia",
                     down: "projects/semaphore",
                     left: "link/korsak",
+                    right: "link/korsakpaper"
                 },
             },
             "link/korsak": {
@@ -94,6 +131,14 @@
                 href: "https://korsak.ovbot.net",
                 nav: {
                     right: "projects/korsak",
+                },
+            },
+            "link/korsakpaper": {
+                type: "link",
+                hname: "Korsak Paper",
+                href: "/media/projects/korsak/korsak_20181217_lowres_scan.pdf",
+                nav: {
+                    left: "projects/korsak",
                 },
             },
             "projects/semaphore": {
