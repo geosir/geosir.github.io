@@ -1,5 +1,10 @@
 html, body {
+    margin: 0;
+    padding: 0;
     height: 100%;
+    width: 100%;
+
+    /* Prevent scroll-to-refresh */
     position: fixed;
     overscroll-behavior-y: none;
     overflow: hidden;

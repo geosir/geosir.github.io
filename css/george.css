@@ -1,13 +1,3 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-
-    /* Don't allow pull-to-refresh */
-    overscroll-behavior-y: contain;
-}
-
 body {
     font-family: 'Work Sans', sans-serif;
 }

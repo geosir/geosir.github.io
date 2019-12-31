@@ -14,7 +14,7 @@ class Stroll {
         this.swipeDir = null;
         this.displacement = {x: 0, y: 0};
         this.isAnimating = false;
-        this.showingMenu = true;
+        // this.showingMenu = true;
 
         this.view = {
             root: document.getElementById("stroll"),
@@ -331,19 +331,21 @@ class Stroll {
     handleSwipeEnd(e) {
         if (!this.isSwiping) return;
 
-        if (this.displacement.y > window.innerHeight * 0.2) {
+        const reflen = Math.min(window.innerHeight, window.innerWidth);
+        if (this.displacement.y > reflen * 0.2) {
             this.pageMove("up");
-        } else if (this.displacement.y < -window.innerHeight * 0.2) {
+        } else if (this.displacement.y < -reflen * 0.2) {
             this.pageMove("down");
-        } else if (this.displacement.x > window.innerWidth * 0.2) {
+        } else if (this.displacement.x > reflen * 0.2) {
             this.pageMove("left");
-        } else if (this.displacement.x < -window.innerWidth * 0.2) {
+        } else if (this.displacement.x < -reflen * 0.2) {
             this.pageMove("right");
         } else {
             this.animateToDisplacement(this.displacement, {x: 0, y: 0}, 200);
         }
 
         this.resetSwipe();
+        e.preventDefault();
     }
 
     resetSwipe() {
@@ -382,6 +384,7 @@ class Stroll {
         this.displacement.x = Math.max(Math.min(window.innerWidth, this.displacement.x), -window.innerWidth);
         this.displacement.y = Math.max(Math.min(window.innerHeight, this.displacement.y), -window.innerHeight);
         this.offsetView(this.displacement.x, this.displacement.y);
+        e.preventDefault();
     }
 
     handleArrowKey(e) {
