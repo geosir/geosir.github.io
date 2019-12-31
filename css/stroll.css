@@ -1,6 +1,7 @@
 html, body {
     position: fixed;
     overscroll-behavior: none;
+    overflow: hidden;
 }
 
 #stroll {
