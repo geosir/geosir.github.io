@@ -382,6 +382,7 @@ class Stroll {
         this.displacement.x = Math.max(Math.min(window.innerWidth, this.displacement.x), -window.innerWidth);
         this.displacement.y = Math.max(Math.min(window.innerHeight, this.displacement.y), -window.innerHeight);
         this.offsetView(this.displacement.x, this.displacement.y);
+        e.preventDefault();
     }
 
     handleArrowKey(e) {
