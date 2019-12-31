@@ -408,10 +408,10 @@ class Stroll {
         }
     }
 
-    animateToDisplacement(start, end, time, callback = undefined, steptime = 10) {
+    animateToDisplacement(start, end, time, callback = undefined, elapsed = 0, laststep = null) {
         // Snap if displacement is too small, or if out of time
         if ((Math.abs(start.x - end.x) < 2 && Math.abs(start.y - end.y) < 2) ||
-            time < steptime
+            elapsed > time
         ) {
             this.offsetView(end.x, end.y);
             this.isAnimating = false;
@@ -430,15 +430,17 @@ class Stroll {
             }
         }
 
+        const thisstep = new Date();
+        elapsed = laststep ? elapsed + (thisstep - laststep) : 0;
+
         this.isAnimating = true;
 
-        const xstep = (end.x - start.x) / time * steptime;
-        const ystep = (end.y - start.y) / time * steptime;
+        const xstep = (end.x - start.x) * elapsed / time;
+        const ystep = (end.y - start.y) * elapsed / time;
         const nextstart = {x: start.x + xstep, y: start.y + ystep};
         this.offsetView(nextstart.x, nextstart.y);
-        setTimeout(() => {
-            this.animateToDisplacement(nextstart, end, time - steptime, callback, steptime)
-        }, steptime);
+
+        requestAnimationFrame(() => this.animateToDisplacement(nextstart, end, time, callback, elapsed, thisstep));
     }
 
     makeCenter(target) {
