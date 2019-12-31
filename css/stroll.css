@@ -1,7 +1,7 @@
 html, body {
     height: 100%;
     position: fixed;
-    overscroll-behavior: none;
+    overscroll-behavior-y: none;
     overflow: hidden;
 }
 
