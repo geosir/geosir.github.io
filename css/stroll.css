@@ -1,5 +1,6 @@
 html, body {
     position: fixed;
+    overscroll-behavior: contain;
 }
 
 #stroll {
