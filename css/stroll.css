@@ -1,3 +1,7 @@
+html, body {
+    position: fixed;
+}
+
 #stroll {
     position: absolute;
     top: 0;
