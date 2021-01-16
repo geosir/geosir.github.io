@@ -119,6 +119,12 @@ class Stroll {
         });
     }
 
+    imageClickHandler(src) {
+        return function () {
+            window.open(src, '_blank');
+        };
+    }
+
     async focus(name, push = true, replace = false) {
         // console.info("Stroll: Focus " + name);
         const page = this.strollmap[name];
@@ -169,6 +175,11 @@ class Stroll {
                 break;
         }
 
+        // Add click listeners to image-thumb
+        this.view.main.querySelectorAll(".zoomable-image").forEach((element) => {
+            element.addEventListener("click", this.imageClickHandler(element.src));
+        });
+
         // Run scripts
         const scripts = this.view.main.querySelectorAll("script");
         scripts.forEach((e) => {
@@ -185,6 +196,12 @@ class Stroll {
             console.error("Stroll: pagePreMoveHook: " + name + " is not defined.");
             return false;
         }
+
+        // Remove click listeners on image-thumb
+        this.view.main.querySelectorAll(".zoomable-image").forEach((element) => {
+            element.removeEventListener("click", this.imageClickHandler(element.src));
+        });
+
         switch (page.type) {
             case "link":
                 window.location = page.href;

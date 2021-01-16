@@ -76,6 +76,7 @@
                 nav: {
                     up: "home",
                     down: "projects/troav",
+                    right: "essays"
                 },
             },
             "projects/troav": {
@@ -264,6 +265,28 @@
                 href: "https://george.moe/imsa-scheduler/",
                 nav: {
                     right: "home",
+                },
+            },
+
+            // Essays
+            "essays": {
+                type: "page",
+                hname: "Essays",
+                href: "/pages/essays/contents.html",
+                nav: {
+                    left: "projects",
+                    down: "essays/animals"
+                }
+            },
+            "essays/animals": {
+                type: "page",
+                hname: "Animals",
+                href: "/pages/essays/animals.html",
+                nav: {
+                    up: "essays",
+                },
+                options: {
+                    format: "article",
                 },
             },
 

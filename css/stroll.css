@@ -92,3 +92,28 @@ html, body {
     padding: 2px;
     cursor: pointer;
 }
+
+.zoomable-image {
+    cursor: zoom-in;
+}
+
+.blockquote {
+    display: block;
+    margin: 1em 0 1em 0.5in;
+    font-size: 0.9em;
+}
+
+.hanging {
+    margin-left: 0.5in;
+    text-indent: -0.5in;
+}
+
+.anchor::before {
+    display: block;
+    content: " ";
+    margin-top: -50vh;
+    margin-bottom: -50vh;
+    height: 100vh;
+    visibility: hidden;
+    pointer-events: none;
+}
